@@ -8,8 +8,7 @@
 
 class Lig4 : public JogoDeTabuleiro {
 private:
-    int _linha;
-    int _coluna;
+
 public:
     Lig4(int linhas, int colunas);
 };

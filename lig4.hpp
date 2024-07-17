@@ -8,11 +8,10 @@
 
 class Lig4 : public JogoDeTabuleiro {
 private:
-
+    int _linha;
+    int _coluna;
 public:
-    Lig4::Lig4(int linhas, int colunas);
-
-    void imprimir_tabuleiro() override;
+    Lig4(int linhas, int colunas);
 };
 
 #endif

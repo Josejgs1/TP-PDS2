@@ -10,7 +10,7 @@ void JogoDeTabuleiro::imprimir_tabuleiro()
         std::cout << "|";
         for (int j = 0; j < _colunas; j++)
         {
-            std::cout << " 0 ";
+            std::cout << " O ";
             std::cout << "|";
         }
         std::cout << std::endl;

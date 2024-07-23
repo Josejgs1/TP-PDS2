@@ -6,9 +6,9 @@
 #include <vector>
 #include "jogoDeTabuleiro.hpp"
 
-class JogoDaVelha : public JogoDeTabuleiro {
+class JogoDaVelha : public JogoDeTabuleiro
+{
 private:
-
 public:
     JogoDaVelha();
 

@@ -12,9 +12,9 @@ int main() {
     jogo.imprimir_tabuleiro();
     
     while(true){
-        std::cout << "Faça joagada: ";
+        std::cout << "Faça sua jogada: ";
         std::cin >> a >> b;
-        jogo.fazer_jogada(a -1,b -1);
+        jogo.fazer_jogada(a ,b);
     }
 
     return 0;

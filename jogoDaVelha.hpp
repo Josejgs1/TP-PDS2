@@ -19,7 +19,7 @@ public:
     void imprimir_tabuleiro() override;
     void fazer_jogada(int x, int y);
     void alternar_jogador();
-    //bool checar_vitoria() override;
+    bool checar_vitoria() override;
 };
 
 #endif

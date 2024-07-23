@@ -5,7 +5,7 @@
 #include <iostream>
 #include <vector>
 
-class Jogador : public Jogador
+class Jogador
 {
 private:
     std::string _nome;

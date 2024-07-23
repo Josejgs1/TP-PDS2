@@ -1,7 +1,7 @@
 #include "jogoDaVelha.hpp"
 
 JogoDaVelha::JogoDaVelha(Jogador jogador1, Jogador jogador2)
-    : JogoDeTabuleiro(3, 3), _jogador1(jogador1), _jogador2(jogador2) {}
+    : JogoDeTabuleiro(3, 3), _jogador1(jogador1), _jogador2(jogador2), _jogador_atual(1) {}
 
 void JogoDaVelha::imprimir_tabuleiro()
 {
@@ -46,14 +46,27 @@ void JogoDaVelha::fazer_jogada(int x, int y)
         {
             if (i == y - 1 && j == x - 1)
             {
-                _tabuleiro[x - 1][y - 1] = 1;
+                _tabuleiro[x - 1][y - 1] = _jogador_atual;
+                alternar_jogador();
             }
         }
     }
     imprimir_tabuleiro();
 }
 
-bool checar_vitoria()
+void JogoDaVelha::alternar_jogador()
 {
-
+    if (_jogador_atual == 1)
+    {
+        _jogador_atual = 2;
+    }
+    else
+    {
+        _jogador_atual = 1;
+    }
 }
+
+// bool JogoDaVelha::checar_vitoria()
+// {
+
+// }

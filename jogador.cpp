@@ -1,10 +1,7 @@
 #include "jogador.hpp"
 
 Jogador::Jogador(std::string nome, std::string apelido)
-{
-    this->_nome = nome;
-    this->_apelido = apelido;
-}
+: _nome(nome), _apelido(apelido) {}
 
 std::string Jogador::get_nome()
 {

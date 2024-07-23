@@ -19,7 +19,7 @@ public:
 
     virtual void imprimir_tabuleiro();
     void inicializarTabuleiro();
-    virtual bool checar_vitoria();
+    // virtual bool checar_vitoria() = 0;
 };
 
 #endif

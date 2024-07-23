@@ -9,11 +9,16 @@
 class JogoDaVelha : public JogoDeTabuleiro
 {
 private:
+    Jogador _jogador1;
+    Jogador _jogador2;
+    int _jogador_atual;
+
 public:
-    JogoDaVelha();
+    JogoDaVelha(Jogador jogador1, Jogador jogador2);
 
     void imprimir_tabuleiro() override;
     void fazer_jogada(int x, int y);
+    bool checar_vitoria() override;
 };
 
 #endif

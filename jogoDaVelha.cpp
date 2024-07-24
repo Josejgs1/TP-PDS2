@@ -138,12 +138,31 @@ void JogoDaVelha::partida()
     if (checar_vitoria())
     {
         alternar_jogador();
+        if (_jogador_atual == 1)
+        {
+            int vitorias = _jogador1.get_vitorias_jdv();
+            _jogador1.set_vitorias_jdv(vitorias + 1);
+            int derrotas = _jogador2.get_derrotas_jdv();
+            _jogador2.set_derrotas_jdv(derrotas + 1);
+        } else
+        {
+            int vitorias = _jogador2.get_vitorias_jdv();
+            _jogador2.set_vitorias_jdv(vitorias + 1);
+            int derrotas = _jogador1.get_derrotas_jdv();
+            _jogador1.set_derrotas_jdv(derrotas + 1);
+        }
+        
+        
         std::cout << "Parabens " << apelido_atual() << ", voce venceu!" << std::endl;
+        _jogador1.imprimir_informacoes();
+        _jogador2.imprimir_informacoes();
         return;
     }
     if (checar_final())
     {
         std::cout << "Deu velha!" << std::endl;
+        _jogador1.imprimir_informacoes();
+        _jogador2.imprimir_informacoes();
         return;
     }
 }

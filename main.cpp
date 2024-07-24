@@ -5,17 +5,15 @@
 int main() {
     int a, b;
 
+    Jogador jogador1("Jogador 1", "X");
+    Jogador jogador2("Jogador 2", "O");
+
     // Lig4 john = Lig4(a,b);
     // john.imprimir_tabuleiro();
 
-    JogoDaVelha jogo = JogoDaVelha();
-    jogo.imprimir_tabuleiro();
+    JogoDaVelha jogo = JogoDaVelha(jogador1, jogador2);
     
-    while(true){
-        std::cout << "Faça joagada: ";
-        std::cin >> a >> b;
-        jogo.fazer_jogada(a -1,b -1);
-    }
+    jogo.partida();
 
     return 0;
 }

@@ -12,13 +12,8 @@ int main() {
     // john.imprimir_tabuleiro();
 
     JogoDaVelha jogo = JogoDaVelha(jogador1, jogador2);
-    jogo.imprimir_tabuleiro();
     
-    while(true){
-        std::cout << "Faça sua jogada: ";
-        std::cin >> a >> b;
-        jogo.fazer_jogada(a ,b);
-    }
+    jogo.partida();
 
     return 0;
 }

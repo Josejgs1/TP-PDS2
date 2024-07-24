@@ -64,6 +64,19 @@ void JogoDaVelha::alternar_jogador()
     }
 }
 
+std::string JogoDaVelha::apelido_atual()
+{
+    std::string apelido;
+    if (_jogador_atual == 1)
+    {
+        return _jogador1.get_apelido();
+    }
+    else
+    {
+        return _jogador2.get_apelido();
+    }
+}
+
 bool JogoDaVelha::checar_vitoria()
 {
     // linhas:
@@ -95,4 +108,42 @@ bool JogoDaVelha::checar_vitoria()
     }
 
     return false;
+}
+
+bool JogoDaVelha::checar_final()
+{
+    for (int i = 0; i < _linhas; i++)
+    {
+        for (int j = 0; j < _colunas; j++)
+        {
+            if (_tabuleiro[i][j] == 0)
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+void JogoDaVelha::partida()
+{
+    imprimir_tabuleiro();
+    while (!checar_vitoria() && !checar_final())
+    {
+        int x, y;
+        std::cout << apelido_atual() << ", faça sua jogada: ";
+        std::cin >> x >> y;
+        fazer_jogada(x, y);
+    }
+    if (checar_vitoria())
+    {
+        alternar_jogador();
+        std::cout << "Parabens " << apelido_atual() << ", voce venceu!" << std::endl;
+        return;
+    }
+    if (checar_final())
+    {
+        std::cout << "Deu velha!" << std::endl;
+        return;
+    }
 }

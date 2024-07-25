@@ -1,0 +1,21 @@
+#ifndef CAMPOMINADO_HPP
+#define CAMPOMINADO_HPP
+
+#include "jogoDeTabuleiro.hpp"
+
+class CampoMinado : public JogoDeTabuleiro
+{
+private:
+    Jogador _jogador;
+    int _n_bombas;
+public:
+    CampoMinado(int linhas, int colunas, Jogador jogador, int n_bombas);
+    ~CampoMinado();
+
+    void imprimir_tabuleiro() override;
+    // void fazer_jogada(int x, int y);
+    void colocar_bombas();
+    int bombas_em_volta(int x, int y);
+};
+
+#endif

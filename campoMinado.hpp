@@ -13,9 +13,11 @@ public:
     ~CampoMinado();
 
     void imprimir_tabuleiro() override;
-    // void fazer_jogada(int x, int y);
+    void fazer_jogada(int x, int y);
     void colocar_bombas();
     int bombas_em_volta(int x, int y);
+    bool checar_vitoria() override;
+    void partida() override;
 };
 
 #endif

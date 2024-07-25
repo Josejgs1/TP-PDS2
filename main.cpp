@@ -15,14 +15,14 @@ int main() {
     
     // jogo.partida();
 
-    int a = 10;
-    int b = 10;
-    int bombas = 15;
+    int a = 4;
+    int b = 4;
+    int bombas = 2;
 
     Jogador jogador1("jogador", "jog");
 
     CampoMinado jogo = CampoMinado(a, b, jogador1, bombas);
-    jogo.imprimir_tabuleiro();
+    jogo.partida();
 
     return 0;
 }

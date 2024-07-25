@@ -1,9 +1,11 @@
 #include "campoMinado.hpp"
+#include <cstdlib>
+#include <ctime>
 
 CampoMinado::CampoMinado(int linhas, int colunas, Jogador jogador, int n_bombas)
     : JogoDeTabuleiro(linhas, colunas), _jogador(jogador), _n_bombas(n_bombas)
 {
-    srand(time(0)); 
+    srand(time(0));
     colocar_bombas();
 }
 
@@ -15,24 +17,25 @@ void CampoMinado::imprimir_tabuleiro()
     {
         for (int j = 0; j < _colunas; j++)
         {
-            if (_tabuleiro[i][j] == 0)
+            if (_tabuleiro[i][j] == 0 || _tabuleiro[i][j] == 1)
+            {
+                std::cout << " / ";
+            }
+            else if (_tabuleiro[i][j] == 2)
             {
                 if (bombas_em_volta(i, j) == 0)
                 {
                     std::cout << "   ";
-                } else
+                }
+                else
                 {
                     std::cout << " " << bombas_em_volta(i, j) << " ";
                 }
             }
-            else if (_tabuleiro[i][j] == 1)
+            else if (_tabuleiro[i][j] == 3)
             {
                 std::cout << " * ";
             }
-            // else if (_tabuleiro[i][j] == 2)
-            // {
-            //     std::cout << " O ";
-            // }
 
             if (j != _colunas - 1)
             {
@@ -42,6 +45,29 @@ void CampoMinado::imprimir_tabuleiro()
         std::cout << std::endl;
     }
     std::cout << std::endl;
+}
+
+void CampoMinado::fazer_jogada(int x, int y)
+{
+    if (x < 1 || x > _linhas || y < 1 || y > _colunas)
+    {
+        std::cout << "Jogada invalida! Por favor, insira dois numeros de 1 a " << _colunas << "." << std::endl;
+        return;
+    }
+
+    if (_tabuleiro[x - 1][y - 1] == 0)
+    {
+        _tabuleiro[x - 1][y - 1] = 2;
+    }
+    else if (_tabuleiro[x - 1][y - 1] == 1)
+    {
+        _tabuleiro[x - 1][y - 1] = 3;
+    }
+    else
+    {
+        std::cout << "Posicao ja ocupada! Tente novamente." << std::endl;
+    }
+    imprimir_tabuleiro();
 }
 
 void CampoMinado::colocar_bombas()
@@ -77,4 +103,48 @@ int CampoMinado::bombas_em_volta(int x, int y)
         }
     }
     return bombas_adjacentes;
+}
+
+bool CampoMinado::checar_vitoria()
+{
+    for (int i = 0; i < _linhas; i++)
+    {
+        for (int j = 0; j < _colunas; j++)
+        {
+            if (_tabuleiro[i][j] == 0 && _tabuleiro[i][j] != 2)
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+void CampoMinado::partida()
+{
+    imprimir_tabuleiro();
+    while (!checar_vitoria())
+    {
+        int x, y;
+        std::cout << _jogador.get_apelido() << ", faça sua jogada: ";
+        std::cin >> x >> y;
+        fazer_jogada(x, y);
+        if (_tabuleiro[x - 1][y - 1] == 3)
+        {
+            std::cout << "Voce perdeu!" << std::endl;
+            int vitorias = _jogador.get_derrotas_cm();
+            _jogador.set_derrotas_cm(vitorias + 1);
+            _jogador.imprimir_informacoes();
+            return;
+        }
+    }
+    if (checar_vitoria())
+    {
+        int vitorias = _jogador.get_vitorias_cm();
+        _jogador.set_vitorias_cm(vitorias + 1);
+
+        std::cout << "Parabens " << _jogador.get_apelido() << ", voce venceu!" << std::endl;
+        _jogador.imprimir_informacoes();
+        return;
+    }
 }

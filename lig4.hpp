@@ -11,8 +11,10 @@ private:
 
 public:
     Lig4(int linhas, int colunas);
+    
     void fazer_jogada(int x);
-
+    bool checar_vitoria() override;
+    void partida() override;
 };
 
 #endif

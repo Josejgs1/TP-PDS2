@@ -19,12 +19,12 @@ int main()
         {
             case 1:
             {
-                // Jogador jogador1("Jogador 1", "X");
-                // Jogador jogador2("Jogador 2", "O");
+                Jogador jogador1("Jogador 1", "X");
+                Jogador jogador2("Jogador 2", "O");
 
-                // JogoDaVelha jogo = JogoDaVelha(jogador1, jogador2);
-                // jogo.partida();
-                // break;
+                JogoDaVelha jogo = JogoDaVelha(jogador1, jogador2);
+                jogo.partida();
+                break;
             }
             case 2:
             {
@@ -33,7 +33,7 @@ int main()
                 std::cout << "Insira as dimensões do tabuleiro: ";
                 std::cin >> a >> b;
 
-                if(a <= 0 || b <= 0){
+                if(a <= 0 || b <= 0 || (a < 4 && b < 4)){
                     std::cout << "Dimensões inválidas\n";
                     break;
                 }
@@ -50,6 +50,7 @@ int main()
             }
             case 3:
                 exit(0);
+
         }
     }
     return 0;

@@ -15,8 +15,11 @@ protected:
 
 public:
     JogoDeTabuleiro(int linhas, int colunas);
+    
     virtual void imprimir_tabuleiro();
     void inicializar_tabuleiro();
+    virtual bool checar_vitoria() = 0;
+    virtual void partida() = 0;
 };
 
 #endif

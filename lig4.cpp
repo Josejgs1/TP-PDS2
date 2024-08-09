@@ -23,3 +23,12 @@ void Lig4::fazer_jogada(int x){
 
     imprimir_tabuleiro();
 }
+
+bool Lig4::checar_vitoria(){
+    return 0;
+};
+
+void Lig4::partida(){
+
+};
+

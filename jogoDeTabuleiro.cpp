@@ -10,14 +10,18 @@ void JogoDeTabuleiro::imprimir_tabuleiro()
         std::cout << "|";
         for (int j = 0; j < _colunas; j++)
         {
-            std::cout << " O ";
+            if(_tabuleiro[i][j] == 0){
+                std::cout << "   ";
+            } else if (_tabuleiro[i][j] == 1){
+                std::cout << " X ";
+            }
             std::cout << "|";
         }
         std::cout << std::endl;
     }
 }
 
-void JogoDeTabuleiro::inicializarTabuleiro()
+void JogoDeTabuleiro::inicializar_tabuleiro()
 {
     for (int i = 0; i < _linhas; ++i)
     {

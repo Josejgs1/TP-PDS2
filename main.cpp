@@ -2,18 +2,41 @@
 #include "lig4.hpp"
 #include "jogoDaVelha.hpp"
 
-int main() {
-    int a, b;
+int main()
+{
+    int opcao;
 
-    Jogador jogador1("Jogador 1", "X");
-    Jogador jogador2("Jogador 2", "O");
+    while (true)
+    {
+        std::cin >> opcao;
+        switch (opcao)
+        {
+            case 1:
+            {
+                int a, b; // boa prática?
+                std::cin >> a >> b;
 
-    // Lig4 john = Lig4(a,b);
-    // john.imprimir_tabuleiro();
+                Jogador jogador1("Jogador 1", "X");
+                Jogador jogador2("Jogador 2", "O");
 
-    JogoDaVelha jogo = JogoDaVelha(jogador1, jogador2);
-    
-    jogo.partida();
+                JogoDaVelha jogo = JogoDaVelha(jogador1, jogador2);
+                jogo.partida();
+                break;
+            }
+            case 2:
+            {
+                // int a, b, x;
 
+                // Lig4 john = Lig4(a,b);
+                // john.imprimir_tabuleiro();
+
+                // while(true){
+                //     std::cout << "Faça jogada: ";
+                //     std::cin >> x;
+                //     john.fazer_jogada(x);
+                break;
+            }
+        }
+    }
     return 0;
 }

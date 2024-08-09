@@ -12,9 +12,9 @@ void Lig4::fazer_jogada(int x){
     for(int i = 0; i < _linhas; i++){
         if(_tabuleiro[_linhas - 1 - i][x - 1] == 0){
             _tabuleiro[_linhas - 1 - i][x - 1] = 1;
-            invalido = true;
             break;
         }
+        invalido = true;
     }    
     
     if(invalido){

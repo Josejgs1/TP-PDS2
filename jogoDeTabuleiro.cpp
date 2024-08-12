@@ -7,18 +7,29 @@ void JogoDeTabuleiro::imprimir_tabuleiro()
 {
     for (int i = 0; i < _linhas; i++)
     {
-        std::cout << "|";
         for (int j = 0; j < _colunas; j++)
         {
-            if(_tabuleiro[i][j] == 0){
+            if (_tabuleiro[i][j] == 0)
+            {
                 std::cout << "   ";
-            } else if (_tabuleiro[i][j] == 1){
+            }
+            else if (_tabuleiro[i][j] == 1)
+            {
                 std::cout << " X ";
             }
-            std::cout << "|";
+            else if (_tabuleiro[i][j] == 2)
+            {
+                std::cout << " O ";
+            }
+
+            if (j != _colunas - 1)
+            {
+                std::cout << "|";
+            }
         }
         std::cout << std::endl;
     }
+    std::cout << std::endl;
 }
 
 void JogoDeTabuleiro::inicializar_tabuleiro()

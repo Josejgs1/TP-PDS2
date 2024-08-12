@@ -1,34 +1,179 @@
 #include "lig4.hpp"
-#include <string>
-#include <iostream>
-#include <vector>
 
-Lig4::Lig4(int linhas, int colunas) : JogoDeTabuleiro(linhas, colunas) {}
+Lig4::Lig4(int linhas, int colunas, Jogador jogador1, Jogador jogador2)
+    : JogoDeTabuleiro(linhas, colunas), _jogador1(jogador1), _jogador2(jogador2), _jogador_atual(1){}
 
-void Lig4::fazer_jogada(int x){
-
-    bool invalido = false;
-
-    for(int i = 0; i < _linhas; i++){
-        if(_tabuleiro[_linhas - 1 - i][x - 1] == 0){
-            _tabuleiro[_linhas - 1 - i][x - 1] = 1;
-            break;
-        }
-        invalido = true;
-    }    
-    
-    if(invalido){
-        std::cout << "Movimento inválido." << std::endl;
+void Lig4::fazer_jogada(int x)
+{
+    if(x < 1 || x > _colunas)
+    {
+        std::cout << "Jogada invalida! Por favor, escolha uma coluna entre 1 e " << _colunas << "." << std::endl;
+        return;
     }
 
+    if(_tabuleiro[0][x - 1] != 0)
+    {
+        std::cout << "Coluna cheia! Por favor, escolha outra coluna." << std::endl;
+        return;
+    }
+
+    for(int i = 0; i < _linhas; i++)
+    {
+        if(_tabuleiro[_linhas - 1 - i][x - 1] == 0)
+        {
+            _tabuleiro[_linhas - 1 - i][x - 1] = _jogador_atual;
+            break;
+        }
+    }
+
+    alternar_jogador();
     imprimir_tabuleiro();
 }
 
-bool Lig4::checar_vitoria(){
-    return 0;
+void Lig4::alternar_jogador()
+{
+    if (_jogador_atual == 1)
+    {
+        _jogador_atual = 2;
+    }
+    else
+    {
+        _jogador_atual = 1;
+    }
+}
+
+std::string Lig4::apelido_atual()
+{
+    std::string apelido;
+    if (_jogador_atual == 1)
+    {
+        return _jogador1.get_apelido();
+    }
+    else
+    {
+        return _jogador2.get_apelido();
+    }
+}
+
+bool Lig4::checar_vitoria()
+{
+    // Verificar vitória horizontal
+    for (int i = 0; i < _linhas; i++)
+    {
+        for (int j = 0; j <= _colunas - 4; j++)
+        {
+            if (_tabuleiro[i][j] != 0 &&
+                _tabuleiro[i][j] == _tabuleiro[i][j + 1] &&
+                _tabuleiro[i][j] == _tabuleiro[i][j + 2] &&
+                _tabuleiro[i][j] == _tabuleiro[i][j + 3])
+            {
+                return true;
+            }
+        }
+    }
+
+    // Verificar vitória vertical
+    for (int i = 0; i <= _linhas - 4; i++)
+    {
+        for (int j = 0; j < _colunas; j++)
+        {
+            if (_tabuleiro[i][j] != 0 &&
+                _tabuleiro[i][j] == _tabuleiro[i + 1][j] &&
+                _tabuleiro[i][j] == _tabuleiro[i + 2][j] &&
+                _tabuleiro[i][j] == _tabuleiro[i + 3][j])
+            {
+                return true;
+            }
+        }
+    }
+
+    // Verificar vitória diagonal descendente (\)
+    for (int i = 0; i <= _linhas - 4; i++)
+    {
+        for (int j = 0; j <= _colunas - 4; j++)
+        {
+            if (_tabuleiro[i][j] != 0 &&
+                _tabuleiro[i][j] == _tabuleiro[i + 1][j + 1] &&
+                _tabuleiro[i][j] == _tabuleiro[i + 2][j + 2] &&
+                _tabuleiro[i][j] == _tabuleiro[i + 3][j + 3])
+            {
+                return true;
+            }
+        }
+    }
+
+    // Verificar vitória diagonal ascendente (/)
+    for (int i = 3; i < _linhas; i++)
+    {
+        for (int j = 0; j <= _colunas - 4; j++)
+        {
+            if (_tabuleiro[i][j] != 0 &&
+                _tabuleiro[i][j] == _tabuleiro[i - 1][j + 1] &&
+                _tabuleiro[i][j] == _tabuleiro[i - 2][j + 2] &&
+                _tabuleiro[i][j] == _tabuleiro[i - 3][j + 3])
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+bool Lig4::checar_final()
+{
+    for(int i = 0; i < _colunas; i++)
+    {
+        if(_tabuleiro[0][i] == 0)
+        {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+void Lig4::partida()
+{
+    imprimir_tabuleiro();
+    while (!checar_vitoria() && !checar_final())
+    {
+        int x;
+        std::cout << apelido_atual() << ", faça sua jogada: ";
+        std::cin >> x;
+        fazer_jogada(x);
+    }
+    if (checar_vitoria())
+    {
+        alternar_jogador();
+        // if (_jogador_atual == 1)
+        // {
+        //     int vitorias = _jogador1.get_vitorias_jdv();
+        //     _jogador1.set_vitorias_jdv(vitorias + 1);
+        //     int derrotas = _jogador2.get_derrotas_jdv();
+        //     _jogador2.set_derrotas_jdv(derrotas + 1);
+        // } else
+        // {
+        //     int vitorias = _jogador2.get_vitorias_jdv();
+        //     _jogador2.set_vitorias_jdv(vitorias + 1);
+        //     int derrotas = _jogador1.get_derrotas_jdv();
+        //     _jogador1.set_derrotas_jdv(derrotas + 1);
+        // }
+        
+        std::cout << "Parabens " << apelido_atual() << ", voce venceu!" << std::endl;
+        // _jogador1.imprimir_informacoes();
+        // _jogador2.imprimir_informacoes();
+        return;
+    }
+    if (checar_final())
+    {
+        std::cout << "Empate!" << std::endl;
+        // _jogador1.imprimir_informacoes();
+        // _jogador2.imprimir_informacoes();
+        return;
+    }
 };
 
-void Lig4::partida(){
-
-};
-
+bool validar_tabuleiro_lig4(int linhas, int colunas) {
+    return linhas > 0 && colunas > 0 && (linhas >= 4 || colunas >= 4);
+}

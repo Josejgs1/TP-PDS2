@@ -23,3 +23,4 @@ main: main.o jogador.o jogoDaVelha.o jogoDeTabuleiro.o lig4.o
 
 clean:
 	rm -f main *.o
+

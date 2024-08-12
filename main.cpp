@@ -76,6 +76,7 @@ int main()
                 {
                     std::cout << erro.what() << std::endl;
                 }
+                break;
             }
             case 4:
                 exit(0);

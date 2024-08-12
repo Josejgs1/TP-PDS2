@@ -52,6 +52,7 @@ void JogoDaVelha::fazer_jogada(int x, int y)
     imprimir_tabuleiro();
 }
 
+//dar uma olhada depois
 void JogoDaVelha::alternar_jogador()
 {
     if (_jogador_atual == 1)

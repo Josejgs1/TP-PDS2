@@ -1,6 +1,8 @@
+#include <limits>
 #include "jogoDeTabuleiro.hpp"
 #include "lig4.hpp"
 #include "jogoDaVelha.hpp"
+#include "reversi.hpp"
 
 void imprimir_menu()
 {

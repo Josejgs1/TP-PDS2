@@ -4,7 +4,7 @@
 
 void imprimir_menu()
 {
-    std::cout << "O que você gostaria de fazer?\n1. Jogo da Velha\n2. Lig4\n3. Sair\n";
+    std::cout << "O que você gostaria de fazer?\n1. Jogo da Velha\n2. Lig4\n3. Reversi\n4. Sair\n";
 }
 
 int main()
@@ -42,6 +42,40 @@ int main()
                 break;
             }
             case 3:
+            {
+                int tamanho;
+                while (true) 
+                {
+                    std::cout << "O tabuleiro deve ser quadrado, no mínimo 6x6, no máximo 10x10, e com dimensões pares: ";
+                    std::cin >> tamanho;
+
+                    if (std::cin.fail())
+                    {
+                        std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        std::cout << "Entrada inválida. Tente novamente." << std::endl;
+                    }
+                    else if (tamanho < 6 || tamanho > 10 || tamanho % 2 != 0)
+                    {
+                        std::cout << "O valor deve ser entre 6 e 10 e deve ser par. Tente novamente." << std::endl;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                try
+                {
+                    Reversi jogo(tamanho, tamanho);
+                    jogo.jogar();
+                }
+                catch (const std::invalid_argument &erro)
+                {
+                    std::cout << erro.what() << std::endl;
+                }
+            }
+            case 4:
                 exit(0);
         }
     }

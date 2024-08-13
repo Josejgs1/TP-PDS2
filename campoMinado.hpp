@@ -14,6 +14,8 @@ public:
 
     void imprimir_tabuleiro() override;
     void fazer_jogada(int x, int y);
+    void exibir_mensagem_e_atualizar_tabuleiro(const std::string& mensagem);
+    void marcar_bomba(int x, int y);
     void colocar_bombas();
     int bombas_em_volta(int x, int y);
     bool checar_vitoria() override;

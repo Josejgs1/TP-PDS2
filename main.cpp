@@ -34,19 +34,20 @@ int main()
                 int linhas, colunas;
                 std::cout << "Insira as dimensões do tabuleiro: ";
                 std::cin >> linhas >> colunas;
-                while(!validar_tabuleiro_lig4(linhas, colunas))
+                while (!validar_tabuleiro_lig4(linhas, colunas))
                 {
                     std::cout << "Dimensões inválidas. Tente novamente: ";
                     std::cin >> linhas >> colunas;
                 }
                 Lig4 jogo = Lig4(linhas, colunas, jogador1, jogador2);
                 jogo.partida();
+
                 break;
             }
             case 3:
             {
                 int tamanho;
-                while (true) 
+                while (true)
                 {
                     std::cout << "O tabuleiro deve ser quadrado, no mínimo 6x6, no máximo 10x10, e com dimensões pares: ";
                     std::cin >> tamanho;
@@ -82,5 +83,6 @@ int main()
                 exit(0);
         }
     }
+    
     return 0;
 }

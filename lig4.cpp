@@ -1,25 +1,27 @@
 #include "lig4.hpp"
 
 Lig4::Lig4(int linhas, int colunas, Jogador jogador1, Jogador jogador2)
-    : JogoDeTabuleiro(linhas, colunas), _jogador1(jogador1), _jogador2(jogador2), _jogador_atual(1){}
+    : JogoDeTabuleiro(linhas, colunas), _jogador1(jogador1), _jogador2(jogador2), _jogador_atual(1) {}
+
+Lig4::~Lig4() {}
 
 void Lig4::fazer_jogada(int x)
 {
-    if(x < 1 || x > _colunas)
+    if (x < 1 || x > _colunas)
     {
         std::cout << "Jogada invalida! Por favor, escolha uma coluna entre 1 e " << _colunas << "." << std::endl;
         return;
     }
 
-    if(_tabuleiro[0][x - 1] != 0)
+    if (_tabuleiro[0][x - 1] != 0)
     {
         std::cout << "Coluna cheia! Por favor, escolha outra coluna." << std::endl;
         return;
     }
 
-    for(int i = 0; i < _linhas; i++)
+    for (int i = 0; i < _linhas; i++)
     {
-        if(_tabuleiro[_linhas - 1 - i][x - 1] == 0)
+        if (_tabuleiro[_linhas - 1 - i][x - 1] == 0)
         {
             _tabuleiro[_linhas - 1 - i][x - 1] = _jogador_atual;
             break;
@@ -27,6 +29,8 @@ void Lig4::fazer_jogada(int x)
     }
 
     alternar_jogador();
+
+    std::cout << "\033[2J\033[1;1H"; //Limpa o terminal
     imprimir_tabuleiro();
 }
 
@@ -122,14 +126,14 @@ bool Lig4::checar_vitoria()
 
 bool Lig4::checar_final()
 {
-    for(int i = 0; i < _colunas; i++)
+    for (int i = 0; i < _colunas; i++)
     {
-        if(_tabuleiro[0][i] == 0)
+        if (_tabuleiro[0][i] == 0)
         {
             return false;
         }
     }
-    
+
     return true;
 }
 
@@ -146,34 +150,31 @@ void Lig4::partida()
     if (checar_vitoria())
     {
         alternar_jogador();
-        // if (_jogador_atual == 1)
-        // {
-        //     int vitorias = _jogador1.get_vitorias_jdv();
-        //     _jogador1.set_vitorias_jdv(vitorias + 1);
-        //     int derrotas = _jogador2.get_derrotas_jdv();
-        //     _jogador2.set_derrotas_jdv(derrotas + 1);
-        // } else
-        // {
-        //     int vitorias = _jogador2.get_vitorias_jdv();
-        //     _jogador2.set_vitorias_jdv(vitorias + 1);
-        //     int derrotas = _jogador1.get_derrotas_jdv();
-        //     _jogador1.set_derrotas_jdv(derrotas + 1);
-        // }
-        
+        if (_jogador_atual == 1)
+        {
+            _jogador1.soma_vitoria_lig4();
+            _jogador2.soma_derrota_lig4();
+        } else
+        {
+            _jogador2.soma_vitoria_lig4();
+            _jogador1.soma_derrota_lig4();
+        }
+
         std::cout << "Parabens " << apelido_atual() << ", voce venceu!" << std::endl;
-        // _jogador1.imprimir_informacoes();
-        // _jogador2.imprimir_informacoes();
+        _jogador1.imprimir_informacoes_lig4();
+        _jogador2.imprimir_informacoes_lig4();
         return;
     }
     if (checar_final())
     {
         std::cout << "Empate!" << std::endl;
-        // _jogador1.imprimir_informacoes();
-        // _jogador2.imprimir_informacoes();
+        _jogador1.imprimir_informacoes_lig4();
+        _jogador2.imprimir_informacoes_lig4();
         return;
     }
 };
 
-bool validar_tabuleiro_lig4(int linhas, int colunas) {
+bool validar_tabuleiro_lig4(int linhas, int colunas)
+{
     return linhas > 0 && colunas > 0 && (linhas >= 4 || colunas >= 4);
 }

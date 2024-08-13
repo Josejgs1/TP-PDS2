@@ -14,6 +14,8 @@ private:
 
 public:
     Lig4(int linhas, int colunas, Jogador jogador1, Jogador jogador2);
+
+    ~Lig4();
     
     void fazer_jogada(int x);
     void alternar_jogador();

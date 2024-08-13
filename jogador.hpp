@@ -12,6 +12,10 @@ private:
     std::string _apelido;
     int _vitorias_jdv = 0;
     int _derrotas_jdv = 0;
+
+    int _vitorias_lig4 = 0;
+    int _derrotas_lig4 = 0;
+
 public:
     Jogador(std::string nome, std::string apelido);
 
@@ -23,7 +27,11 @@ public:
     void set_vitorias_jdv(int vitorias);
     void set_derrotas_jdv(int derrotas);
 
-    void imprimir_informacoes();
+    void soma_derrota_lig4();
+    void soma_vitoria_lig4();
+
+    void imprimir_informacoes_jdv();
+    void imprimir_informacoes_lig4();
 };
 
 #endif

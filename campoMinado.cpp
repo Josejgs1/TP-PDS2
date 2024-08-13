@@ -51,11 +51,28 @@ void CampoMinado::imprimir_tabuleiro()
     std::cout << std::endl;
 }
 
+void CampoMinado::exibir_mensagem(const std::string &mensagem)
+{
+    // Exibe a mensagem de erro ou aviso
+    std::cout << mensagem << std::endl;
+}
+
+void CampoMinado::limpar_tela()
+{
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+
 void CampoMinado::fazer_jogada(int x, int y)
 {
     if (x < 1 || x > _linhas || y < 1 || y > _colunas)
     {
-        std::cout << "Jogada invalida! Por favor, insira dois numeros de 1 a " << _colunas << "." << std::endl;
+        limpar_tela();
+        exibir_mensagem("Jogada invalida! Por favor, insira dois numeros de 1 a " + std::to_string(_colunas) + ".");
+        imprimir_tabuleiro();
         return;
     }
 
@@ -69,8 +86,12 @@ void CampoMinado::fazer_jogada(int x, int y)
     }
     else
     {
-        std::cout << "Posicao ja ocupada! Tente novamente." << std::endl;
+        limpar_tela();
+        exibir_mensagem("Posicao ja ocupada! Tente novamente.");
+        imprimir_tabuleiro();
+        return;
     }
+    limpar_tela();
     imprimir_tabuleiro();
 }
 
@@ -80,7 +101,8 @@ void CampoMinado::marcar_bomba(int x, int y)
 
     if (x < 1 || x > _linhas || y < 1 || y > _colunas)
     {
-        std::cout << "Jogada invalida! Por favor, insira dois numeros de 1 a " << _colunas << "." << std::endl;
+        limpar_tela();
+        exibir_mensagem("Jogada invalida! Por favor, insira dois numeros de 1 a " + std::to_string(_colunas) + ".");
         imprimir_tabuleiro();
         return;
     }
@@ -89,7 +111,8 @@ void CampoMinado::marcar_bomba(int x, int y)
     {
         if (bombas_marcadas >= _n_bombas)
         {
-            std::cout << "Você já marcou o número máximo de bombas (" << _n_bombas << ")." << std::endl;
+            limpar_tela();
+            exibir_mensagem("Você já marcou o número máximo de bombas (" + std::to_string(_n_bombas) + ").");
             imprimir_tabuleiro();
             return;
         }
@@ -103,7 +126,8 @@ void CampoMinado::marcar_bomba(int x, int y)
     {
         if (bombas_marcadas >= _n_bombas)
         {
-            std::cout << "Você já marcou o número máximo de bombas (" << _n_bombas << ")." << std::endl;
+            limpar_tela();
+            exibir_mensagem("Você já marcou o número máximo de bombas (" + std::to_string(_n_bombas) + ").");
             imprimir_tabuleiro();
             return;
         }
@@ -125,8 +149,12 @@ void CampoMinado::marcar_bomba(int x, int y)
     }
     else
     {
-        std::cout << "Posicao ja ocupada! Tente novamente." << std::endl;
+        limpar_tela();
+        exibir_mensagem("Posicao ja ocupada! Tente novamente.");
+        imprimir_tabuleiro();
+        return;
     }
+    limpar_tela();
     imprimir_tabuleiro();
 }
 
@@ -171,7 +199,7 @@ bool CampoMinado::checar_vitoria()
     {
         for (int j = 0; j < _colunas; j++)
         {
-            if (_tabuleiro[i][j] == 0 && _tabuleiro[i][j] != 2)
+            if (_tabuleiro[i][j] == 0 && _tabuleiro[i][j] != 2 && _tabuleiro[i][j] != 4)
             {
                 return false;
             }
@@ -200,6 +228,11 @@ void CampoMinado::partida()
             x = stoi(jogada);
             std::cin >> y;
             fazer_jogada(x, y);
+        }
+        if (x < 1 || x > _linhas || y < 1 || y > _colunas)
+        {
+            exibir_mensagem("Jogada fora dos limites! Tente novamente.");
+            continue; // Continue para a próxima iteração do loop
         }
         if (_tabuleiro[x - 1][y - 1] == 3)
         {

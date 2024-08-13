@@ -14,7 +14,6 @@ public:
 
     void imprimir_tabuleiro() override;
     void fazer_jogada(int x, int y);
-    void exibir_mensagem(const std::string& mensagem);
     void limpar_tela();
     void marcar_bomba(int x, int y);
     void colocar_bombas();

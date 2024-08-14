@@ -1,15 +1,50 @@
 #include "campoMinado.hpp"
 #include <cstdlib>
 #include <ctime>
+#include <sstream>
+#include <stdexcept>
+
+const int MIN_LINHAS = 4;
+const int MAX_LINHAS = 30;
+const int MIN_COLUNAS = 4;
+const int MAX_COLUNAS = 30;
 
 CampoMinado::CampoMinado(int linhas, int colunas, Jogador jogador, int n_bombas)
     : JogoDeTabuleiro(linhas, colunas), _jogador(jogador), _n_bombas(n_bombas)
 {
-    srand(time(0));
-    colocar_bombas();
+    try
+    {
+        if (linhas < MIN_LINHAS || linhas > MAX_LINHAS)
+        {
+            throw std::invalid_argument("Número de linhas deve estar entre " + std::to_string(MIN_LINHAS) + " e " + std::to_string(MAX_LINHAS) + ".");
+        }
+        if (colunas < MIN_COLUNAS || colunas > MAX_COLUNAS)
+        {
+            throw std::invalid_argument("Número de colunas deve estar entre " + std::to_string(MIN_COLUNAS) + " e " + std::to_string(MAX_COLUNAS) + ".");
+        }
+        if (n_bombas < 1 || n_bombas >= (linhas * colunas))
+        {
+            throw std::invalid_argument("Número de bombas deve ser pelo menos 1 e menor que o total de células do tabuleiro.");
+        }
+
+        srand(time(0));
+        colocar_bombas();
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << "Erro ao inicializar o tabuleiro: " << e.what() << '\n';
+        throw;
+    }
 }
 
 CampoMinado::~CampoMinado() {}
+
+/*  0- sem marcação e sem bomba
+    1- sem marcação e com bomba
+    2- marcado e sem bombas em volta
+    3- marcado e com bombas em volta
+    4- bomba marcada e tem bomba de verdade
+    5- bomba marcada e não tem bomba de verdade*/
 
 void CampoMinado::imprimir_tabuleiro()
 {
@@ -226,7 +261,11 @@ bool CampoMinado::checar_vitoria()
         {
             for (int j = 0; j < _colunas; j++)
             {
-                if ((_tabuleiro[i][j] == 0) || (_tabuleiro[i][j] == 1 && _tabuleiro[i][j] != 4 && _tabuleiro[i][j] != 5))
+                if (_tabuleiro[i][j] == 0)
+                {
+                    return false;
+                }
+                if (_tabuleiro[i][j] == 1 && _tabuleiro[i][j] != 4 && _tabuleiro[i][j] != 5)
                 {
                     return false;
                 }
@@ -249,35 +288,55 @@ void CampoMinado::partida()
         imprimir_tabuleiro();
         while (!checar_vitoria())
         {
-            std::string jogada;
+            std::string linha;
             int x, y;
-            std::cout << _jogador.get_apelido() << ", faca sua jogada: ";
-            std::cin >> jogada;
+            std::cout << _jogador.get_apelido() << ", faça sua jogada: ";
+            std::getline(std::cin, linha);
 
             try
             {
-                if (jogada == "B")
+                std::istringstream iss(linha);
+                char opcao;
+                if (iss >> opcao)
                 {
-                    std::cin >> x >> y;
-                    if (x < 1 || x > _linhas || y < 1 || y > _colunas)
+                    if (opcao == 'B')
                     {
-                        throw std::out_of_range("Erro ao marcar bombas: Jogada fora dos limites! Tente novamente.");
+                        if (!(iss >> x >> y) || !iss.eof())
+                        {
+                            throw std::invalid_argument("Erro ao marcar bomba: Entrada inválida! Digite 'B' seguido de duas coordenadas.");
+                        }
+
+                        if (x < 1 || x > _linhas || y < 1 || y > _colunas)
+                        {
+                            throw std::out_of_range("Erro ao marcar bombas: Jogada fora dos limites! Tente novamente.");
+                        }
+                        marcar_bomba(x, y);
                     }
-                    marcar_bomba(x, y);
+                    else
+                    {
+                        iss.clear();
+                        iss.str(linha); 
+                        iss >> x >> y;
+                        if (iss.fail() || !iss.eof())
+                        {
+                            throw std::invalid_argument("Erro ao fazer jogada: Entrada inválida! Digite duas coordenadas inteiras.");
+                        }
+
+                        if (x < 1 || x > _linhas || y < 1 || y > _colunas)
+                        {
+                            throw std::out_of_range("Erro ao fazer jogada: Jogada fora dos limites! Tente novamente.");
+                        }
+                        fazer_jogada(x, y);
+                    }
                 }
                 else
                 {
-                    x = stoi(jogada);
-                    std::cin >> y;
-                    if (x < 1 || x > _linhas || y < 1 || y > _colunas)
-                    {
-                        throw std::out_of_range("Erro ao fazer jogada: Jogada fora dos limites! Tente novamente.");
-                    }
-                    fazer_jogada(x, y);
+                    throw std::invalid_argument("Erro ao processar a entrada: Entrada inválida!");
                 }
+
                 if (_tabuleiro[x - 1][y - 1] == 3)
                 {
-                    std::cout << "Voce perdeu!" << std::endl;
+                    std::cout << "Você perdeu!" << std::endl;
                     int vitorias = _jogador.get_derrotas_cm();
                     _jogador.set_derrotas_cm(vitorias + 1);
                     _jogador.imprimir_informacoes();

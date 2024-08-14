@@ -102,13 +102,44 @@ void CampoMinado::limpar_tela()
 #endif
 }
 
+void CampoMinado::revelar_area(int x, int y)
+{
+    if (x < 0 || x >= _linhas || y < 0 || y >= _colunas)
+    {
+        return;
+    }
+    if (_tabuleiro[x][y] == 2)
+    {
+        return;
+    }
+
+    _tabuleiro[x][y] = 2;
+
+    if (bombas_em_volta(x, y) > 0)
+    {
+        return;
+    }
+
+    for (int i = x - 1; i <= x + 1; i++)
+    {
+        for (int j = y - 1; j <= y + 1; j++)
+        {
+            if (i == x && j == y)
+            {
+                continue;
+            }
+            revelar_area(i, j);
+        }
+    }
+}
+
 void CampoMinado::fazer_jogada(int x, int y)
 {
     try
     {
         if (_tabuleiro[x - 1][y - 1] == 0)
         {
-            _tabuleiro[x - 1][y - 1] = 2;
+            revelar_area(x - 1, y - 1);
         }
         else if (_tabuleiro[x - 1][y - 1] == 1)
         {
@@ -265,9 +296,16 @@ bool CampoMinado::checar_vitoria()
                 {
                     return false;
                 }
-                if (_tabuleiro[i][j] == 1 && _tabuleiro[i][j] != 4 && _tabuleiro[i][j] != 5)
+                if (_tabuleiro[i][j] == 1 || _tabuleiro[i][j] == 4 || _tabuleiro[i][j] == 5)
                 {
-                    return false;
+                    if (_tabuleiro[i][j] == 1 || _tabuleiro[i][j] == 5)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
         }

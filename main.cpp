@@ -15,9 +15,9 @@ int main() {
     
     // jogo.partida();
 
-    int a = 4;
-    int b = 4;
-    int bombas = 2;
+    int a = 8;
+    int b = 8;
+    int bombas = 12;
 
     Jogador jogador1("jogador", "jog");
 

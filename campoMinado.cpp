@@ -71,11 +71,11 @@ void CampoMinado::imprimir_tabuleiro()
                 }
                 else if (_tabuleiro[i][j] == 3)
                 {
-                    std::cout << " * ";
+                    std::cout << "\033[1;31m * \033[0m";
                 }
                 else if (_tabuleiro[i][j] == 4 || _tabuleiro[i][j] == 5)
                 {
-                    std::cout << " B ";
+                    std::cout << "\033[1;31m B \033[0m";
                 }
 
                 if (j != _colunas - 1)
@@ -104,32 +104,39 @@ void CampoMinado::limpar_tela()
 
 void CampoMinado::revelar_area(int x, int y)
 {
-    if (x < 0 || x >= _linhas || y < 0 || y >= _colunas)
+    try
     {
-        return;
-    }
-    if (_tabuleiro[x][y] == 2)
-    {
-        return;
-    }
-
-    _tabuleiro[x][y] = 2;
-
-    if (bombas_em_volta(x, y) > 0)
-    {
-        return;
-    }
-
-    for (int i = x - 1; i <= x + 1; i++)
-    {
-        for (int j = y - 1; j <= y + 1; j++)
+        if (x < 0 || x >= _linhas || y < 0 || y >= _colunas)
         {
-            if (i == x && j == y)
-            {
-                continue;
-            }
-            revelar_area(i, j);
+            return;
         }
+        if (_tabuleiro[x][y] == 2)
+        {
+            return;
+        }
+
+        _tabuleiro[x][y] = 2;
+
+        if (bombas_em_volta(x, y) > 0)
+        {
+            return;
+        }
+
+        for (int i = x - 1; i <= x + 1; i++)
+        {
+            for (int j = y - 1; j <= y + 1; j++)
+            {
+                if (i == x && j == y)
+                {
+                    continue;
+                }
+                revelar_area(i, j);
+            }
+        }
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << "Erro ao revelar area: " << e.what() << '\n';
     }
 }
 
@@ -353,7 +360,7 @@ void CampoMinado::partida()
                     else
                     {
                         iss.clear();
-                        iss.str(linha); 
+                        iss.str(linha);
                         iss >> x >> y;
                         if (iss.fail() || !iss.eof())
                         {

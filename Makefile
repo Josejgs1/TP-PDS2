@@ -12,7 +12,7 @@ OBJFILES=$(OBJDIR)/jogador.o $(OBJDIR)/jogoDaVelha.o $(OBJDIR)/jogoDeTabuleiro.o
 BINFILE=$(BINDIR)/main
 
 # Regras principais
-all: $(BINFILE)
+all: $(BINDIR) $(BINFILE)
 
 $(BINFILE): $(OBJFILES)
 	$(CC) $(CFLAGS) $(OBJFILES) -o $(BINFILE)

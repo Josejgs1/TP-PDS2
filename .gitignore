@@ -1,0 +1,8 @@
+# Ignorar arquivos objeto (.o)
+*.o
+
+# Ignorar o executável main
+main
+
+# Ignorar o diretório de configurações do vscode
+.vscode/

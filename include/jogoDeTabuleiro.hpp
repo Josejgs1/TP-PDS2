@@ -22,4 +22,6 @@ public:
     virtual void partida() = 0;
 };
 
+void limpar_terminal();
+    
 #endif

@@ -42,3 +42,8 @@ void JogoDeTabuleiro::inicializar_tabuleiro()
         }
     }
 }
+
+void limpar_terminal()
+{
+    std::cout << "\033[2J\033[1;1H";
+}

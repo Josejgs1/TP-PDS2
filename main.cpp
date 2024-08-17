@@ -3,10 +3,11 @@
 #include "lig4.hpp"
 #include "jogoDaVelha.hpp"
 #include "reversi.hpp"
+#include "campoMinado.hpp"
 
 void imprimir_menu()
 {
-    std::cout << "O que você gostaria de fazer?\n1. Jogo da Velha\n2. Lig4\n3. Reversi\n4. Sair\n";
+    std::cout << "O que você gostaria de fazer?\n1. Jogo da Velha\n2. Lig4\n3. Reversi\n4. Campo Minado\n5. Sair\n";
 }
 
 int main()
@@ -32,11 +33,11 @@ int main()
             case 2:
             {
                 int linhas, colunas;
-                std::cout << "Insira as dimensões do tabuleiro: ";
+                std::cout << "Insira as dimensoes do tabuleiro: ";
                 std::cin >> linhas >> colunas;
                 while (!validar_tabuleiro_lig4(linhas, colunas))
                 {
-                    std::cout << "Dimensões inválidas. Tente novamente: ";
+                    std::cout << "Dimensoes inválidas. Tente novamente: ";
                     std::cin >> linhas >> colunas;
                 }
                 Lig4 jogo = Lig4(linhas, colunas, jogador1, jogador2);
@@ -49,7 +50,7 @@ int main()
                 int tamanho;
                 while (true)
                 {
-                    std::cout << "O tabuleiro deve ser quadrado, no mínimo 6x6, no máximo 10x10, e com dimensões pares: ";
+                    std::cout << "O tabuleiro deve ser quadrado, no mínimo 6x6, no máximo 10x10, e com dimensoes pares: ";
                     std::cin >> tamanho;
 
                     if (std::cin.fail())
@@ -80,9 +81,20 @@ int main()
                 break;
             }
             case 4:
+            {
+                int a = 8;
+                int b = 8;
+                int bombas = 12;
+
+                Jogador jogador3("jogador", "jog");
+
+                CampoMinado jogo = CampoMinado(a, b, jogador3, bombas);
+                jogo.partida();
+                break;
+            }
+            case 5:
                 exit(0);
         }
     }
-    
     return 0;
 }

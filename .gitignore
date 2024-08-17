@@ -4,5 +4,5 @@
 # Ignorar o executável main
 main
 
-# Ignora o diretório de configurações do vscode
+# Ignorar o diretório de configurações do vscode
 .vscode/

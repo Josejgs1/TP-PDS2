@@ -18,11 +18,14 @@ lig4.o: lig4.hpp lig4.cpp
 reversi.o: reversi.hpp reversi.cpp
 	${CC} ${CFLAGS} -c reversi.cpp
 
-main.o: jogador.hpp jogoDaVelha.hpp jogoDeTabuleiro.hpp lig4.hpp reversi.hpp main.cpp
+campoMinado.o: campoMinado.hpp campoMinado.cpp
+	${CC} ${CFLAGS} -c campoMinado.cpp
+
+main.o: jogador.hpp jogoDaVelha.hpp jogoDeTabuleiro.hpp lig4.hpp reversi.hpp campoMinado.hpp main.cpp
 	${CC} ${CFLAGS} -c main.cpp
 
-main: main.o jogador.o jogoDaVelha.o jogoDeTabuleiro.o lig4.o reversi.o
-	${CC} ${CFLAGS} main.o jogador.o jogoDaVelha.o jogoDeTabuleiro.o lig4.o reversi.o -o main
+main: main.o jogador.o jogoDaVelha.o jogoDeTabuleiro.o lig4.o reversi.o campoMinado.o
+	${CC} ${CFLAGS} main.o jogador.o jogoDaVelha.o jogoDeTabuleiro.o lig4.o reversi.o campoMinado.o -o main
 
 clean:
 	rm -f main *.o

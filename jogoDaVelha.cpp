@@ -34,7 +34,7 @@ void JogoDaVelha::imprimir_tabuleiro()
 
 void JogoDaVelha::fazer_jogada(int x, int y)
 {
-    if (x < 1 || x > 3 || y < 1 || y > 3)
+    if (x < 1 || x > _linhas || y < 1 || y > _colunas)
     {
         std::cout << "Jogada invalida! Por favor, insira dois numeros de 1 a 3." << std::endl;
         return;

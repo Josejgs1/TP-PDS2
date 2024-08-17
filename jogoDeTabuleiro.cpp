@@ -1,7 +1,7 @@
 #include "jogoDeTabuleiro.hpp"
 
 JogoDeTabuleiro::JogoDeTabuleiro(int linhas, int colunas)
-    : _linhas(linhas), _colunas(colunas), _tabuleiro(colunas, std::vector<int>(linhas)) {}
+    : _linhas(linhas), _colunas(colunas), _tabuleiro(linhas, std::vector<int>(colunas)) {}
 
 void JogoDeTabuleiro::imprimir_tabuleiro()
 {

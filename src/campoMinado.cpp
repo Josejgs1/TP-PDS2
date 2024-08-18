@@ -12,29 +12,21 @@ const int MAX_COLUNAS = 30;
 CampoMinado::CampoMinado(int linhas, int colunas, Jogador jogador, int n_bombas)
     : JogoDeTabuleiro(linhas, colunas), _jogador(jogador), _n_bombas(n_bombas)
 {
-    try
+    if (linhas < MIN_LINHAS || linhas > MAX_LINHAS)
     {
-        if (linhas < MIN_LINHAS || linhas > MAX_LINHAS)
-        {
-            throw std::invalid_argument("Número de linhas deve estar entre " + std::to_string(MIN_LINHAS) + " e " + std::to_string(MAX_LINHAS) + ".");
-        }
-        if (colunas < MIN_COLUNAS || colunas > MAX_COLUNAS)
-        {
-            throw std::invalid_argument("Número de colunas deve estar entre " + std::to_string(MIN_COLUNAS) + " e " + std::to_string(MAX_COLUNAS) + ".");
-        }
-        if (n_bombas < 1 || n_bombas >= (linhas * colunas))
-        {
-            throw std::invalid_argument("Número de bombas deve ser pelo menos 1 e menor que o total de células do tabuleiro.");
-        }
+        throw std::invalid_argument("Erro ao inicializar o tabuleiro: Numero de linhas deve estar entre " + std::to_string(MIN_LINHAS) + " e " + std::to_string(MAX_LINHAS) + ".");
+    }
+    if (colunas < MIN_COLUNAS || colunas > MAX_COLUNAS)
+    {
+        throw std::invalid_argument("Erro ao inicializar o tabuleiro: Numero de colunas deve estar entre " + std::to_string(MIN_COLUNAS) + " e " + std::to_string(MAX_COLUNAS) + ".");
+    }
+    if (n_bombas < 1 || n_bombas >= (linhas * colunas))
+    {
+        throw std::invalid_argument("Erro ao inicializar o tabuleiro: Numero de bombas deve ser pelo menos 1 e menor que o total de células do tabuleiro.");
+    }
 
-        srand(time(0));
-        colocar_bombas();
-    }
-    catch (const std::exception &e)
-    {
-        std::cerr << "Erro ao inicializar o tabuleiro: " << e.what() << '\n';
-        throw;
-    }
+    srand(time(0));
+    colocar_bombas();
 }
 
 CampoMinado::~CampoMinado() {}
@@ -315,11 +307,11 @@ void CampoMinado::partida()
 
         if (linha.empty())
         {
-           limpar_terminal();
-           imprimir_tabuleiro();
-           continue;
+            limpar_terminal();
+            imprimir_tabuleiro();
+            continue;
         }
-        
+
         try
         {
             std::istringstream iss(linha);

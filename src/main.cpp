@@ -82,43 +82,84 @@ int main()
         }
         case 4:
         {
+            limpar_terminal();
+            int opcao;
             Jogador jogador3("jogador", "jog");
+
             std::cout << "Escolha uma opção de tamanho do tabuleiro:" << std::endl;
             std::cout << "1. Facil (6 x 6 e 10 bombas)" << std::endl;
             std::cout << "2. Medio (15 x 15 e 50 bombas)" << std::endl;
             std::cout << "3. Dificil (24 x 24 e 95 bombas)" << std::endl;
             std::cout << "4. Extremo (30 x 30 e 150 bombas)" << std::endl;
             std::cout << "5. Personalizado" << std::endl;
-            int opcao;
+            start_case_4:
             std::cin >> opcao;
 
             CampoMinado *jogo = nullptr;
 
-            switch (opcao)
+            try
             {
-            case 1:
-                jogo = new CampoMinado(6, 6, jogador3, 10);
-                break;
-            case 2:
-                jogo = new CampoMinado(15, 15, jogador3, 50);
-                break;
-            case 3:
-                jogo = new CampoMinado(24, 24, jogador3, 95);
-                break;
-            case 4:
-                jogo = new CampoMinado(30, 30, jogador3, 150);
-                break;
-            case 5:
-                int a, b, c;
-                std::cout << "O tamanho minimo do tabuleiro e 4 x 4 e maximo 30 x 30" << std::endl;
-                std::cout << "Digite as dimensoes e o numero de bombas desejadas: ";
-                std::cin >> a >> b >> c;
-                jogo = new CampoMinado(a, b, jogador3, c);
-                break;
-            default:
-                break;
+                if (std::cin.fail())
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    throw std::invalid_argument("Entrada invalida. Escolha uma opcao de 1 a 5.");
+                }
+                else
+                {
+                    switch (opcao)
+                    {
+                    case 1:
+                        jogo = new CampoMinado(6, 6, jogador3, 10);
+                        break;
+                    case 2:
+                        jogo = new CampoMinado(15, 15, jogador3, 50);
+                        break;
+                    case 3:
+                        jogo = new CampoMinado(24, 24, jogador3, 95);
+                        break;
+                    case 4:
+                        jogo = new CampoMinado(30, 30, jogador3, 150);
+                        break;
+                    case 5:
+                        int linhas, colunas, bombas;
+                        limpar_terminal();
+                        std::cout << "O tamanho minimo do tabuleiro e 4 x 4 e maximo 30 x 30" << std::endl;
+                        start_personalizado:
+                        std::cout << "Digite as dimensoes e o numero de bombas desejadas: ";
+                        std::cin >> linhas >> colunas >> bombas;
+                        try
+                        {
+                            if (std::cin.fail())
+                            {
+                                std::cin.clear();
+                                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                throw std::invalid_argument("Entrada invalida. Digite tres numeros inteiros.");
+                            }
+                            else
+                            {
+                                jogo = new CampoMinado(linhas, colunas, jogador3, bombas);
+                                break;
+                            }
+                        }
+                        catch (const std::exception &e)
+                        {
+                            std::cerr << e.what() << '\n';
+                            goto start_personalizado;
+                        }
+
+                    default:
+                        throw std::invalid_argument("Opção invalida. Escolha uma opcao de 1 a 5.");
+                    }
+
+                    jogo->partida();
+                }
             }
-            jogo->partida();
+            catch (const std::exception &e)
+            {
+                std::cerr << e.what() << '\n';
+                goto start_case_4;
+            }
             break;
         }
         case 5:

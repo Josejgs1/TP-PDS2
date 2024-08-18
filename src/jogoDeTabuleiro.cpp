@@ -1,7 +1,25 @@
 #include "jogoDeTabuleiro.hpp"
 
 JogoDeTabuleiro::JogoDeTabuleiro(int linhas, int colunas)
-    : _linhas(linhas), _colunas(colunas), _tabuleiro(linhas, std::vector<int>(colunas)) {}
+    : _linhas(linhas), _colunas(colunas)
+{
+    if (linhas < 0 || colunas < 0)
+    {
+        throw std::invalid_argument("O tabuleiro deve ter valores positivos para as dimensões.");
+    }
+    _tabuleiro.resize(_linhas, std::vector<int>(_colunas, 0));
+}
+
+void JogoDeTabuleiro::inicializar_tabuleiro()
+{
+    for (int i = 0; i < _linhas; ++i)
+    {
+        for (int j = 0; j < _colunas; ++j)
+        {
+            _tabuleiro[i][j] = 0;
+        }
+    }
+}
 
 void JogoDeTabuleiro::imprimir_tabuleiro()
 {
@@ -30,17 +48,6 @@ void JogoDeTabuleiro::imprimir_tabuleiro()
         std::cout << std::endl;
     }
     std::cout << std::endl;
-}
-
-void JogoDeTabuleiro::inicializar_tabuleiro()
-{
-    for (int i = 0; i < _linhas; ++i)
-    {
-        for (int j = 0; j < _colunas; ++j)
-        {
-            _tabuleiro[i][j] = 0;
-        }
-    }
 }
 
 void limpar_terminal()

@@ -6,35 +6,14 @@ Jogador::Jogador(std::string nome, std::string apelido)
 Jogador::Jogador(std::string nome, std::string apelido, int vitorias_jdv, int derrotas_jdv, int vitorias_lig4, int derrotas_lig4, int vitorias_cm, int derrotas_cm)
     : _nome(nome), _apelido(apelido), _vitorias_jdv(vitorias_jdv), _derrotas_jdv(derrotas_jdv), _vitorias_lig4(vitorias_lig4), _derrotas_lig4(derrotas_lig4), _vitorias_cm(vitorias_cm), _derrotas_cm(derrotas_cm) {}
 
-std::string Jogador::get_apelido()
-{
-    return this->_apelido;
-}
-
-void Jogador::set_apelido(std::string apelido)
-{
-    this->_apelido = apelido;
-}
-
-int Jogador::get_vitorias_jdv()
-{
-    return this->_vitorias_jdv;
-}
-
-int Jogador::get_derrotas_jdv()
-{
-    return this->_derrotas_jdv;
-}
-
-int Jogador::get_vitorias_cm()
-{
-    return this->_vitorias_cm;
-}
-
-int Jogador::get_derrotas_cm()
-{
-    return this->_derrotas_cm;
-}
+std::string Jogador::get_apelido() const { return _apelido; }
+std::string Jogador::get_nome() const { return _nome; }
+int Jogador::get_vitorias_jdv() const { return _vitorias_jdv; }
+int Jogador::get_derrotas_jdv() const { return _derrotas_jdv; }
+int Jogador::get_vitorias_lig4() const { return _vitorias_lig4; }
+int Jogador::get_derrotas_lig4() const { return _derrotas_lig4; }
+int Jogador::get_vitorias_cm() const { return _vitorias_cm; }
+int Jogador::get_derrotas_cm() const { return _derrotas_cm; }
 
 void Jogador::set_vitorias_jdv(int vitorias)
 {
@@ -58,7 +37,7 @@ void Jogador::set_derrotas_cm(int derrotas)
 
 void Jogador::soma_derrota_lig4()
 {
-    this->_derrotas_lig4 = _derrotas_lig4 + 1;
+    _derrotas_lig4 = _derrotas_lig4 + 1;
 }
 
 void Jogador::soma_vitoria_lig4()
@@ -91,60 +70,56 @@ void Jogador::imprimir_informacoes()
     std::cout << std::endl;
 }
 
-//REFAZER
-void Jogador::salvar_jogador() {
-    std::string caminho_arquivo = "files/jogadores.csv";
-
-    std::ofstream arquivo(caminho_arquivo, std::ios::app);
-    if (!arquivo.is_open()) {
-        std::cerr << "Erro ao abrir o arquivo " << caminho_arquivo << std::endl;
+void salvarJogadores(const std::vector<Jogador> &jogadores)
+{
+    std::ofstream ofs("files/jogadores.csv");
+    if (!ofs)
+    {
+        std::cerr << "Erro ao abrir o arquivo para escrita\n";
         return;
     }
 
-    // Escrever os dados do jogador no arquivo
-    arquivo << _nome << ","
-            << _apelido << ","
-            << _vitorias_jdv << ","
-            << _derrotas_jdv << ","
-            << _vitorias_lig4 << ","
-            << _derrotas_lig4 << ","
-            << _vitorias_cm << ","
-            << _derrotas_cm << "\n";
-
-    arquivo.close();
+    // for (const auto &jogador : jogadores)
+    // {
+    //     ofs << jogador.get_nome() << ',' << jogador.get_apelido() << ','
+    //         << jogador.get_vitorias_jdv() << ',' << jogador.get_derrotas_jdv() << ','
+    //         << jogador.get_vitorias_lig4() << ',' << jogador.get_derrotas_lig4() << ','
+    //         << jogador.get_vitorias_cm() << ',' << jogador.get_derrotas_cm() << '\n';
+    // }
 }
 
-void Jogador::ler_jogadores_de_csv(std::vector<Jogador>& jogadores) {
-    std::string nome_arquivo = "files/jogadores.csv";
-
-    std::ifstream arquivo(nome_arquivo);
-    if (!arquivo.is_open()) {
-        std::cerr << "Erro ao abrir o arquivo " << nome_arquivo << std::endl;
-        return;
+std::vector<Jogador> carregar_jogadores()
+{
+    std::ifstream ifs("files/jogadores.csv");
+    std::vector<Jogador> jogadores;
+    if (!ifs)
+    {
+        std::cerr << "Erro ao abrir o arquivo para leitura\n"; // fazer tratamento
+        return jogadores;
     }
 
     std::string linha;
-    while (std::getline(arquivo, linha)) {
-        std::stringstream ss(linha);
+    while (std::getline(ifs, linha))
+    {
+        std::istringstream iss(linha);
         std::string nome, apelido;
-        int vitorias_jdv = 0, derrotas_jdv = 0, vitorias_lig4 = 0, derrotas_lig4 = 0, vitorias_cm = 0, derrotas_cm = 0;
+        int vjdv, djdv, vlig4, dlig4, vcm, dcm;
 
-        std::getline(ss, nome, ',');
-        std::getline(ss, apelido, ',');
-        ss >> vitorias_jdv;
-        ss.ignore();
-        ss >> derrotas_jdv;
-        ss.ignore();
-        ss >> vitorias_lig4;
-        ss.ignore();
-        ss >> derrotas_lig4;
-        ss.ignore();
-        ss >> vitorias_cm;
-        ss.ignore();
-        ss >> derrotas_cm;
+        std::getline(iss, nome, ',');
+        std::getline(iss, apelido, ',');
+        iss >> vjdv;
+        iss.ignore();
+        iss >> djdv;
+        iss.ignore();
+        iss >> vlig4;
+        iss.ignore();
+        iss >> dlig4;
+        iss.ignore();
+        iss >> vcm;
+        iss.ignore();
+        iss >> dcm;
 
-        jogadores.emplace_back(nome, apelido, vitorias_jdv, derrotas_jdv, vitorias_lig4, derrotas_lig4, vitorias_cm, derrotas_cm);
+        jogadores.emplace_back(nome, apelido, vjdv, djdv, vlig4, dlig4, vcm, dcm);
     }
-
-    arquivo.close();
+    return jogadores;
 }

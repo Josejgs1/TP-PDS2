@@ -93,15 +93,6 @@ void CampoMinado::imprimir_tabuleiro()
     }
 }
 
-void CampoMinado::limpar_tela()
-{
-#ifdef _WIN32
-    system("cls");
-#else
-    system("clear");
-#endif
-}
-
 void CampoMinado::revelar_area(int x, int y)
 {
     try
@@ -154,19 +145,15 @@ void CampoMinado::fazer_jogada(int x, int y)
         }
         else
         {
-            limpar_tela();
             throw std::logic_error("Posicao ja ocupada! Tente novamente.");
-            imprimir_tabuleiro();
             return;
         }
-        limpar_tela();
+        limpar_terminal();
         imprimir_tabuleiro();
     }
     catch (const std::exception &e)
     {
-        limpar_tela();
         std::cerr << "Erro ao fazer jogada: " << e.what() << '\n';
-        imprimir_tabuleiro();
     }
 }
 
@@ -178,9 +165,7 @@ void CampoMinado::marcar_bomba(int x, int y)
 
         if (x < 1 || x > _linhas || y < 1 || y > _colunas)
         {
-            limpar_tela();
             throw std::out_of_range("Jogada invalida! Por favor, insira dois numeros de 1 a " + std::to_string(_colunas) + ".");
-            imprimir_tabuleiro();
             return;
         }
 
@@ -188,9 +173,7 @@ void CampoMinado::marcar_bomba(int x, int y)
         {
             if (bombas_marcadas >= _n_bombas)
             {
-                limpar_tela();
-                throw std::logic_error("Você já marcou o número máximo de bombas (" + std::to_string(_n_bombas) + ").");
-                imprimir_tabuleiro();
+                throw std::logic_error("Voce já marcou o número máximo de bombas (" + std::to_string(_n_bombas) + ").");
                 return;
             }
             else
@@ -203,9 +186,7 @@ void CampoMinado::marcar_bomba(int x, int y)
         {
             if (bombas_marcadas >= _n_bombas)
             {
-                limpar_tela();
-                throw std::logic_error("Você já marcou o número máximo de bombas (" + std::to_string(_n_bombas) + ").");
-                imprimir_tabuleiro();
+                throw std::logic_error("Voce já marcou o número máximo de bombas (" + std::to_string(_n_bombas) + ").");
                 return;
             }
             else
@@ -226,19 +207,15 @@ void CampoMinado::marcar_bomba(int x, int y)
         }
         else
         {
-            limpar_tela();
             throw std::logic_error("Posicao ja ocupada! Tente novamente.");
-            imprimir_tabuleiro();
             return;
         }
-        limpar_tela();
+        limpar_terminal();
         imprimir_tabuleiro();
     }
     catch (const std::exception &e)
     {
-        limpar_tela();
         std::cerr << "Erro ao marcar bomba: " << e.what() << '\n';
-        imprimir_tabuleiro();
     }
 }
 
@@ -326,95 +303,86 @@ bool CampoMinado::checar_vitoria()
 
 void CampoMinado::partida()
 {
-    try
+    limpar_terminal();
+    std::cout << "Digite duas coordenadas para fazer uma jogada ou adicione 'B' no inicio para marcar uma bomba." << std::endl;
+    imprimir_tabuleiro();
+    while (!checar_vitoria())
     {
-        limpar_tela();
-        std::cout << "Digite duas coordenadas para fazer uma jogada ou adicione 'B' no inicio para marcar uma bomba." << std::endl;
-        imprimir_tabuleiro();
-        while (!checar_vitoria())
+        std::string linha;
+        int x, y;
+        std::cout << _jogador.get_apelido() << ", faca sua jogada: ";
+        std::getline(std::cin, linha);
+
+        if (linha.empty())
         {
-            std::string linha;
-            int x, y;
-            std::cout << _jogador.get_apelido() << ", faça sua jogada: ";
-            std::getline(std::cin, linha);
-
-            try
+           limpar_terminal();
+           imprimir_tabuleiro();
+           continue;
+        }
+        
+        try
+        {
+            std::istringstream iss(linha);
+            char opcao;
+            if (iss >> opcao)
             {
-                std::istringstream iss(linha);
-                char opcao;
-                if (iss >> opcao)
+                if (opcao == 'B')
                 {
-                    if (opcao == 'B')
+                    if (!(iss >> x >> y) || !iss.eof())
                     {
-                        if (!(iss >> x >> y) || !iss.eof())
-                        {
-                            throw std::invalid_argument("Erro ao marcar bomba: Entrada inválida! Digite 'B' seguido de duas coordenadas.");
-                        }
-
-                        if (x < 1 || x > _linhas || y < 1 || y > _colunas)
-                        {
-                            throw std::out_of_range("Erro ao marcar bombas: Jogada fora dos limites! Tente novamente.");
-                        }
-                        marcar_bomba(x, y);
+                        throw std::invalid_argument("Erro ao marcar bomba: Entrada inválida! Digite 'B' seguido de duas coordenadas.");
                     }
-                    else
+
+                    if (x < 1 || x > _linhas || y < 1 || y > _colunas)
                     {
-                        iss.clear();
-                        iss.str(linha);
-                        iss >> x >> y;
-                        if (iss.fail() || !iss.eof())
-                        {
-                            throw std::invalid_argument("Erro ao fazer jogada: Entrada inválida! Digite duas coordenadas inteiras.");
-                        }
-
-                        if (x < 1 || x > _linhas || y < 1 || y > _colunas)
-                        {
-                            throw std::out_of_range("Erro ao fazer jogada: Jogada fora dos limites! Tente novamente.");
-                        }
-                        fazer_jogada(x, y);
+                        throw std::out_of_range("Erro ao marcar bombas: Jogada fora dos limites! Tente novamente.");
                     }
+                    marcar_bomba(x, y);
                 }
                 else
                 {
-                    throw std::invalid_argument("Erro ao processar a entrada: Entrada inválida!");
-                }
+                    iss.clear();
+                    iss.str(linha);
+                    iss >> x >> y;
+                    if (iss.fail() || !iss.eof())
+                    {
+                        throw std::invalid_argument("Erro ao fazer jogada: Entrada inválida! Digite duas coordenadas inteiras.");
+                    }
 
-                if (_tabuleiro[x - 1][y - 1] == 3)
-                {
-                    std::cout << "Você perdeu!" << std::endl;
-                    int vitorias = _jogador.get_derrotas_cm();
-                    _jogador.set_derrotas_cm(vitorias + 1);
-                    _jogador.imprimir_informacoes();
-                    return;
+                    if (x < 1 || x > _linhas || y < 1 || y > _colunas)
+                    {
+                        throw std::out_of_range("Erro ao fazer jogada: Jogada fora dos limites! Tente novamente.");
+                    }
+                    fazer_jogada(x, y);
                 }
             }
-            catch (const std::invalid_argument &)
+            else
             {
-                limpar_tela();
-                std::cerr << "Entrada invalida! Digite duas coordenadas para fazer uma jogada ou adicione 'B' no inicio para marcar uma bomba." << '\n';
-                imprimir_tabuleiro();
-                continue;
+                throw std::invalid_argument("Erro ao processar a entrada: Entrada inválida!");
             }
-            catch (const std::exception &e)
+
+            if (_tabuleiro[x - 1][y - 1] == 3)
             {
-                limpar_tela();
-                std::cerr << e.what() << '\n';
-                imprimir_tabuleiro();
-                continue;
+                std::cout << "Você perdeu!" << std::endl;
+                int vitorias = _jogador.get_derrotas_cm();
+                _jogador.set_derrotas_cm(vitorias + 1);
+                _jogador.imprimir_informacoes();
+                return;
             }
         }
-        if (checar_vitoria())
+        catch (const std::exception &e)
         {
-            int vitorias = _jogador.get_vitorias_cm();
-            _jogador.set_vitorias_cm(vitorias + 1);
-
-            std::cout << "Parabens " << _jogador.get_apelido() << ", voce venceu!" << std::endl;
-            _jogador.imprimir_informacoes();
-            return;
+            std::cerr << e.what() << '\n';
+            continue;
         }
     }
-    catch (const std::exception &e)
+    if (checar_vitoria())
     {
-        std::cerr << e.what() << '\n';
+        int vitorias = _jogador.get_vitorias_cm();
+        _jogador.set_vitorias_cm(vitorias + 1);
+
+        std::cout << "Parabens " << _jogador.get_apelido() << ", voce venceu!" << std::endl;
+        _jogador.imprimir_informacoes();
+        return;
     }
 }

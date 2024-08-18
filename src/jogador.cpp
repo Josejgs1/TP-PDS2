@@ -70,7 +70,7 @@ void Jogador::imprimir_informacoes()
     std::cout << std::endl;
 }
 
-void salvarJogadores(const std::vector<Jogador> &jogadores)
+void salvar_jogadores(const std::vector<Jogador> &jogadores)
 {
     std::ofstream ofs("files/jogadores.csv");
     if (!ofs)
@@ -79,13 +79,13 @@ void salvarJogadores(const std::vector<Jogador> &jogadores)
         return;
     }
 
-    // for (const auto &jogador : jogadores)
-    // {
-    //     ofs << jogador.get_nome() << ',' << jogador.get_apelido() << ','
-    //         << jogador.get_vitorias_jdv() << ',' << jogador.get_derrotas_jdv() << ','
-    //         << jogador.get_vitorias_lig4() << ',' << jogador.get_derrotas_lig4() << ','
-    //         << jogador.get_vitorias_cm() << ',' << jogador.get_derrotas_cm() << '\n';
-    // }
+    for (const auto &jogador : jogadores)
+    {
+        ofs << jogador.get_nome() << ',' << jogador.get_apelido() << ','
+            << jogador.get_vitorias_jdv() << ',' << jogador.get_derrotas_jdv() << ','
+            << jogador.get_vitorias_lig4() << ',' << jogador.get_derrotas_lig4() << ','
+            << jogador.get_vitorias_cm() << ',' << jogador.get_derrotas_cm() << '\n';
+    }
 }
 
 std::vector<Jogador> carregar_jogadores()
@@ -121,5 +121,35 @@ std::vector<Jogador> carregar_jogadores()
 
         jogadores.emplace_back(nome, apelido, vjdv, djdv, vlig4, dlig4, vcm, dcm);
     }
+
     return jogadores;
+}
+
+bool apelido_existe(const std::vector<Jogador>& jogadores, const std::string& apelido) {
+    for (const auto& jogador : jogadores) {
+        if (jogador.get_apelido() == apelido) {
+            return true;
+        }
+    }
+    return false;
+}
+
+Jogador escolhe_jogador(const std::vector<Jogador>& jogadores){
+    std::string apelidoJogador; 
+    
+    while(true){
+        std::cin >> apelidoJogador;
+
+        if (!apelido_existe(jogadores, apelidoJogador))
+        {
+            std::cout << "O apelido não foi encontrado. Tente novamente: "; //resolver
+        } else
+        {
+            for (const auto& jogador : jogadores) {
+                if (jogador.get_apelido() == apelidoJogador) {
+                    return jogador; // Retorna o jogador com o apelido correspondente
+                }
+            }
+        }
+    }
 }

@@ -44,9 +44,11 @@ public:
     void imprimir_informacoes_jdv();
     void imprimir_informacoes_lig4();
     void imprimir_informacoes();
-
-    void salvar_jogador();
-    std::vector<Jogador> carregar_jogadores();
 };
+
+std::vector<Jogador> carregar_jogadores();
+void salvar_jogadores(const std::vector<Jogador> &jogadores);
+bool apelido_existe(const std::vector<Jogador>& jogadores, const std::string& apelido);
+Jogador escolhe_jogador(const std::vector<Jogador>& jogadores);
 
 #endif

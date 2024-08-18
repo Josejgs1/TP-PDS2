@@ -297,29 +297,32 @@ void Reversi::partida()
             jogadorAtual = 1;
         }
     }
+
     limpar_terminal();
     imprimir_tabuleiro(jogadorAtual);
-    
-    int resultado = checar_vitoria();
-
 
     if (contarPecas(1) == contarPecas(2))
     {
         std::cout << "Empate com " << contarPecas(1) << " peças para cada jogador." << std::endl;
     }
-    else if (resultado == 0)
+    else 
     {
-        std::cout << std::endl;
-        std::cout << _jogador1.get_apelido() << " (X) venceu com " << contarPecas(1) << " peças contra " << contarPecas(2) << " peças de " << _jogador2.get_apelido() << " (O)." << std::endl;
-        _jogador1.soma_vitoria_rvs();
-        _jogador2.soma_derrota_rvs();
-    }
-    else if (resultado == 1)
-    {   
-        std::cout << std::endl;
-        std::cout << _jogador2.get_apelido() << " (O) venceu com " << contarPecas(2) << " peças contra " << contarPecas(1) << " peças de " << _jogador1.get_apelido() << " (X)." << std::endl;
-        _jogador2.soma_vitoria_rvs();
-        _jogador1.soma_derrota_rvs();
+        int resultado = checar_vitoria();
+
+        if (resultado == 0)
+        {
+            std::cout << std::endl;
+            std::cout << _jogador1.get_apelido() << " (X) venceu com " << contarPecas(1) << " peças contra " << contarPecas(2) << " peças de " << _jogador2.get_apelido() << " (O)." << std::endl;
+            _jogador1.soma_vitoria_rvs();
+            _jogador2.soma_derrota_rvs();
+        }
+        else if (resultado == 1)
+        {   
+            std::cout << std::endl;
+            std::cout << _jogador2.get_apelido() << " (O) venceu com " << contarPecas(2) << " peças contra " << contarPecas(1) << " peças de " << _jogador1.get_apelido() << " (X)." << std::endl;
+            _jogador2.soma_vitoria_rvs();
+            _jogador1.soma_derrota_rvs();
+        }
     }
     std::cout << std::endl;
     std::cout << "Estatísticas Atuais:" << std::endl;
@@ -337,7 +340,7 @@ bool Reversi::checar_vitoria()
     {
         return 0;
     }
-    else if (pecasJogador2 > pecasJogador1)
+    else
     {
         return 1;
     }

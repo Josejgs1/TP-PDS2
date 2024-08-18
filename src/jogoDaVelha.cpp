@@ -18,11 +18,11 @@ void JogoDaVelha::imprimir_tabuleiro()
                 }
                 else if (_tabuleiro[i][j] == 1)
                 {
-                    std::cout << " X ";
+                    std::cout << "\033[31m X \033[0m";
                 }
                 else if (_tabuleiro[i][j] == 2)
                 {
-                    std::cout << " O ";
+                    std::cout << "\033[32m O \033[0m";
                 }
 
                 if (j != _colunas - 1)
@@ -44,11 +44,6 @@ void JogoDaVelha::fazer_jogada(int x, int y)
 {
     try
     {
-        // if (x < 1 || x > _linhas || y < 1 || y > _colunas)
-        // {
-        //     std::cout << "Jogada invalida! Por favor, insira dois numeros de 1 a 3." << std::endl;
-        //     return;
-        // }
         if (_tabuleiro[x - 1][y - 1] == 0)
         {
             _tabuleiro[x - 1][y - 1] = _jogador_atual;

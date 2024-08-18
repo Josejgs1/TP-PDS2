@@ -4,6 +4,8 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include <sstream>
 
 class Jogador
 {
@@ -18,8 +20,10 @@ private:
 
     int _vitorias_cm = 0;
     int _derrotas_cm = 0;
+
 public:
     Jogador(std::string nome, std::string apelido);
+    Jogador(std::string nome, std::string apelido, int vitorias_jdv, int derrotas_jdv, int vitorias_lig4, int derrotas_lig4, int vitorias_cm, int derrotas_cm);
 
     std::string get_apelido();
     void set_apelido(std::string apelido);
@@ -39,8 +43,10 @@ public:
 
     void imprimir_informacoes_jdv();
     void imprimir_informacoes_lig4();
-
     void imprimir_informacoes();
+
+    void salvar_jogador();
+    static void ler_jogadores_de_csv(std::vector<Jogador>& jogadores);
 };
 
 #endif

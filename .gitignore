@@ -6,3 +6,6 @@ main
 
 # Ignorar o diretório de configurações do vscode
 .vscode/
+
+# Ignorar o banco de jogadores
+jogadores.csv

@@ -18,7 +18,7 @@ void JogoDaVelha::imprimir_tabuleiro()
                 }
                 else if (_tabuleiro[i][j] == 1)
                 {
-                    std::cout << "\033[31m X \033[0m";
+                    std::cout << "\033[34m X \033[0m";
                 }
                 else if (_tabuleiro[i][j] == 2)
                 {
@@ -53,6 +53,7 @@ void JogoDaVelha::fazer_jogada(int x, int y)
         {
             throw std::logic_error("Posicao ja ocupada! Tente novamente.");
         }
+        limpar_terminal();
         imprimir_tabuleiro();
     }
     catch (const std::exception &e)
@@ -157,6 +158,7 @@ bool JogoDaVelha::checar_final()
 
 void JogoDaVelha::partida()
 {
+    limpar_terminal();
     imprimir_tabuleiro();
     while (!checar_vitoria() && !checar_final())
     {

@@ -1,31 +1,33 @@
 CC=g++
 CFLAGS=-std=c++11 -Wall
 
-all: main
+# Diretórios para objetos e binários
+OBJDIR=obj
+BINDIR=bin
+SRCDIR=src
+INCLUDEDIR=include
 
-jogador.o: jogador.hpp jogador.cpp
-	${CC} ${CFLAGS} -c jogador.cpp
+# Diretórios e arquivos
+OBJFILES=$(OBJDIR)/jogador.o $(OBJDIR)/jogoDaVelha.o $(OBJDIR)/jogoDeTabuleiro.o $(OBJDIR)/lig4.o $(OBJDIR)/reversi.o $(OBJDIR)/campoMinado.o $(OBJDIR)/main.o
+BINFILE=$(BINDIR)/main
 
-jogoDaVelha.o: jogoDaVelha.hpp jogoDaVelha.cpp
-	${CC} ${CFLAGS} -c jogoDaVelha.cpp
+# Regras principais
+all: $(BINDIR) $(BINFILE)
 
-jogoDeTabuleiro.o: jogoDeTabuleiro.hpp jogoDeTabuleiro.cpp
-	${CC} ${CFLAGS} -c jogoDeTabuleiro.cpp
+$(BINFILE): $(OBJFILES)
+	$(CC) $(CFLAGS) $(OBJFILES) -o $(BINFILE)
 
-lig4.o: lig4.hpp lig4.cpp
-	${CC} ${CFLAGS} -c lig4.cpp
+# Regras para arquivos .o
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR)
+	$(CC) $(CFLAGS) -I$(INCLUDEDIR) -c $< -o $@
 
-reversi.o: reversi.hpp reversi.cpp
-	${CC} ${CFLAGS} -c reversi.cpp
+# Regra para garantir que as pastas existem
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
 
-campoMinado.o: campoMinado.hpp campoMinado.cpp
-	${CC} ${CFLAGS} -c campoMinado.cpp
+$(BINDIR):
+	mkdir -p $(BINDIR)
 
-main.o: jogador.hpp jogoDaVelha.hpp jogoDeTabuleiro.hpp lig4.hpp reversi.hpp campoMinado.hpp main.cpp
-	${CC} ${CFLAGS} -c main.cpp
-
-main: main.o jogador.o jogoDaVelha.o jogoDeTabuleiro.o lig4.o reversi.o campoMinado.o
-	${CC} ${CFLAGS} main.o jogador.o jogoDaVelha.o jogoDeTabuleiro.o lig4.o reversi.o campoMinado.o -o main
-
+# Limpeza
 clean:
-	rm -f main *.o
+	rm -f $(BINFILE) $(OBJDIR)/*.o

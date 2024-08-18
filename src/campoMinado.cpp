@@ -391,7 +391,7 @@ void CampoMinado::partida()
             catch (const std::invalid_argument &)
             {
                 limpar_tela();
-                std::cerr << "Entrada inválida! Digite duas coordenadas para fazer uma jogada ou adicione 'B' no inicio para marcar uma bomba." << '\n';
+                std::cerr << "Entrada invalida! Digite duas coordenadas para fazer uma jogada ou adicione 'B' no inicio para marcar uma bomba." << '\n';
                 imprimir_tabuleiro();
                 continue;
             }

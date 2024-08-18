@@ -245,7 +245,7 @@ void Reversi::jogar()
     while (!tabuleiroCheio())
     {
         int linha, coluna;
-        std::cout << "\033[2J\033[1;1H";
+        limpar_terminal();
         imprimir_tabuleiro(jogadorAtual);
 
         if (jogadorAtual == 1)

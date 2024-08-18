@@ -30,7 +30,7 @@ void Lig4::fazer_jogada(int x)
 
     alternar_jogador();
 
-    std::cout << "\033[2J\033[1;1H"; //Limpa o terminal
+    limpar_terminal();
     imprimir_tabuleiro();
 }
 

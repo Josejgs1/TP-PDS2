@@ -166,3 +166,5 @@ void JogoDaVelha::partida()
         return;
     }
 }
+
+JogoDaVelha::~JogoDaVelha() {}

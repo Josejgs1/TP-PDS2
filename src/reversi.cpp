@@ -1,18 +1,18 @@
 #include "reversi.hpp"
+#include "jogador.hpp"
 #include <stdexcept>
 #include <iostream>
 #include <iomanip>
 #include <limits>
 #include <vector>
 
-Reversi::Reversi(int linhas, int colunas) : JogoDeTabuleiro(linhas, colunas)
+Reversi::Reversi(int linhas, int colunas, Jogador jogador1, Jogador jogador2)
+    : JogoDeTabuleiro(linhas, colunas), _jogador1(jogador1), _jogador2(jogador2), _jogador_atual(1)
 {
-    if (linhas != colunas || linhas < 6 || linhas > 10 || linhas % 2 != 0)
-    {
-        throw std::invalid_argument("O tabuleiro deve ser quadrado, no mínimo 6x6, no máximo 10x10, e com dimensões pares.");
-    }
     inicializarTabuleiro();
 }
+
+Reversi::~Reversi() {}
 
 void Reversi::inicializarTabuleiro()
 {
@@ -36,15 +36,7 @@ bool Reversi::movimentoValido(int linha, int coluna, int jogador)
         return false;
     }
 
-    int oponente;
-    if (jogador == 1)
-    {
-        oponente = 2;
-    }
-    else
-    {
-        oponente = 1;
-    }
+    int oponente = (jogador == 1) ? 2 : 1;
 
     for (int _deltaLinha = -1; _deltaLinha <= 1; ++_deltaLinha)
     {
@@ -85,15 +77,7 @@ void Reversi::realizarMovimento(int linha, int coluna, int jogador)
         throw std::invalid_argument("Movimento inválido.");
     }
 
-    int oponente;
-    if (jogador == 1)
-    {
-        oponente = 2;
-    }
-    else
-    {
-        oponente = 1;
-    }
+    int oponente = (jogador == 1) ? 2 : 1;
 
     _tabuleiro[linha][coluna] = jogador;
 
@@ -239,7 +223,7 @@ void Reversi::imprimir_tabuleiro(int jogadorAtual)
     }
 }
 
-void Reversi::jogar()
+void Reversi::partida()
 {
     int jogadorAtual = 1;
     while (!tabuleiroCheio())
@@ -250,11 +234,11 @@ void Reversi::jogar()
 
         if (jogadorAtual == 1)
         {
-            std::cout << "\033[32mJogador 1 (X), é sua vez.\033[0m" << std::endl;
+            std::cout << "\033[32m" << _jogador1.get_apelido() << " (X), é sua vez.\033[0m" << std::endl;
         }
         else
         {
-            std::cout << "\033[31mJogador 2 (O), é sua vez.\033[0m" << std::endl;
+            std::cout << "\033[31m" << _jogador2.get_apelido() << " (O), é sua vez.\033[0m" << std::endl;
         }
 
         if (temMovimentosValidos(jogadorAtual))
@@ -269,7 +253,7 @@ void Reversi::jogar()
                 {
                     std::cin.clear();
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    std::cout << "Entrada inválida. Tente novamente." << std::endl;
+                    std::cout << std::endl << "Entrada inválida. Tente novamente." << std::endl;
                     continue;
                 }
 
@@ -283,7 +267,7 @@ void Reversi::jogar()
                 }
                 else
                 {
-                    std::cout << "Movimento inválido. Tente novamente." << std::endl;
+                    std::cout << std::endl << "Movimento inválido. Tente novamente." << std::endl;
                 }
             }
         }
@@ -291,11 +275,11 @@ void Reversi::jogar()
         {
             if (jogadorAtual == 1)
             {
-                std::cout << "\033[32mJogador " << jogadorAtual << " Não possui jogada válida. Passou a vez.\033[0m" << std::endl;
+                std::cout << "\033[32mJogador " << _jogador1.get_apelido() << " Não possui jogada válida. Passou a vez.\033[0m" << std::endl;
             }
             else
             {
-                std::cout << "\033[31mJogador " << jogadorAtual << " Não possui jogada válida. Passou a vez.\033[0m" << std::endl;
+                std::cout << "\033[31mJogador " << _jogador2.get_apelido() << " Não possui jogada válida. Passou a vez.\033[0m" << std::endl;
             }
         }
 
@@ -313,47 +297,54 @@ void Reversi::jogar()
             jogadorAtual = 1;
         }
     }
+    limpar_terminal();
+    imprimir_tabuleiro(jogadorAtual);
+    
+    int resultado = checar_vitoria();
 
-    int pontosJogador1 = contarPecas(1);
-    int pontosJogador2 = contarPecas(2);
-    std::cout << std::endl;
-    std::cout << "Fim de jogo!" << std::endl;
-    std::cout << "Jogador 1 (X) tem " << pontosJogador1 << " peças." << std::endl;
-    std::cout << "Jogador 2 (O) tem " << pontosJogador2 << " peças." << std::endl;
-    std::cout << std::endl;
 
-    if (pontosJogador1 > pontosJogador2)
+    if (contarPecas(1) == contarPecas(2))
     {
-        std::cout << "Jogador 1 (X) vence!" << std::endl;
+        std::cout << "Empate com " << contarPecas(1) << " peças para cada jogador." << std::endl;
     }
-    else if (pontosJogador2 > pontosJogador1)
+    else if (resultado == 0)
     {
-        std::cout << "Jogador 2 (O) vence!" << std::endl;
+        std::cout << std::endl;
+        std::cout << _jogador1.get_apelido() << " (X) venceu com " << contarPecas(1) << " peças contra " << contarPecas(2) << " peças de " << _jogador2.get_apelido() << " (O)." << std::endl;
+        _jogador1.soma_vitoria_rvs();
+        _jogador2.soma_derrota_rvs();
     }
-    else
-    {
-        std::cout << "Empate!" << std::endl;
+    else if (resultado == 1)
+    {   
+        std::cout << std::endl;
+        std::cout << _jogador2.get_apelido() << " (O) venceu com " << contarPecas(2) << " peças contra " << contarPecas(1) << " peças de " << _jogador1.get_apelido() << " (X)." << std::endl;
+        _jogador2.soma_vitoria_rvs();
+        _jogador1.soma_derrota_rvs();
     }
+    std::cout << std::endl;
+    std::cout << "Estatísticas Atuais:" << std::endl;
+    _jogador1.imprimir_informacoes_rvs();
+    _jogador2.imprimir_informacoes_rvs();
     std::cout << std::endl;
 }
 
 bool Reversi::checar_vitoria()
 {
-    int pontosJogador1 = contarPecas(1);
-    int pontosJogador2 = contarPecas(2);
-    return pontosJogador1 > pontosJogador2 || pontosJogador2 > pontosJogador1;
-}
+    int pecasJogador1 = contarPecas(1);
+    int pecasJogador2 = contarPecas(2);
 
-void Reversi::partida()
-{
-    jogar();
+    if (pecasJogador1 > pecasJogador2)
+    {
+        return 0;
+    }
+    else if (pecasJogador2 > pecasJogador1)
+    {
+        return 1;
+    }
 }
-
 
 //--Casos extremos-- 
 //1° - Tabuleiro fica completamente cheio;
 //2° - Um jogador não possui movimentos válidos e passa sua vez;
 //3° - Um jogador não possui nenhuma "peça" e o jogo termina;
 //4° - Ambos os jogadores não possuem movimentos válidos, o jogo termina e contabiliza o número de peças de cada um;
-
-

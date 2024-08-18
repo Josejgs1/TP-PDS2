@@ -61,6 +61,17 @@ void Jogador::soma_vitoria_lig4()
     this->_vitorias_lig4++;
 }
 
+void Jogador::soma_derrota_rvs()
+{
+    this->_derrotas_rvs++;
+
+}
+
+void Jogador::soma_vitoria_rvs()
+{
+    this->_vitorias_rvs++;
+}
+
 void Jogador::imprimir_informacoes_jdv()
 {
     std::cout << "Jogador: " << this->_nome << std::endl;
@@ -74,6 +85,14 @@ void Jogador::imprimir_informacoes_lig4()
     std::cout << "Jogador: " << this->_nome << std::endl;
     std::cout << "Apelido: " << this->_apelido << std::endl;
     std::cout << "Vitorias no Ligue 4: " << this->_vitorias_lig4 << "      Derrotas no Ligue 4: " << this->_derrotas_lig4 << std::endl;
+    std::cout << std::endl;
+}
+
+void Jogador::imprimir_informacoes_rvs()
+{
+    std::cout << "Jogador: " << this->_nome << std::endl;
+    std::cout << "Apelido: " << this->_apelido << std::endl;
+    std::cout << "Vitorias no Reversi: " << this->_vitorias_rvs << "      Derrotas no Reversi: " << this->_derrotas_rvs << std::endl;
     std::cout << std::endl;
 }
 

@@ -71,8 +71,8 @@ int main()
 
                 try
                 {
-                    Reversi jogo(tamanho, tamanho);
-                    jogo.jogar();
+                    Reversi jogo(tamanho, tamanho, jogador1, jogador2);
+                    jogo.partida();
                 }
                 catch (const std::invalid_argument &erro)
                 {

@@ -15,7 +15,7 @@ private:
 
 public:
     JogoDaVelha(Jogador jogador1, Jogador jogador2);
-
+    virtual ~JogoDaVelha();
     void imprimir_tabuleiro() override;
     void fazer_jogada(int x, int y);
     void alternar_jogador();

@@ -24,28 +24,42 @@ void JogoDeTabuleiro::inicializar_tabuleiro()
 }
 
 void JogoDeTabuleiro::imprimir_tabuleiro()
-{
+{   
+    for (int j = 0; j < _colunas; ++j)
+    {
+        std::cout << std::setw(3) << (j + 1) << " ";
+    }
+    std::cout << std::endl;
+
     for (int i = 0; i < _linhas; i++)
     {
         for (int j = 0; j < _colunas; j++)
-        {
+        {   
+            std::cout << "|";
             if (_tabuleiro[i][j] == 0)
             {
                 std::cout << "   ";
             }
             else if (_tabuleiro[i][j] == 1)
             {
-                std::cout << " X ";
+                std::cout << "\033[34m X \033[0m";
             }
             else if (_tabuleiro[i][j] == 2)
             {
-                std::cout << " O ";
+                std::cout << "\033[33m O \033[0m";
             }
 
-            if (j != _colunas - 1)
+            if (j == _colunas - 1)
             {
                 std::cout << "|";
             }
+        }
+        std::cout << std::endl;
+
+        std::cout << "-";
+        for (int j = 0; j < _colunas; ++j)
+        {
+            std::cout << "----";
         }
         std::cout << std::endl;
     }

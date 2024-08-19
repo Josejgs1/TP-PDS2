@@ -5,6 +5,7 @@
 #include "reversi.hpp"
 #include "campoMinado.hpp"
 #include "jogador.hpp"
+#include <memory>
 
 #define DIMENSAO_JOGO_RAPIDO 6
 #define DIMENSAO_JOGO_CLASSICO 8
@@ -178,7 +179,7 @@ int main()
             start_case_4:
             std::cin >> opcao;
 
-            CampoMinado *jogo = nullptr;
+            std::unique_ptr<CampoMinado> jogo = nullptr;
 
             try
             {
@@ -221,7 +222,7 @@ int main()
                             }
                             else
                             {
-                                jogo = new CampoMinado(linhas, colunas, *jogador, bombas);
+                                jogo = std::make_unique<CampoMinado>(linhas, colunas, *jogador, bombas);
                                 break;
                             }
                         }

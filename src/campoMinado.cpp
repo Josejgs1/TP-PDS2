@@ -3,6 +3,7 @@
 #include <ctime>
 #include <sstream>
 #include <stdexcept>
+#include <iomanip>
 
 const int MIN_LINHAS = 4;
 const int MAX_LINHAS = 30;
@@ -44,8 +45,15 @@ void CampoMinado::imprimir_tabuleiro()
 {
     try
     {
+        std::cout << "   ";
+        for (int j = 0; j < _colunas; ++j)
+        {
+            std::cout << std::setw(3) << (j + 1) << " ";
+        }
+        std::cout << std::endl;
         for (int i = 0; i < _linhas; i++)
         {
+            std::cout << std::setw(2) << (i + 1) << " |";
             for (int j = 0; j < _colunas; j++)
             {
                 if (_tabuleiro[i][j] == 0 || _tabuleiro[i][j] == 1)
@@ -60,7 +68,7 @@ void CampoMinado::imprimir_tabuleiro()
                     }
                     else
                     {
-                        std::cout << " " << bombas_em_volta(i, j) << " ";
+                        std::cout << "\033[32m " << bombas_em_volta(i, j) << " \033[0m";
                     }
                 }
                 else if (_tabuleiro[i][j] == 3)
@@ -72,10 +80,7 @@ void CampoMinado::imprimir_tabuleiro()
                     std::cout << "\033[1;31m B \033[0m";
                 }
 
-                if (j != _colunas - 1)
-                {
-                    std::cout << "|";
-                }
+                std::cout << "|";
             }
             std::cout << std::endl;
         }
@@ -324,7 +329,7 @@ void CampoMinado::partida()
                 {
                     if (!(iss >> x >> y) || !iss.eof())
                     {
-                        throw std::invalid_argument("Erro ao marcar bomba: Entrada inválida! Digite 'B' seguido de duas coordenadas.");
+                        throw std::invalid_argument("Erro ao marcar bomba: Entrada invalida! Digite 'B' seguido de duas coordenadas.");
                     }
 
                     if (x < 1 || x > _linhas || y < 1 || y > _colunas)
@@ -340,7 +345,7 @@ void CampoMinado::partida()
                     iss >> x >> y;
                     if (iss.fail() || !iss.eof())
                     {
-                        throw std::invalid_argument("Erro ao fazer jogada: Entrada inválida! Digite duas coordenadas inteiras.");
+                        throw std::invalid_argument("Erro ao fazer jogada: Entrada invalida! Digite duas coordenadas inteiras.");
                     }
 
                     if (x < 1 || x > _linhas || y < 1 || y > _colunas)
@@ -352,7 +357,7 @@ void CampoMinado::partida()
             }
             else
             {
-                throw std::invalid_argument("Erro ao processar a entrada: Entrada inválida!");
+                throw std::invalid_argument("Erro ao processar a entrada: Entrada invalida!");
             }
 
             if (_tabuleiro[x - 1][y - 1] == 3)

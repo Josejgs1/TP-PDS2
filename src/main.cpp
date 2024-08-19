@@ -251,7 +251,7 @@ void imprimir_menu()
 
 void imprimir_menu_jogadores()
 {
-    std::cout << "O que você gostaria de fazer?\n1. Adicionar Jogador\n2. Remover Jogador 4\n3. Listar Jogadores\n4. Ver estatísticas do Jogador\n5. Voltar\n-> ";
+    std::cout << "O que você gostaria de fazer?\n1. Adicionar Jogador\n2. Remover Jogador\n3. Listar Jogadores\n4. Ver estatísticas do Jogador\n5. Voltar\n-> ";
 }
 
 void chamar_menu_jogadores(std::vector<Jogador>& jogadores){
@@ -296,11 +296,12 @@ void chamar_menu_jogadores(std::vector<Jogador>& jogadores){
             }
             case 2:
             {
+                remover_jogador(jogadores);
                 break;
             }
             case 3:
             {
-                
+                listar_jogadores(jogadores);
                 break;
             }
             case 4:
@@ -316,7 +317,10 @@ void chamar_menu_jogadores(std::vector<Jogador>& jogadores){
                 limpar_terminal();
                 return;
             }
+
         }
+
+        std::cout << std::endl;
     }
 }
 

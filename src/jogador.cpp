@@ -80,10 +80,10 @@ void Jogador::imprimir_informacoes_geral()
 {
     std::cout << "Jogador: " << this->_nome << std::endl;
     std::cout << "Apelido: " << this->_apelido << std::endl;
-    std::cout << "Vitorias no Jogo da Velha: " << this->_vitorias_jdv << "      Derrotas no jogo da velha: " << this->_derrotas_jdv << std::endl;
-    std::cout << "Vitorias no Campo Minado: " << this->_vitorias_cm << "      Derrotas no campo minado: " << this->_derrotas_cm << std::endl;
-    std::cout << "Vitorias no Reversi: " << this->_vitorias_rvs << "      Derrotas no Reversi: " << this->_derrotas_rvs << std::endl;
-    std::cout << "Vitorias no Ligue 4: " << this->_vitorias_lig4 << "      Derrotas no Ligue 4: " << this->_derrotas_lig4 << std::endl;
+    std::cout << "Vitorias no Jogo da Velha: "  <<  this->_vitorias_jdv << "      Derrotas no jogo da velha: " << this->_derrotas_jdv << std::endl;
+    std::cout << "Vitorias no Campo Minado: "   <<  this->_vitorias_cm  << "       Derrotas no campo minado: " << this->_derrotas_cm << std::endl;
+    std::cout << "Vitorias no Reversi: "        << this->_vitorias_rvs  << "            Derrotas no Reversi: " << this->_derrotas_rvs << std::endl;
+    std::cout << "Vitorias no Ligue 4: "        << this->_vitorias_lig4 << "            Derrotas no Ligue 4: " << this->_derrotas_lig4 << std::endl;
     std::cout << std::endl;
 }
 
@@ -159,7 +159,7 @@ bool apelido_existe(const std::vector<Jogador> &jogadores, const std::string &ap
     return false;
 }
 
-Jogador *escolhe_jogador(std::vector<Jogador> &jogadores)
+Jogador *encontrar_jogador(std::vector<Jogador> &jogadores)
 {
     std::string apelidoJogador;
 
@@ -189,9 +189,9 @@ void selecionar_jogadores(Jogador** jogador1, Jogador** jogador2, std::vector<Jo
 
     while (true) {
         std::cout << "Informe o apelido do jogador 1: ";
-        *jogador1 = escolhe_jogador(jogadores);  // Atribuir o endereço retornado por escolhe_jogador
+        *jogador1 = encontrar_jogador(jogadores);  // Atribuir o endereço retornado por encontrar_jogador
         std::cout << "Informe o apelido do jogador 2: ";
-        *jogador2 = escolhe_jogador(jogadores);  // Atribuir o endereço retornado por escolhe_jogador
+        *jogador2 = encontrar_jogador(jogadores);  // Atribuir o endereço retornado por encontrar_jogador
 
         if ((*jogador1)->get_apelido() == (*jogador2)->get_apelido()) {
             std::cout << "Os jogadores devem ser diferentes." << std::endl;
@@ -204,5 +204,5 @@ void selecionar_jogadores(Jogador** jogador1, Jogador** jogador2, std::vector<Jo
 void selecionar_jogador(Jogador** jogador1, std::vector<Jogador>& jogadores) {
     std::cout << "Quem irá jogar?" << std::endl;
     std::cout << "Informe o apelido do jogador: ";
-    *jogador1 = escolhe_jogador(jogadores);  // Atribuir o endereço retornado por escolhe_jogador
+    *jogador1 = encontrar_jogador(jogadores);  // Atribuir o endereço retornado por encontrar_jogador
 }

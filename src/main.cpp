@@ -258,9 +258,9 @@ void chamar_menu_jogadores(std::vector<Jogador>& jogadores){
     int opcao;
 
     while(true){
-        limpar_terminal();
         imprimir_menu_jogadores();
         std::cin >> opcao;
+        limpar_terminal();
 
         switch(opcao){
             default:
@@ -294,9 +294,22 @@ void chamar_menu_jogadores(std::vector<Jogador>& jogadores){
                 std::cout << "Jogador criado com sucesso!" << std::endl;
                 break;
             }
-            case 4:
+            case 2:
             {
-                encontrar_jogador(jogadores);
+                break;
+            }
+            case 3:
+            {
+                
+                break;
+            }
+            case 4:
+            {   
+                std::cout << "Informe o apelido do jogador: ";
+                Jogador* jogador = encontrar_jogador(jogadores);
+                std::cout << std::endl;
+                jogador->imprimir_informacoes_geral();
+                break;
             }
             case 5:
             {   

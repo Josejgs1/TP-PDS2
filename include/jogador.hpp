@@ -58,7 +58,7 @@ public:
 std::vector<Jogador> carregar_jogadores();
 void salvar_jogadores(const std::vector<Jogador> &jogadores);
 bool apelido_existe(const std::vector<Jogador>& jogadores, const std::string& apelido);
-Jogador* escolhe_jogador(std::vector<Jogador>& jogadores);
+Jogador* encontrar_jogador(std::vector<Jogador>& jogadores);
 void selecionar_jogadores(Jogador** jogador1, Jogador** jogador2, std::vector<Jogador>& jogadores);
 void selecionar_jogador(Jogador** jogador1, std::vector<Jogador>& jogadores);
 

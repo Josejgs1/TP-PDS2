@@ -10,9 +10,9 @@ const int MAX_LINHAS = 30;
 const int MIN_COLUNAS = 4;
 const int MAX_COLUNAS = 30;
 
-CampoMinado::CampoMinado() : JogoDeTabuleiro(0, 0), _jogador(nullptr), _n_bombas(0){}
+CampoMinado::CampoMinado() : JogoDeTabuleiro(0, 0), _jogador(nullptr), _n_bombas(0) {}
 
-CampoMinado::CampoMinado(int linhas, int colunas, Jogador& jogador, int n_bombas)
+CampoMinado::CampoMinado(int linhas, int colunas, Jogador &jogador, int n_bombas)
     : JogoDeTabuleiro(linhas, colunas), _jogador(&jogador), _n_bombas(n_bombas)
 {
     if (linhas < MIN_LINHAS || linhas > MAX_LINHAS)

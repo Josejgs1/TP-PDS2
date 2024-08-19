@@ -6,6 +6,7 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 
 class Jogador
 {
@@ -56,10 +57,13 @@ public:
 };
 
 std::vector<Jogador> carregar_jogadores();
-void salvar_jogadores(const std::vector<Jogador> &jogadores);
-bool apelido_existe(const std::vector<Jogador>& jogadores, const std::string& apelido);
-Jogador* escolhe_jogador(std::vector<Jogador>& jogadores);
+void salvar_jogadores(std::vector<Jogador> &jogadores);
+bool apelido_existe(std::vector<Jogador>& jogadores, std::string& apelido);
+Jogador* encontrar_jogador(std::vector<Jogador>& jogadores);
 void selecionar_jogadores(Jogador** jogador1, Jogador** jogador2, std::vector<Jogador>& jogadores);
 void selecionar_jogador(Jogador** jogador1, std::vector<Jogador>& jogadores);
+void ordenar_jogadores(std::vector<Jogador>& jogadores);
+void listar_jogadores(std::vector<Jogador>& jogadores);
+void remover_jogador(std::vector<Jogador>& jogadores);
 
 #endif

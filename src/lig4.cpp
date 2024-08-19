@@ -1,16 +1,18 @@
 #include "lig4.hpp"
+Lig4::Lig4()
+    : JogoDeTabuleiro(), _jogador1(Jogador()), _jogador2(Jogador()), _jogador_atual(1){};
 
-Lig4::Lig4(int linhas, int colunas, Jogador jogador1, Jogador jogador2)
+Lig4::Lig4(int linhas, int colunas, Jogador& jogador1, Jogador& jogador2)
     : JogoDeTabuleiro(linhas, colunas), _jogador1(jogador1), _jogador2(jogador2), _jogador_atual(1)
 {
-    if (linhas < 4 && colunas < 4)
+    if (linhas < 4 || colunas < 4)
     {
         throw std::invalid_argument("O tamanho mínimo do tabuleiro é 4x4.");
     }
     _tabuleiro.resize(_linhas, std::vector<int>(_colunas, 0));
 }
 
-Lig4::Lig4(Jogador jogador1, Jogador jogador2)
+Lig4::Lig4( Jogador& jogador1, Jogador& jogador2)
     : JogoDeTabuleiro(0, 0), _jogador1(jogador1), _jogador2(jogador2), _jogador_atual(1) {}
 
 Lig4::~Lig4() {}

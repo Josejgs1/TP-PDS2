@@ -1,4 +1,5 @@
 #include "jogador.hpp"
+Jogador::Jogador() : Jogador("", ""){}
 
 Jogador::Jogador(std::string nome, std::string apelido)
     : _nome(nome), _apelido(apelido) {}
@@ -134,20 +135,19 @@ bool apelido_existe(const std::vector<Jogador>& jogadores, const std::string& ap
     return false;
 }
 
-Jogador escolhe_jogador(const std::vector<Jogador>& jogadores){
+Jogador* escolhe_jogador(std::vector<Jogador>& jogadores) {
     std::string apelidoJogador; 
     
-    while(true){
+    while (true) {
+        // std::cout << "Insira o apelido do jogador: ";
         std::cin >> apelidoJogador;
 
-        if (!apelido_existe(jogadores, apelidoJogador))
-        {
-            std::cout << "O apelido não foi encontrado. Tente novamente: "; //resolver
-        } else
-        {
-            for (const auto& jogador : jogadores) {
+        if (!apelido_existe(jogadores, apelidoJogador)) {
+            std::cout << "O apelido não foi encontrado. Tente novamente: ";
+        } else {
+            for (auto& jogador : jogadores) {
                 if (jogador.get_apelido() == apelidoJogador) {
-                    return jogador; // Retorna o jogador com o apelido correspondente
+                    return &jogador; // Retorna o endereço do jogador com o apelido correspondente
                 }
             }
         }

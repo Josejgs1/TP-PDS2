@@ -1,5 +1,7 @@
 #include "jogoDeTabuleiro.hpp"
 
+JogoDeTabuleiro::JogoDeTabuleiro() : JogoDeTabuleiro(0, 0) {}
+
 JogoDeTabuleiro::JogoDeTabuleiro(int linhas, int colunas)
     : _linhas(linhas), _colunas(colunas)
 {

@@ -17,8 +17,8 @@ int main()
     std::vector<Jogador> jogadores = carregar_jogadores();
 
     //PARA TESTE
-    Jogador jogador1("Jogador 1", "X");
-    Jogador jogador2("Jogador 2", "O");
+    Jogador jogador3("Jogador 1", "X");
+    Jogador jogador4("Jogador 2", "O");
 
     limpar_terminal();
 
@@ -35,13 +35,17 @@ int main()
             break;
         case 1:
         {
-            JogoDaVelha jogo = JogoDaVelha(jogador1, jogador2);
+            JogoDaVelha jogo = JogoDaVelha(jogador3, jogador4);
             jogo.partida();
 
             break;
         }
         case 2:
         {
+            Jogador* jogador1 = nullptr;  // Inicialize os ponteiros
+            Jogador* jogador2 = nullptr;
+            Lig4 jogo;
+
             std::cout << "Quem irá jogar?" << std::endl;
             while (true)
             {
@@ -50,17 +54,15 @@ int main()
                 std::cout << "Jogador 2: ";
                 jogador2 = escolhe_jogador(jogadores);
 
-                if (jogador1.get_apelido() == jogador2.get_apelido())
+                if (jogador1->get_apelido() == jogador2->get_apelido())
                 {
-                    std::cout << "Os jogadores devem ser diferentes. "; //resolver
+                    std::cout << "Os jogadores devem ser diferentes." << std::endl; //resolver
                 }
                 else
                 {
                     break;
                 }
             }
-
-            Lig4 jogo = Lig4(jogador1, jogador2);
 
             int linhas, colunas;
             std::cout << "Insira as dimensoes do tabuleiro de Ligue 4: ";
@@ -70,7 +72,7 @@ int main()
             {
                 try
                 {
-                    jogo = Lig4(linhas, colunas, jogador1, jogador2);
+                    jogo = Lig4(linhas, colunas, *jogador1, *jogador2);
                     break;
                 }
                 catch (const std::invalid_argument &erro) // terminar tratamento de erros
@@ -162,8 +164,9 @@ int main()
             break;
         }
         case 6:
+            std::cout << jogadores[2].get_apelido() << jogadores[2].get_vitorias_lig4();
             salvar_jogadores(jogadores);
-            exit(0);
+            // exit(0);
         }
 
         std::cout << std::endl;

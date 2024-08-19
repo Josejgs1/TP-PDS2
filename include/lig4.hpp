@@ -13,8 +13,9 @@ private:
     int _jogador_atual;
 
 public:
-    Lig4(Jogador jogador1, Jogador jogador2);
-    Lig4(int linhas, int colunas, Jogador jogador1, Jogador jogador2);
+    Lig4();
+    Lig4(Jogador& jogador1, Jogador& jogador2);
+    Lig4(int linhas, int colunas, Jogador& jogador1, Jogador& jogador2);
 
     ~Lig4();
     

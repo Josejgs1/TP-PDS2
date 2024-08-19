@@ -8,13 +8,12 @@
 
 class Lig4 : public JogoDeTabuleiro {
 private:
-    Jogador _jogador1;
-    Jogador _jogador2;
+    Jogador* _jogador1;
+    Jogador* _jogador2;
     int _jogador_atual;
 
 public:
     Lig4();
-    Lig4(Jogador& jogador1, Jogador& jogador2);
     Lig4(int linhas, int colunas, Jogador& jogador1, Jogador& jogador2);
 
     ~Lig4();

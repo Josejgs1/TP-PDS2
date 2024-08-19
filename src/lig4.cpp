@@ -1,9 +1,9 @@
 #include "lig4.hpp"
 Lig4::Lig4()
-    : JogoDeTabuleiro(), _jogador1(Jogador()), _jogador2(Jogador()), _jogador_atual(1){};
+    : JogoDeTabuleiro(), _jogador1(nullptr), _jogador2(nullptr), _jogador_atual(1){};
 
 Lig4::Lig4(int linhas, int colunas, Jogador& jogador1, Jogador& jogador2)
-    : JogoDeTabuleiro(linhas, colunas), _jogador1(jogador1), _jogador2(jogador2), _jogador_atual(1)
+    : JogoDeTabuleiro(linhas, colunas), _jogador1(&jogador1), _jogador2(&jogador2), _jogador_atual(1)
 {
     if (linhas < 4 || colunas < 4)
     {
@@ -11,9 +11,6 @@ Lig4::Lig4(int linhas, int colunas, Jogador& jogador1, Jogador& jogador2)
     }
     _tabuleiro.resize(_linhas, std::vector<int>(_colunas, 0));
 }
-
-Lig4::Lig4( Jogador& jogador1, Jogador& jogador2)
-    : JogoDeTabuleiro(0, 0), _jogador1(jogador1), _jogador2(jogador2), _jogador_atual(1) {}
 
 Lig4::~Lig4() {}
 
@@ -63,11 +60,11 @@ std::string Lig4::apelido_atual()
     std::string apelido;
     if (_jogador_atual == 1)
     {
-        return _jogador1.get_apelido();
+        return _jogador1->get_apelido();
     }
     else
     {
-        return _jogador2.get_apelido();
+        return _jogador2->get_apelido();
     }
 }
 
@@ -164,25 +161,25 @@ void Lig4::partida()
         alternar_jogador();
         if (_jogador_atual == 1)
         {
-            _jogador1.soma_vitoria_lig4();
-            _jogador2.soma_derrota_lig4();
+            _jogador1->soma_vitoria_lig4(); //não funciona
+            _jogador2->soma_derrota_lig4();
         }
         else
         {
-            _jogador2.soma_vitoria_lig4();
-            _jogador1.soma_derrota_lig4();
+            _jogador2->soma_vitoria_lig4();
+            _jogador1->soma_derrota_lig4();
         }
 
         std::cout << "Parabens " << apelido_atual() << ", voce venceu!" << std::endl;
-        _jogador1.imprimir_informacoes_lig4();
-        _jogador2.imprimir_informacoes_lig4();
+        _jogador1->imprimir_informacoes_lig4();
+        _jogador2->imprimir_informacoes_lig4();
         return;
     }
     if (checar_final())
     {
         std::cout << "Empate!" << std::endl;
-        _jogador1.imprimir_informacoes_lig4();
-        _jogador2.imprimir_informacoes_lig4();
+        _jogador1->imprimir_informacoes_lig4();
+        _jogador2->imprimir_informacoes_lig4();
         return;
     }
 };

@@ -164,9 +164,8 @@ int main()
             break;
         }
         case 6:
-            std::cout << jogadores[2].get_apelido() << jogadores[2].get_vitorias_lig4();
             salvar_jogadores(jogadores);
-            // exit(0);
+            exit(0);
         }
 
         std::cout << std::endl;

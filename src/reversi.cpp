@@ -5,6 +5,8 @@
 #include <iomanip>
 #include <limits>
 #include <vector>
+#include <sstream>
+#include <string>
 
 Reversi::Reversi(int linhas, int colunas, Jogador jogador1, Jogador jogador2)
     : JogoDeTabuleiro(linhas, colunas), _jogador1(jogador1), _jogador2(jogador2), _jogador_atual(1)
@@ -226,34 +228,50 @@ void Reversi::imprimir_tabuleiro(int jogadorAtual)
 void Reversi::partida()
 {
     int jogadorAtual = 1;
+    std::string mensagemErro;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
     while (!tabuleiroCheio())
     {
         int linha, coluna;
-        limpar_terminal();
-        imprimir_tabuleiro(jogadorAtual);
 
-        if (jogadorAtual == 1)
+        while (true)
         {
-            std::cout << "\033[32m" << _jogador1.get_apelido() << " (X), é sua vez.\033[0m" << std::endl;
-        }
-        else
-        {
-            std::cout << "\033[31m" << _jogador2.get_apelido() << " (O), é sua vez.\033[0m" << std::endl;
-        }
+            limpar_terminal();
 
-        if (temMovimentosValidos(jogadorAtual))
-        {
-            bool movimentoValido = false;
-            while (!movimentoValido)
+            if (!mensagemErro.empty())
             {
-                std::cout << "Insira a linha e a coluna onde deseja colocar sua peça : ";
-                std::cin >> linha >> coluna;
 
-                if (std::cin.fail())
+                std::cout << "\033[1;31m" << mensagemErro << "\033[0m" << std::endl;
+            }
+
+            imprimir_tabuleiro(jogadorAtual);
+
+            if (jogadorAtual == 1)
+            {
+                std::cout << "\033[32m" << _jogador1.get_apelido() << " (X), é sua vez.\033[0m" << std::endl;
+            }
+            else
+            {
+                std::cout << "\033[31m" << _jogador2.get_apelido() << " (O), é sua vez.\033[0m" << std::endl;
+            }
+
+            if (!mensagemErro.empty())
+            {
+
+                mensagemErro.clear();
+            }
+
+            if (temMovimentosValidos(jogadorAtual))
+            {
+                std::cout << "Insira a linha e a coluna onde deseja colocar sua peça (formato: linha X coluna) : ";
+                std::string entrada;
+                std::getline(std::cin, entrada);
+                std::istringstream iss(entrada);
+
+                if (!(iss >> linha >> coluna) || !(iss.eof()))
                 {
-                    std::cin.clear();
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    std::cout << std::endl << "Entrada inválida. Tente novamente." << std::endl;
+                    mensagemErro = "Entrada inválida. Tente novamente.";
                     continue;
                 }
 
@@ -263,23 +281,24 @@ void Reversi::partida()
                 if (linha >= 0 && linha < _linhas && coluna >= 0 && coluna < _colunas && this->movimentoValido(linha, coluna, jogadorAtual))
                 {
                     realizarMovimento(linha, coluna, jogadorAtual);
-                    movimentoValido = true;
+                    break;
                 }
                 else
                 {
-                    std::cout << std::endl << "Movimento inválido. Tente novamente." << std::endl;
+                    mensagemErro = "Movimento inválido. Tente novamente.";
                 }
-            }
-        }
-        else
-        {
-            if (jogadorAtual == 1)
-            {
-                std::cout << "\033[32mJogador " << _jogador1.get_apelido() << " Não possui jogada válida. Passou a vez.\033[0m" << std::endl;
             }
             else
             {
-                std::cout << "\033[31mJogador " << _jogador2.get_apelido() << " Não possui jogada válida. Passou a vez.\033[0m" << std::endl;
+                if (jogadorAtual == 1)
+                {
+                    mensagemErro = "Jogador " + _jogador1.get_apelido() + " Não possui jogada válida. Passou a vez.";
+                }
+                else
+                {
+                    mensagemErro = "Jogador " + _jogador2.get_apelido() + " Não possui jogada válida. Passou a vez.";
+                }
+                break;
             }
         }
 
@@ -288,14 +307,7 @@ void Reversi::partida()
             break;
         }
 
-        if (jogadorAtual == 1)
-        {
-            jogadorAtual = 2;
-        }
-        else
-        {
-            jogadorAtual = 1;
-        }
+        jogadorAtual = (jogadorAtual == 1) ? 2 : 1;
     }
 
     limpar_terminal();
@@ -305,7 +317,7 @@ void Reversi::partida()
     {
         std::cout << "Empate com " << contarPecas(1) << " peças para cada jogador." << std::endl;
     }
-    else 
+    else
     {
         int resultado = checar_vitoria();
 
@@ -317,7 +329,7 @@ void Reversi::partida()
             _jogador2.soma_derrota_rvs();
         }
         else if (resultado == 1)
-        {   
+        {
             std::cout << std::endl;
             std::cout << _jogador2.get_apelido() << " (O) venceu com " << contarPecas(2) << " peças contra " << contarPecas(1) << " peças de " << _jogador1.get_apelido() << " (X)." << std::endl;
             _jogador2.soma_vitoria_rvs();
@@ -346,8 +358,8 @@ bool Reversi::checar_vitoria()
     }
 }
 
-//--Casos extremos-- 
-//1° - Tabuleiro fica completamente cheio;
-//2° - Um jogador não possui movimentos válidos e passa sua vez;
-//3° - Um jogador não possui nenhuma "peça" e o jogo termina;
-//4° - Ambos os jogadores não possuem movimentos válidos, o jogo termina e contabiliza o número de peças de cada um;
+//--Casos extremos--
+// 1° - Tabuleiro fica completamente cheio;
+// 2° - Um jogador não possui movimentos válidos e passa sua vez;
+// 3° - Um jogador não possui nenhuma "peça" e o jogo termina;
+// 4° - Ambos os jogadores não possuem movimentos válidos, o jogo termina e contabiliza o número de peças de cada um;

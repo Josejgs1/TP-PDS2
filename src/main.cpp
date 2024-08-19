@@ -194,16 +194,16 @@ int main()
                     switch (opcao)
                     {
                     case 1:
-                        jogo = std::make_unique<CampoMinado>(6, 6, jogador3, 10);
+                        jogo = std::make_unique<CampoMinado>(6, 6, *jogador, 10);
                         break;
                     case 2:
-                        jogo = std::make_unique<CampoMinado>(15, 15, jogador3, 50);
+                        jogo = std::make_unique<CampoMinado>(15, 15, *jogador, 50);
                         break;
                     case 3:
-                        jogo = std::make_unique<CampoMinado>(24, 24, jogador3, 95);
+                        jogo = std::make_unique<CampoMinado>(24, 24, *jogador, 95);
                         break;
                     case 4:
-                        jogo = std::make_unique<CampoMinado>(30, 30, jogador3, 150);
+                        jogo = std::make_unique<CampoMinado>(30, 30, *jogador, 150);
                         break;
                     case 5:
                         int linhas, colunas, bombas;
@@ -222,7 +222,7 @@ int main()
                             }
                             else
                             {
-                                jogo = std::make_unique<CampoMinado>(linhas, colunas, jogador3, bombas);
+                                jogo = std::make_unique<CampoMinado>(linhas, colunas, *jogador, bombas);
                                 break;
                             }
                         }

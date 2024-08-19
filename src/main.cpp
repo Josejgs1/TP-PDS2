@@ -4,6 +4,7 @@
 #include "jogoDaVelha.hpp"
 #include "reversi.hpp"
 #include "campoMinado.hpp"
+#include "jogador.hpp"
 
 #define DIMENSAO_JOGO_RAPIDO 6
 #define DIMENSAO_JOGO_CLASSICO 8
@@ -11,7 +12,7 @@
 
 void imprimir_menu()
 {
-    std::cout << "O que você gostaria de fazer?\n1. Jogo da Velha\n2. Lig4\n3. Reversi\n4. Campo Minado\n5. Sair\n";
+    std::cout << "O que você gostaria de fazer?\n1. Jogo da Velha\n2. Lig4\n3. Reversi\n4. Campo Minado\n5. Cadastrar Jogador\n6. Sair\n";
 }
 
 char validar_entrada()
@@ -44,39 +45,79 @@ char validar_entrada()
 int main()
 {
     int opcao;
+    std::vector<Jogador> jogadores = carregar_jogadores();
+
+    //PARA TESTE
     Jogador jogador1("Jogador 1", "X");
     Jogador jogador2("Jogador 2", "O");
+
+    limpar_terminal();
 
     while (true)
     {
         imprimir_menu();
         std::cin >> opcao;
+        limpar_terminal();
 
         switch (opcao)
         {
+        default:
+            std::cout << "Opção inválida. ";
+            break;
         case 1:
         {
-            JogoDaVelha jogo = JogoDaVelha(jogador1, jogador2);
+            JogoDaVelha jogo = JogoDaVelha(jogador3, jogador4);
             jogo.partida();
 
             break;
         }
         case 2:
         {
-            int linhas, colunas;
-            std::cout << "Insira as dimensoes do tabuleiro: ";
-            std::cin >> linhas >> colunas;
-            while (!validar_tabuleiro_lig4(linhas, colunas))
-            {
-                std::cout << "Dimensoes inválidas. Tente novamente: ";
-                std::cin >> linhas >> colunas;
-            }
-            Lig4 jogo = Lig4(linhas, colunas, jogador1, jogador2);
-            jogo.partida();
+            Jogador* jogador1 = nullptr;  // Inicialize os ponteiros
+            Jogador* jogador2 = nullptr;
+            Lig4 jogo;
 
+            std::cout << "Quem irá jogar?" << std::endl;
+            while (true)
+            {
+                std::cout << "Jogador 1: ";
+                jogador1 = escolhe_jogador(jogadores);
+                std::cout << "Jogador 2: ";
+                jogador2 = escolhe_jogador(jogadores);
+
+                if (jogador1->get_apelido() == jogador2->get_apelido())
+                {
+                    std::cout << "Os jogadores devem ser diferentes." << std::endl; //resolver
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            int linhas, colunas;
+            std::cout << "Insira as dimensoes do tabuleiro de Ligue 4: ";
+            std::cin >> linhas >> colunas;
+
+            while (true)
+            {
+                try
+                {
+                    jogo = Lig4(linhas, colunas, *jogador1, *jogador2);
+                    break;
+                }
+                catch (const std::invalid_argument &erro) // terminar tratamento de erros
+                {
+                    std::cout << erro.what() << std::endl;
+                    std::cout << "Tente novamente: ";
+                    std::cin >> linhas >> colunas;
+                }
+            }
+
+            limpar_terminal();
+            jogo.partida(); // fazer tratamento de exceções
             break;
         }
-
         case 3:
         {   
             limpar_terminal();
@@ -212,9 +253,42 @@ int main()
             break;
         }
         case 5:
+        {
+            std::string nome, apelido;
+
+            std::cout << "Insira seu nome: ";
+            std::cin >> nome;
+            std::cout << "Insira seu apelido: ";
+
+            while (true)
+            {
+                std::cin >> apelido;
+
+                if (!apelido_existe(jogadores, apelido))
+                {
+                    break;
+                }
+                else
+                {
+                    std::cout << "O apelido já existe. Tente novamente: ";
+                }
+            }
+
+            Jogador novoJogador = Jogador(nome, apelido);
+            jogadores.push_back(novoJogador);
+
+            std::cout << "Jogador criado com sucesso!" << std::endl;
+            break;
+        }
+        case 6:
+            salvar_jogadores(jogadores);
             exit(0);
         }
+
+        std::cout << std::endl;
     }
+
+    salvar_jogadores(jogadores);
     return 0;
 }
 

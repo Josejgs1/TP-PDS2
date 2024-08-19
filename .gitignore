@@ -8,4 +8,4 @@ main
 .vscode/
 
 # Ignorar o banco de jogadores
-#jogadores.csv
+jogadores.csv

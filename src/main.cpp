@@ -47,10 +47,6 @@ int main()
     int opcao;
     std::vector<Jogador> jogadores = carregar_jogadores();
 
-    //PARA TESTE
-    Jogador jogador1("Jogador 1", "X");
-    Jogador jogador2("Jogador 2", "O");
-
     limpar_terminal();
 
     while (true)
@@ -66,27 +62,14 @@ int main()
             break;
         case 1:
         {
-            Jogador* jogador1 = nullptr;  // Inicialize os ponteiros
+            Jogador* jogador1 = nullptr;
             Jogador* jogador2 = nullptr;
+            JogoDaVelha jogo;
 
-            while (true)
-            {
-                std::cout << "Jogador 1: ";
-                jogador1 = escolhe_jogador(jogadores);
-                std::cout << "Jogador 2: ";
-                jogador2 = escolhe_jogador(jogadores);
+            selecionar_jogadores(&jogador1, &jogador2, jogadores);
 
-                if (jogador1->get_apelido() == jogador2->get_apelido())
-                {
-                    std::cout << "Os jogadores devem ser diferentes." << std::endl; //resolver
-                }
-                else
-                {
-                    break;
-                }
-            }
+            jogo = JogoDaVelha(*jogador1, *jogador2);
 
-            JogoDaVelha jogo = JogoDaVelha(*jogador1, *jogador2);
             jogo.partida();
 
             break;
@@ -97,29 +80,13 @@ int main()
             Jogador* jogador2 = nullptr;
             Lig4 jogo;
 
-            std::cout << "Quem irá jogar?" << std::endl;
-            while (true)
-            {
-                std::cout << "Jogador 1: ";
-                jogador1 = escolhe_jogador(jogadores);
-                std::cout << "Jogador 2: ";
-                jogador2 = escolhe_jogador(jogadores);
-
-                if (jogador1->get_apelido() == jogador2->get_apelido())
-                {
-                    std::cout << "Os jogadores devem ser diferentes." << std::endl; //resolver
-                }
-                else
-                {
-                    break;
-                }
-            }
+            selecionar_jogadores(&jogador1, &jogador2, jogadores);
 
             int linhas, colunas;
             std::cout << "Insira as dimensoes do tabuleiro de Ligue 4: ";
             std::cin >> linhas >> colunas;
 
-            while (true)
+            while (true) //o que eu faço com isso aqui
             {
                 try
                 {
@@ -135,12 +102,18 @@ int main()
             }
 
             limpar_terminal();
-            jogo.partida(); // fazer tratamento de exceções
+            jogo.partida();
             break;
         }
         case 3:
         {   
+            Jogador* jogador1 = nullptr;  // Inicialize os ponteiros
+            Jogador* jogador2 = nullptr;
+            Reversi jogo;
+
+            selecionar_jogadores(&jogador1, &jogador2, jogadores);
             limpar_terminal();
+
             while (true)
             {
                 std::cout << "- Escolha a dimensão do tabuleiro -" << std::endl;
@@ -157,7 +130,7 @@ int main()
                     {
                         std::cout << "Você escolheu Jogo Rápido (Tabuleiro 6x6)." << std::endl;
                         limpar_terminal();
-                        Reversi jogo(DIMENSAO_JOGO_RAPIDO, DIMENSAO_JOGO_RAPIDO, jogador1, jogador2);
+                        Reversi jogo(DIMENSAO_JOGO_RAPIDO, DIMENSAO_JOGO_RAPIDO, *jogador1, *jogador2);
                         jogo.partida();
                         break;
                     }
@@ -165,7 +138,7 @@ int main()
                     {
                         std::cout << "Você escolheu Jogo Clássico (Tabuleiro 8x8)." << std::endl;
                         limpar_terminal();
-                        Reversi jogo(DIMENSAO_JOGO_CLASSICO, DIMENSAO_JOGO_CLASSICO, jogador1, jogador2);
+                        Reversi jogo(DIMENSAO_JOGO_CLASSICO, DIMENSAO_JOGO_CLASSICO, *jogador1, *jogador2);
                         jogo.partida();
                         break;
                     }
@@ -173,7 +146,7 @@ int main()
                     {
                         std::cout << "Você escolheu Jogo Extremo (Tabuleiro 10x10)." << std::endl;
                         limpar_terminal();
-                        Reversi jogo(DIMENSAO_JOGO_EXTREMO, DIMENSAO_JOGO_EXTREMO, jogador1, jogador2);
+                        Reversi jogo(DIMENSAO_JOGO_EXTREMO, DIMENSAO_JOGO_EXTREMO, *jogador1, *jogador2);
                         jogo.partida();
                         break;
                     }
@@ -192,9 +165,9 @@ int main()
 
         case 4:
         {
-            limpar_terminal();
             int opcao;
-            Jogador jogador3("jogador", "jog");
+            Jogador* jogador = nullptr;  // Inicialize os ponteiros
+            selecionar_jogador(&jogador, jogadores);
 
             std::cout << "Escolha uma opção de tamanho do tabuleiro:" << std::endl;
             std::cout << "1. Facil (6 x 6 e 10 bombas)" << std::endl;
@@ -220,16 +193,16 @@ int main()
                     switch (opcao)
                     {
                     case 1:
-                        jogo = new CampoMinado(6, 6, jogador3, 10);
+                        jogo = new CampoMinado(6, 6, *jogador, 10);
                         break;
                     case 2:
-                        jogo = new CampoMinado(15, 15, jogador3, 50);
+                        jogo = new CampoMinado(15, 15, *jogador, 50);
                         break;
                     case 3:
-                        jogo = new CampoMinado(24, 24, jogador3, 95);
+                        jogo = new CampoMinado(24, 24, *jogador, 95);
                         break;
                     case 4:
-                        jogo = new CampoMinado(30, 30, jogador3, 150);
+                        jogo = new CampoMinado(30, 30, *jogador, 150);
                         break;
                     case 5:
                         int linhas, colunas, bombas;
@@ -248,7 +221,7 @@ int main()
                             }
                             else
                             {
-                                jogo = new CampoMinado(linhas, colunas, jogador3, bombas);
+                                jogo = new CampoMinado(linhas, colunas, *jogador, bombas);
                                 break;
                             }
                         }
@@ -311,5 +284,3 @@ int main()
     salvar_jogadores(jogadores);
     return 0;
 }
-
-

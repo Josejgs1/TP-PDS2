@@ -15,7 +15,6 @@ public:
     void imprimir_tabuleiro() override;
     void revelar_area(int x, int y);
     void fazer_jogada(int x, int y);
-    void limpar_tela();
     void marcar_bomba(int x, int y);
     void colocar_bombas();
     int bombas_em_volta(int x, int y);

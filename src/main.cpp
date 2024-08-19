@@ -6,9 +6,40 @@
 #include "campoMinado.hpp"
 #include "jogador.hpp"
 
+#define DIMENSAO_JOGO_RAPIDO 6
+#define DIMENSAO_JOGO_CLASSICO 8
+#define DIMENSAO_JOGO_EXTREMO 10
+
 void imprimir_menu()
 {
     std::cout << "O que você gostaria de fazer?\n1. Jogo da Velha\n2. Lig4\n3. Reversi\n4. Campo Minado\n5. Cadastrar Jogador\n6. Sair\n";
+}
+
+char validar_entrada()
+{
+    char modo_de_jogo;
+    std::cin >> modo_de_jogo;
+
+    if (std::cin.fail())
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        throw std::runtime_error("\033[31mErro: Não foi possível ler um caractere.\033[0m");
+    }
+
+    if (std::cin.peek() != '\n')
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        throw std::runtime_error("\033[31mErro: Entrada deve ser um único caractere.\033[0m");
+    }
+
+    if (modo_de_jogo != 'R' && modo_de_jogo != 'r' && modo_de_jogo != 'E' && modo_de_jogo != 'e' && modo_de_jogo != 'C' && modo_de_jogo != 'c')
+    {
+        throw std::runtime_error("\033[31mErro: Caractere inválido. Use R, r, E, e, C ou c.\033[0m");
+    }
+
+    return modo_de_jogo;
 }
 
 int main()
@@ -17,8 +48,8 @@ int main()
     std::vector<Jogador> jogadores = carregar_jogadores();
 
     //PARA TESTE
-    Jogador jogador3("Jogador 1", "X");
-    Jogador jogador4("Jogador 2", "O");
+    Jogador jogador1("Jogador 1", "X");
+    Jogador jogador2("Jogador 2", "O");
 
     limpar_terminal();
 
@@ -88,51 +119,137 @@ int main()
             break;
         }
         case 3:
-        {
-            int tamanho;
-
+        {   
+            limpar_terminal();
             while (true)
             {
-                std::cout << "O tabuleiro deve ser quadrado, no mínimo 6x6, no máximo 10x10, e com dimensoes pares: ";
-                std::cin >> tamanho;
+                std::cout << "- Escolha a dimensão do tabuleiro -" << std::endl;
+                std::cout << "Digite R para Jogo Rápido   (Tabuleiro 6x6) " << std::endl
+                          << "Digite C para Jogo Clássico (Tabuleiro 8x8) " << std::endl
+                          << "Digite E para Jogo Extremo  (Tabuleiro 10x10) " << std::endl;
+                std::cout << std::endl;
 
+                try
+                {
+                    char modo_de_jogo = validar_entrada();
+
+                    if (modo_de_jogo == 'R' || modo_de_jogo == 'r')
+                    {
+                        std::cout << "Você escolheu Jogo Rápido (Tabuleiro 6x6)." << std::endl;
+                        limpar_terminal();
+                        Reversi jogo(DIMENSAO_JOGO_RAPIDO, DIMENSAO_JOGO_RAPIDO, jogador1, jogador2);
+                        jogo.partida();
+                        break;
+                    }
+                    else if (modo_de_jogo == 'C' || modo_de_jogo == 'c')
+                    {
+                        std::cout << "Você escolheu Jogo Clássico (Tabuleiro 8x8)." << std::endl;
+                        limpar_terminal();
+                        Reversi jogo(DIMENSAO_JOGO_CLASSICO, DIMENSAO_JOGO_CLASSICO, jogador1, jogador2);
+                        jogo.partida();
+                        break;
+                    }
+                    else if (modo_de_jogo == 'E' || modo_de_jogo == 'e')
+                    {
+                        std::cout << "Você escolheu Jogo Extremo (Tabuleiro 10x10)." << std::endl;
+                        limpar_terminal();
+                        Reversi jogo(DIMENSAO_JOGO_EXTREMO, DIMENSAO_JOGO_EXTREMO, jogador1, jogador2);
+                        jogo.partida();
+                        break;
+                    }
+                    else
+                    {
+                        std::cout << "Opção inválida. Tente novamente." << std::endl;
+                    }
+                }
+                catch (const std::runtime_error &e)
+                {
+                    std::cout << e.what() << std::endl;
+                }
+            }
+            break;
+        }
+
+        case 4:
+        {
+            limpar_terminal();
+            int opcao;
+            Jogador jogador3("jogador", "jog");
+
+            std::cout << "Escolha uma opção de tamanho do tabuleiro:" << std::endl;
+            std::cout << "1. Facil (6 x 6 e 10 bombas)" << std::endl;
+            std::cout << "2. Medio (15 x 15 e 50 bombas)" << std::endl;
+            std::cout << "3. Dificil (24 x 24 e 95 bombas)" << std::endl;
+            std::cout << "4. Extremo (30 x 30 e 150 bombas)" << std::endl;
+            std::cout << "5. Personalizado" << std::endl;
+            start_case_4:
+            std::cin >> opcao;
+
+            CampoMinado *jogo = nullptr;
+
+            try
+            {
                 if (std::cin.fail())
                 {
                     std::cin.clear();
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    std::cout << "Entrada inválida. Tente novamente." << std::endl;
-                }
-                else if (tamanho < 6 || tamanho > 10 || tamanho % 2 != 0)
-                {
-                    std::cout << "O valor deve ser entre 6 e 10 e deve ser par. Tente novamente." << std::endl;
+                    throw std::invalid_argument("Entrada invalida. Escolha uma opcao de 1 a 5.");
                 }
                 else
                 {
-                    break;
+                    switch (opcao)
+                    {
+                    case 1:
+                        jogo = new CampoMinado(6, 6, jogador3, 10);
+                        break;
+                    case 2:
+                        jogo = new CampoMinado(15, 15, jogador3, 50);
+                        break;
+                    case 3:
+                        jogo = new CampoMinado(24, 24, jogador3, 95);
+                        break;
+                    case 4:
+                        jogo = new CampoMinado(30, 30, jogador3, 150);
+                        break;
+                    case 5:
+                        int linhas, colunas, bombas;
+                        limpar_terminal();
+                        std::cout << "O tamanho minimo do tabuleiro e 4 x 4 e maximo 30 x 30" << std::endl;
+                        start_personalizado:
+                        std::cout << "Digite as dimensoes e o numero de bombas desejadas: ";
+                        std::cin >> linhas >> colunas >> bombas;
+                        try
+                        {
+                            if (std::cin.fail())
+                            {
+                                std::cin.clear();
+                                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                throw std::invalid_argument("Entrada invalida. Digite tres numeros inteiros.");
+                            }
+                            else
+                            {
+                                jogo = new CampoMinado(linhas, colunas, jogador3, bombas);
+                                break;
+                            }
+                        }
+                        catch (const std::exception &e)
+                        {
+                            std::cerr << e.what() << '\n';
+                            goto start_personalizado;
+                        }
+
+                    default:
+                        throw std::invalid_argument("Opção invalida. Escolha uma opcao de 1 a 5.");
+                    }
+
+                    jogo->partida();
                 }
             }
-
-            try
+            catch (const std::exception &e)
             {
-                Reversi jogo(tamanho, tamanho);
-                jogo.jogar();
+                std::cerr << e.what() << '\n';
+                goto start_case_4;
             }
-            catch (const std::invalid_argument &erro)
-            {
-                std::cout << erro.what() << std::endl;
-            }
-            break;
-        }
-        case 4:
-        {
-            int a = 8;
-            int b = 8;
-            int bombas = 12;
-
-            Jogador jogador3("jogador", "jog");
-
-            CampoMinado jogo = CampoMinado(a, b, jogador3, bombas);
-            jogo.partida();
             break;
         }
         case 5:
@@ -174,3 +291,5 @@ int main()
     salvar_jogadores(jogadores);
     return 0;
 }
+
+

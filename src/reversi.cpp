@@ -228,6 +228,8 @@ void Reversi::imprimir_tabuleiro(int jogadorAtual)
 void Reversi::partida()
 {
     int jogadorAtual = 1;
+    limpar_terminal();
+    imprimir_tabuleiro(jogadorAtual);
     std::string mensagemErro;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 

@@ -12,6 +12,14 @@ JogoDeTabuleiro::JogoDeTabuleiro(int linhas, int colunas)
     _tabuleiro.resize(_linhas, std::vector<int>(_colunas, 0));
 }
 
+int JogoDeTabuleiro::get_coordenada(int x, int y) const {
+    if (x < 0 || x >= _linhas || y < 0 || y >= _colunas)
+    {
+        throw std::out_of_range("Coordenada fora dos limites.");
+    }
+    return _tabuleiro[x][y];
+}
+
 void JogoDeTabuleiro::inicializar_tabuleiro()
 {
     for (int i = 0; i < _linhas; ++i)

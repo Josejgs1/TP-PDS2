@@ -10,20 +10,24 @@
 class Reversi : public JogoDeTabuleiro
 {
 private:
+    Jogador _jogador1;
+    Jogador _jogador2;
+    int _jogador_atual;
+
+public:
+    Reversi(int linhas, int colunas, Jogador jogador1, Jogador jogador2);
+    virtual ~Reversi();
+    void imprimir_tabuleiro(int jogadorAtual);
+    bool checar_vitoria() override;
+    void partida();
     void inicializarTabuleiro();
     bool movimentoValido(int linha, int coluna, int jogador);
     void realizarMovimento(int linha, int coluna, int jogador);
     bool tabuleiroCheio();
     int contarPecas(int jogador);
     bool temMovimentosValidos(int jogador);
-
-public:
-    Reversi(int linhas, int colunas);
-    void imprimir_tabuleiro(int jogadorAtual);
-    void jogar();
-    bool checar_vitoria() override;
-    void partida() override;
 };
 
 #endif
+
 

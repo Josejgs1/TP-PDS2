@@ -5,6 +5,7 @@ CFLAGS=-std=c++11 -Wall
 OBJDIR=obj
 BINDIR=bin
 SRCDIR=src
+FILESDIR=files
 INCLUDEDIR=include
 
 # Diretórios e arquivos
@@ -12,7 +13,7 @@ OBJFILES=$(OBJDIR)/jogador.o $(OBJDIR)/jogoDaVelha.o $(OBJDIR)/jogoDeTabuleiro.o
 BINFILE=$(BINDIR)/main
 
 # Regras principais
-all: $(BINDIR) $(BINFILE)
+all: $(BINDIR) $(FILESDIR) $(BINFILE)
 
 $(BINFILE): $(OBJFILES)
 	$(CC) $(CFLAGS) $(OBJFILES) -o $(BINFILE)
@@ -27,6 +28,9 @@ $(OBJDIR):
 
 $(BINDIR):
 	mkdir -p $(BINDIR)
+
+$(FILESDIR):
+	mkdir -p $(FILESDIR)
 
 # Limpeza
 clean:

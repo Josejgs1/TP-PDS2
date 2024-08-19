@@ -4,7 +4,6 @@
 #include "jogoDaVelha.hpp"
 #include "reversi.hpp"
 #include "campoMinado.hpp"
-#include <memory>
 #include "jogador.hpp"
 
 #define DIMENSAO_JOGO_RAPIDO 6
@@ -176,10 +175,10 @@ int main()
             std::cout << "3. Dificil (24 x 24 e 95 bombas)" << std::endl;
             std::cout << "4. Extremo (30 x 30 e 150 bombas)" << std::endl;
             std::cout << "5. Personalizado" << std::endl;
-        start_case_4:
+            start_case_4:
             std::cin >> opcao;
 
-            std::unique_ptr<CampoMinado> jogo = nullptr;
+            CampoMinado *jogo = nullptr;
 
             try
             {
@@ -209,7 +208,7 @@ int main()
                         int linhas, colunas, bombas;
                         limpar_terminal();
                         std::cout << "O tamanho minimo do tabuleiro e 4 x 4 e maximo 30 x 30" << std::endl;
-                    start_personalizado:
+                        start_personalizado:
                         std::cout << "Digite as dimensoes e o numero de bombas desejadas: ";
                         std::cin >> linhas >> colunas >> bombas;
                         try
@@ -222,7 +221,7 @@ int main()
                             }
                             else
                             {
-                                jogo = std::make_unique<CampoMinado>(linhas, colunas, *jogador, bombas);
+                                jogo = new CampoMinado(linhas, colunas, *jogador, bombas);
                                 break;
                             }
                         }
@@ -278,6 +277,7 @@ int main()
             salvar_jogadores(jogadores);
             exit(0);
         }
+
         std::cout << std::endl;
     }
 

@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include "jogador.hpp"
+#include <iomanip>
 
 class JogoDeTabuleiro
 {

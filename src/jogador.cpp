@@ -4,8 +4,8 @@ Jogador::Jogador() : Jogador("", "") {}
 Jogador::Jogador(std::string nome, std::string apelido)
     : _nome(nome), _apelido(apelido) {}
 
-Jogador::Jogador(std::string nome, std::string apelido, int vitorias_jdv, int derrotas_jdv, int vitorias_lig4, int derrotas_lig4, int vitorias_cm, int derrotas_cm)
-    : _nome(nome), _apelido(apelido), _vitorias_jdv(vitorias_jdv), _derrotas_jdv(derrotas_jdv), _vitorias_lig4(vitorias_lig4), _derrotas_lig4(derrotas_lig4), _vitorias_cm(vitorias_cm), _derrotas_cm(derrotas_cm) {}
+Jogador::Jogador(std::string nome, std::string apelido, int vitorias_jdv, int derrotas_jdv, int vitorias_lig4, int derrotas_lig4, int vitorias_cm, int derrotas_cm, int vitorias_rvs, int derrotas_rvs)
+    : _nome(nome), _apelido(apelido), _vitorias_jdv(vitorias_jdv), _derrotas_jdv(derrotas_jdv), _vitorias_lig4(vitorias_lig4), _derrotas_lig4(derrotas_lig4), _vitorias_cm(vitorias_cm), _derrotas_cm(derrotas_cm), _vitorias_rvs(vitorias_rvs), _derrotas_rvs(derrotas_rvs) {}
 
 std::string Jogador::get_apelido() const { return this->_apelido; }
 std::string Jogador::get_nome() const { return this->_nome; }
@@ -101,7 +101,8 @@ void salvar_jogadores(const std::vector<Jogador> &jogadores)
         ofs << jogador.get_nome() << ',' << jogador.get_apelido() << ','
             << jogador.get_vitorias_jdv() << ',' << jogador.get_derrotas_jdv() << ','
             << jogador.get_vitorias_lig4() << ',' << jogador.get_derrotas_lig4() << ','
-            << jogador.get_vitorias_cm() << ',' << jogador.get_derrotas_cm() << '\n';
+            << jogador.get_vitorias_cm() << ',' << jogador.get_derrotas_cm() << ','
+            << jogador.get_vitorias_rvs() << ',' << jogador.get_derrotas_rvs() << '\n';
     }
 }
 
@@ -120,7 +121,7 @@ std::vector<Jogador> carregar_jogadores()
     {
         std::istringstream iss(linha);
         std::string nome, apelido;
-        int vjdv, djdv, vlig4, dlig4, vcm, dcm;
+        int vjdv, djdv, vlig4, dlig4, vcm, dcm, vrvs, drvs;
 
         std::getline(iss, nome, ',');
         std::getline(iss, apelido, ',');
@@ -135,8 +136,12 @@ std::vector<Jogador> carregar_jogadores()
         iss >> vcm;
         iss.ignore();
         iss >> dcm;
+        iss.ignore();
+        iss >> vrvs;
+        iss.ignore();
+        iss >> drvs;
 
-        jogadores.emplace_back(nome, apelido, vjdv, djdv, vlig4, dlig4, vcm, dcm);
+        jogadores.emplace_back(nome, apelido, vjdv, djdv, vlig4, dlig4, vcm, dcm, vrvs, drvs);
     }
 
     return jogadores;
@@ -194,4 +199,10 @@ void selecionar_jogadores(Jogador** jogador1, Jogador** jogador2, std::vector<Jo
             break;
         }
     }
+}
+
+void selecionar_jogador(Jogador** jogador1, std::vector<Jogador>& jogadores) {
+    std::cout << "Quem irá jogar?" << std::endl;
+    std::cout << "Informe o apelido do jogador: ";
+    *jogador1 = escolhe_jogador(jogadores);  // Atribuir o endereço retornado por escolhe_jogador
 }

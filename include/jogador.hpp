@@ -24,7 +24,7 @@ private:
 public:
     Jogador();
     Jogador(std::string nome, std::string apelido);
-    Jogador(std::string nome, std::string apelido, int vitorias_jdv, int derrotas_jdv, int vitorias_lig4, int derrotas_lig4, int vitorias_cm, int derrotas_cm);
+    Jogador(std::string nome, std::string apelido, int vitorias_jdv, int derrotas_jdv, int vitorias_lig4, int derrotas_lig4, int vitorias_cm, int derrotas_cm, int vitorias_rvs, int derrotas_rvs);
     
     std::string get_nome() const;
     std::string get_apelido() const;
@@ -60,5 +60,6 @@ void salvar_jogadores(const std::vector<Jogador> &jogadores);
 bool apelido_existe(const std::vector<Jogador>& jogadores, const std::string& apelido);
 Jogador* escolhe_jogador(std::vector<Jogador>& jogadores);
 void selecionar_jogadores(Jogador** jogador1, Jogador** jogador2, std::vector<Jogador>& jogadores);
+void selecionar_jogador(Jogador** jogador1, std::vector<Jogador>& jogadores);
 
 #endif

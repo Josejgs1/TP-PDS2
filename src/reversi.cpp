@@ -8,8 +8,10 @@
 #include <sstream>
 #include <string>
 
-Reversi::Reversi(int linhas, int colunas, Jogador jogador1, Jogador jogador2)
-    : JogoDeTabuleiro(linhas, colunas), _jogador1(jogador1), _jogador2(jogador2), _jogador_atual(1)
+Reversi::Reversi() : JogoDeTabuleiro(), _jogador1(nullptr), _jogador2(nullptr), _jogador_atual(1){};
+
+Reversi::Reversi(int linhas, int colunas, Jogador& jogador1, Jogador& jogador2)
+    : JogoDeTabuleiro(linhas, colunas), _jogador1(&jogador1), _jogador2(&jogador2), _jogador_atual(1)
 {
     inicializarTabuleiro();
 }
@@ -251,11 +253,11 @@ void Reversi::partida()
 
             if (jogadorAtual == 1)
             {
-                std::cout << "\033[32m" << _jogador1.get_apelido() << " (X), é sua vez.\033[0m" << std::endl;
+                std::cout << "\033[32m" << _jogador1->get_apelido() << " (X), é sua vez.\033[0m" << std::endl;
             }
             else
             {
-                std::cout << "\033[31m" << _jogador2.get_apelido() << " (O), é sua vez.\033[0m" << std::endl;
+                std::cout << "\033[31m" << _jogador2->get_apelido() << " (O), é sua vez.\033[0m" << std::endl;
             }
 
             if (!mensagemErro.empty())
@@ -294,11 +296,11 @@ void Reversi::partida()
             {
                 if (jogadorAtual == 1)
                 {
-                    mensagemErro = "Jogador " + _jogador1.get_apelido() + " Não possui jogada válida. Passou a vez.";
+                    mensagemErro = "Jogador " + _jogador1->get_apelido() + " Não possui jogada válida. Passou a vez.";
                 }
                 else
                 {
-                    mensagemErro = "Jogador " + _jogador2.get_apelido() + " Não possui jogada válida. Passou a vez.";
+                    mensagemErro = "Jogador " + _jogador2->get_apelido() + " Não possui jogada válida. Passou a vez.";
                 }
                 break;
             }
@@ -326,22 +328,22 @@ void Reversi::partida()
         if (resultado == 0)
         {
             std::cout << std::endl;
-            std::cout << _jogador1.get_apelido() << " (X) venceu com " << contarPecas(1) << " peças contra " << contarPecas(2) << " peças de " << _jogador2.get_apelido() << " (O)." << std::endl;
-            _jogador1.soma_vitoria_rvs();
-            _jogador2.soma_derrota_rvs();
+            std::cout << _jogador1->get_apelido() << " (X) venceu com " << contarPecas(1) << " peças contra " << contarPecas(2) << " peças de " << _jogador2->get_apelido() << " (O)." << std::endl;
+            _jogador1->soma_vitoria_rvs();
+            _jogador2->soma_derrota_rvs();
         }
         else if (resultado == 1)
         {
             std::cout << std::endl;
-            std::cout << _jogador2.get_apelido() << " (O) venceu com " << contarPecas(2) << " peças contra " << contarPecas(1) << " peças de " << _jogador1.get_apelido() << " (X)." << std::endl;
-            _jogador2.soma_vitoria_rvs();
-            _jogador1.soma_derrota_rvs();
+            std::cout << _jogador2->get_apelido() << " (O) venceu com " << contarPecas(2) << " peças contra " << contarPecas(1) << " peças de " << _jogador1->get_apelido() << " (X)." << std::endl;
+            _jogador2->soma_vitoria_rvs();
+            _jogador1->soma_derrota_rvs();
         }
     }
     std::cout << std::endl;
     std::cout << "Estatísticas Atuais:" << std::endl;
-    _jogador1.imprimir_informacoes_rvs();
-    _jogador2.imprimir_informacoes_rvs();
+    _jogador1->imprimir_informacoes_rvs();
+    _jogador2->imprimir_informacoes_rvs();
     std::cout << std::endl;
 }
 

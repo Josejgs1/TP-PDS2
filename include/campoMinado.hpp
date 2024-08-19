@@ -6,10 +6,11 @@
 class CampoMinado : public JogoDeTabuleiro
 {
 private:
-    Jogador _jogador;
+    Jogador* _jogador;
     int _n_bombas;
 public:
-    CampoMinado(int linhas, int colunas, Jogador jogador, int n_bombas);
+    CampoMinado();
+    CampoMinado(int linhas, int colunas, Jogador &jogador, int n_bombas);
     ~CampoMinado();
 
     void imprimir_tabuleiro() override;

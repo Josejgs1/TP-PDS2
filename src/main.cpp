@@ -66,7 +66,7 @@ int main()
             break;
         case 1:
         {
-            JogoDaVelha jogo = JogoDaVelha(jogador3, jogador4);
+            JogoDaVelha jogo = JogoDaVelha(jogador1, jogador2);
             jogo.partida();
 
             break;

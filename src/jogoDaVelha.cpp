@@ -1,8 +1,8 @@
 #include "jogoDaVelha.hpp"
 #include <limits>
 
-JogoDaVelha::JogoDaVelha(Jogador jogador1, Jogador jogador2)
-    : JogoDeTabuleiro(3, 3), _jogador1(jogador1), _jogador2(jogador2), _jogador_atual(1) {}
+JogoDaVelha::JogoDaVelha(Jogador& jogador1, Jogador& jogador2)
+    : JogoDeTabuleiro(3, 3), _jogador1(&jogador1), _jogador2(&jogador2), _jogador_atual(1) {}
 
 void JogoDaVelha::imprimir_tabuleiro()
 {
@@ -86,11 +86,11 @@ std::string JogoDaVelha::apelido_atual()
     std::string apelido;
     if (_jogador_atual == 1)
     {
-        return _jogador1.get_apelido();
+        return _jogador1->get_apelido();
     }
     else
     {
-        return _jogador2.get_apelido();
+        return _jogador2->get_apelido();
     }
 }
 
@@ -194,29 +194,29 @@ void JogoDaVelha::partida()
         alternar_jogador();
         if (_jogador_atual == 1)
         {
-            int vitorias = _jogador1.get_vitorias_jdv();
-            _jogador1.set_vitorias_jdv(vitorias + 1);
-            int derrotas = _jogador2.get_derrotas_jdv();
-            _jogador2.set_derrotas_jdv(derrotas + 1);
+            int vitorias = _jogador1->get_vitorias_jdv();
+            _jogador1->set_vitorias_jdv(vitorias + 1);
+            int derrotas = _jogador2->get_derrotas_jdv();
+            _jogador2->set_derrotas_jdv(derrotas + 1);
         }
         else
         {
-            int vitorias = _jogador2.get_vitorias_jdv();
-            _jogador2.set_vitorias_jdv(vitorias + 1);
-            int derrotas = _jogador1.get_derrotas_jdv();
-            _jogador1.set_derrotas_jdv(derrotas + 1);
+            int vitorias = _jogador2->get_vitorias_jdv();
+            _jogador2->set_vitorias_jdv(vitorias + 1);
+            int derrotas = _jogador1->get_derrotas_jdv();
+            _jogador1->set_derrotas_jdv(derrotas + 1);
         }
 
         std::cout << "Parabens " << apelido_atual() << ", voce venceu!" << std::endl;
-        _jogador1.imprimir_informacoes_jdv();
-        _jogador2.imprimir_informacoes_jdv();
+        _jogador1->imprimir_informacoes_jdv();
+        _jogador2->imprimir_informacoes_jdv();
         return;
     }
     if (checar_final())
     {
         std::cout << "Deu velha!" << std::endl;
-        _jogador1.imprimir_informacoes_jdv();
-        _jogador2.imprimir_informacoes_jdv();
+        _jogador1->imprimir_informacoes_jdv();
+        _jogador2->imprimir_informacoes_jdv();
         return;
     }
 }

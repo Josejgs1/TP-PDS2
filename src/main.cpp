@@ -66,7 +66,27 @@ int main()
             break;
         case 1:
         {
-            JogoDaVelha jogo = JogoDaVelha(jogador1, jogador2);
+            Jogador* jogador1 = nullptr;  // Inicialize os ponteiros
+            Jogador* jogador2 = nullptr;
+
+            while (true)
+            {
+                std::cout << "Jogador 1: ";
+                jogador1 = escolhe_jogador(jogadores);
+                std::cout << "Jogador 2: ";
+                jogador2 = escolhe_jogador(jogadores);
+
+                if (jogador1->get_apelido() == jogador2->get_apelido())
+                {
+                    std::cout << "Os jogadores devem ser diferentes." << std::endl; //resolver
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            JogoDaVelha jogo = JogoDaVelha(*jogador1, *jogador2);
             jogo.partida();
 
             break;

@@ -78,7 +78,8 @@ int main()
         }
 
         case 3:
-        {
+        {   
+            limpar_terminal();
             while (true)
             {
                 std::cout << "- Escolha a dimensão do tabuleiro -" << std::endl;
@@ -94,6 +95,7 @@ int main()
                     if (modo_de_jogo == 'R' || modo_de_jogo == 'r')
                     {
                         std::cout << "Você escolheu Jogo Rápido (Tabuleiro 6x6)." << std::endl;
+                        limpar_terminal();
                         Reversi jogo(DIMENSAO_JOGO_RAPIDO, DIMENSAO_JOGO_RAPIDO, jogador1, jogador2);
                         jogo.partida();
                         break;
@@ -101,6 +103,7 @@ int main()
                     else if (modo_de_jogo == 'C' || modo_de_jogo == 'c')
                     {
                         std::cout << "Você escolheu Jogo Clássico (Tabuleiro 8x8)." << std::endl;
+                        limpar_terminal();
                         Reversi jogo(DIMENSAO_JOGO_CLASSICO, DIMENSAO_JOGO_CLASSICO, jogador1, jogador2);
                         jogo.partida();
                         break;
@@ -108,6 +111,7 @@ int main()
                     else if (modo_de_jogo == 'E' || modo_de_jogo == 'e')
                     {
                         std::cout << "Você escolheu Jogo Extremo (Tabuleiro 10x10)." << std::endl;
+                        limpar_terminal();
                         Reversi jogo(DIMENSAO_JOGO_EXTREMO, DIMENSAO_JOGO_EXTREMO, jogador1, jogador2);
                         jogo.partida();
                         break;

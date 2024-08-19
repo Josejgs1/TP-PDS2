@@ -4,6 +4,7 @@
 #include "jogoDaVelha.hpp"
 #include "reversi.hpp"
 #include "campoMinado.hpp"
+#include <memory>
 
 #define DIMENSAO_JOGO_RAPIDO 6
 #define DIMENSAO_JOGO_CLASSICO 8
@@ -137,10 +138,10 @@ int main()
             std::cout << "3. Dificil (24 x 24 e 95 bombas)" << std::endl;
             std::cout << "4. Extremo (30 x 30 e 150 bombas)" << std::endl;
             std::cout << "5. Personalizado" << std::endl;
-            start_case_4:
+        start_case_4:
             std::cin >> opcao;
 
-            CampoMinado *jogo = nullptr;
+            std::unique_ptr<CampoMinado> jogo = nullptr;
 
             try
             {
@@ -155,22 +156,22 @@ int main()
                     switch (opcao)
                     {
                     case 1:
-                        jogo = new CampoMinado(6, 6, jogador3, 10);
+                        jogo = std::make_unique<CampoMinado>(6, 6, jogador3, 10);
                         break;
                     case 2:
-                        jogo = new CampoMinado(15, 15, jogador3, 50);
+                        jogo = std::make_unique<CampoMinado>(15, 15, jogador3, 50);
                         break;
                     case 3:
-                        jogo = new CampoMinado(24, 24, jogador3, 95);
+                        jogo = std::make_unique<CampoMinado>(24, 24, jogador3, 95);
                         break;
                     case 4:
-                        jogo = new CampoMinado(30, 30, jogador3, 150);
+                        jogo = std::make_unique<CampoMinado>(30, 30, jogador3, 150);
                         break;
                     case 5:
                         int linhas, colunas, bombas;
                         limpar_terminal();
                         std::cout << "O tamanho minimo do tabuleiro e 4 x 4 e maximo 30 x 30" << std::endl;
-                        start_personalizado:
+                    start_personalizado:
                         std::cout << "Digite as dimensoes e o numero de bombas desejadas: ";
                         std::cin >> linhas >> colunas >> bombas;
                         try
@@ -183,7 +184,7 @@ int main()
                             }
                             else
                             {
-                                jogo = new CampoMinado(linhas, colunas, jogador3, bombas);
+                                jogo = std::make_unique<CampoMinado>(linhas, colunas, jogador3, bombas);
                                 break;
                             }
                         }
@@ -213,5 +214,3 @@ int main()
     }
     return 0;
 }
-
-

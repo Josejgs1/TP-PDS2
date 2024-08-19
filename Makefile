@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-std=c++11 -Wall
+CFLAGS=-std=c++14 -Wall
 
 # Diretórios para objetos e binários
 OBJDIR=obj

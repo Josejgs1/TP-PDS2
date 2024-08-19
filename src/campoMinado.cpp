@@ -10,8 +10,10 @@ const int MAX_LINHAS = 30;
 const int MIN_COLUNAS = 4;
 const int MAX_COLUNAS = 30;
 
-CampoMinado::CampoMinado(int linhas, int colunas, Jogador jogador, int n_bombas)
-    : JogoDeTabuleiro(linhas, colunas), _jogador(jogador), _n_bombas(n_bombas)
+CampoMinado::CampoMinado() : JogoDeTabuleiro(0, 0), _jogador(nullptr), _n_bombas(0){}
+
+CampoMinado::CampoMinado(int linhas, int colunas, Jogador& jogador, int n_bombas)
+    : JogoDeTabuleiro(linhas, colunas), _jogador(&jogador), _n_bombas(n_bombas)
 {
     if (linhas < MIN_LINHAS || linhas > MAX_LINHAS)
     {
@@ -307,7 +309,7 @@ void CampoMinado::partida()
     {
         std::string linha;
         int x, y;
-        std::cout << _jogador.get_apelido() << ", faca sua jogada: ";
+        std::cout << _jogador->get_apelido() << ", faca sua jogada: ";
         std::getline(std::cin, linha);
 
         if (linha.empty())
@@ -361,9 +363,9 @@ void CampoMinado::partida()
             if (_tabuleiro[x - 1][y - 1] == 3)
             {
                 std::cout << "Você perdeu!" << std::endl;
-                int vitorias = _jogador.get_derrotas_cm();
-                _jogador.set_derrotas_cm(vitorias + 1);
-                _jogador.imprimir_informacoes();
+                int vitorias = _jogador->get_derrotas_cm();
+                _jogador->set_derrotas_cm(vitorias + 1);
+                _jogador->imprimir_informacoes_cm();
                 return;
             }
         }
@@ -375,11 +377,11 @@ void CampoMinado::partida()
     }
     if (checar_vitoria())
     {
-        int vitorias = _jogador.get_vitorias_cm();
-        _jogador.set_vitorias_cm(vitorias + 1);
+        int vitorias = _jogador->get_vitorias_cm();
+        _jogador->set_vitorias_cm(vitorias + 1);
 
-        std::cout << "Parabens " << _jogador.get_apelido() << ", voce venceu!" << std::endl;
-        _jogador.imprimir_informacoes();
+        std::cout << "Parabens " << _jogador->get_apelido() << ", voce venceu!" << std::endl;
+        _jogador->imprimir_informacoes_cm();
         return;
     }
 }

@@ -5,6 +5,7 @@
 #include "reversi.hpp"
 #include "campoMinado.hpp"
 #include <memory>
+#include "jogador.hpp"
 
 #define DIMENSAO_JOGO_RAPIDO 6
 #define DIMENSAO_JOGO_CLASSICO 8
@@ -12,7 +13,7 @@
 
 void imprimir_menu()
 {
-    std::cout << "O que você gostaria de fazer?\n1. Jogo da Velha\n2. Lig4\n3. Reversi\n4. Campo Minado\n5. Sair\n";
+    std::cout << "O que você gostaria de fazer?\n1. Jogo da Velha\n2. Lig4\n3. Reversi\n4. Campo Minado\n5. Cadastrar Jogador\n6. Sair\n";
 }
 
 char validar_entrada()
@@ -45,41 +46,75 @@ char validar_entrada()
 int main()
 {
     int opcao;
-    Jogador jogador1("Jogador 1", "X");
-    Jogador jogador2("Jogador 2", "O");
+    std::vector<Jogador> jogadores = carregar_jogadores();
+
+    limpar_terminal();
 
     while (true)
     {
         imprimir_menu();
         std::cin >> opcao;
+        limpar_terminal();
 
         switch (opcao)
         {
+        default:
+            std::cout << "Opção inválida. ";
+            break;
         case 1:
         {
-            JogoDaVelha jogo = JogoDaVelha(jogador1, jogador2);
+            Jogador* jogador1 = nullptr;
+            Jogador* jogador2 = nullptr;
+            JogoDaVelha jogo;
+
+            selecionar_jogadores(&jogador1, &jogador2, jogadores);
+
+            jogo = JogoDaVelha(*jogador1, *jogador2);
+
             jogo.partida();
 
             break;
         }
         case 2:
         {
-            int linhas, colunas;
-            std::cout << "Insira as dimensoes do tabuleiro: ";
-            std::cin >> linhas >> colunas;
-            while (!validar_tabuleiro_lig4(linhas, colunas))
-            {
-                std::cout << "Dimensoes inválidas. Tente novamente: ";
-                std::cin >> linhas >> colunas;
-            }
-            Lig4 jogo = Lig4(linhas, colunas, jogador1, jogador2);
-            jogo.partida();
+            Jogador* jogador1 = nullptr;  // Inicialize os ponteiros
+            Jogador* jogador2 = nullptr;
+            Lig4 jogo;
 
+            selecionar_jogadores(&jogador1, &jogador2, jogadores);
+
+            int linhas, colunas;
+            std::cout << "Insira as dimensoes do tabuleiro de Ligue 4: ";
+            std::cin >> linhas >> colunas;
+
+            while (true) //o que eu faço com isso aqui
+            {
+                try
+                {
+                    jogo = Lig4(linhas, colunas, *jogador1, *jogador2);
+                    break;
+                }
+                catch (const std::invalid_argument &erro) // terminar tratamento de erros
+                {
+                    std::cout << erro.what() << std::endl;
+                    std::cout << "Tente novamente: ";
+                    std::cin >> linhas >> colunas;
+                }
+            }
+
+            limpar_terminal();
+            jogo.partida();
             break;
         }
-
         case 3:
-        {
+        {   
+            Jogador* jogador1 = nullptr;  // Inicialize os ponteiros
+            Jogador* jogador2 = nullptr;
+            Reversi jogo;
+
+            selecionar_jogadores(&jogador1, &jogador2, jogadores);
+            limpar_terminal();
+
             while (true)
             {
                 std::cout << "- Escolha a dimensão do tabuleiro -" << std::endl;
@@ -95,21 +130,24 @@ int main()
                     if (modo_de_jogo == 'R' || modo_de_jogo == 'r')
                     {
                         std::cout << "Você escolheu Jogo Rápido (Tabuleiro 6x6)." << std::endl;
-                        Reversi jogo(DIMENSAO_JOGO_RAPIDO, DIMENSAO_JOGO_RAPIDO, jogador1, jogador2);
+                        limpar_terminal();
+                        Reversi jogo(DIMENSAO_JOGO_RAPIDO, DIMENSAO_JOGO_RAPIDO, *jogador1, *jogador2);
                         jogo.partida();
                         break;
                     }
                     else if (modo_de_jogo == 'C' || modo_de_jogo == 'c')
                     {
                         std::cout << "Você escolheu Jogo Clássico (Tabuleiro 8x8)." << std::endl;
-                        Reversi jogo(DIMENSAO_JOGO_CLASSICO, DIMENSAO_JOGO_CLASSICO, jogador1, jogador2);
+                        limpar_terminal();
+                        Reversi jogo(DIMENSAO_JOGO_CLASSICO, DIMENSAO_JOGO_CLASSICO, *jogador1, *jogador2);
                         jogo.partida();
                         break;
                     }
                     else if (modo_de_jogo == 'E' || modo_de_jogo == 'e')
                     {
                         std::cout << "Você escolheu Jogo Extremo (Tabuleiro 10x10)." << std::endl;
-                        Reversi jogo(DIMENSAO_JOGO_EXTREMO, DIMENSAO_JOGO_EXTREMO, jogador1, jogador2);
+                        limpar_terminal();
+                        Reversi jogo(DIMENSAO_JOGO_EXTREMO, DIMENSAO_JOGO_EXTREMO, *jogador1, *jogador2);
                         jogo.partida();
                         break;
                     }
@@ -128,9 +166,9 @@ int main()
 
         case 4:
         {
-            limpar_terminal();
             int opcao;
-            Jogador jogador3("jogador", "jog");
+            Jogador* jogador = nullptr;  // Inicialize os ponteiros
+            selecionar_jogador(&jogador, jogadores);
 
             std::cout << "Escolha uma opção de tamanho do tabuleiro:" << std::endl;
             std::cout << "1. Facil (6 x 6 e 10 bombas)" << std::endl;
@@ -209,8 +247,40 @@ int main()
             break;
         }
         case 5:
+        {
+            std::string nome, apelido;
+
+            std::cout << "Insira seu nome: ";
+            std::cin >> nome;
+            std::cout << "Insira seu apelido: ";
+
+            while (true)
+            {
+                std::cin >> apelido;
+
+                if (!apelido_existe(jogadores, apelido))
+                {
+                    break;
+                }
+                else
+                {
+                    std::cout << "O apelido já existe. Tente novamente: ";
+                }
+            }
+
+            Jogador novoJogador = Jogador(nome, apelido);
+            jogadores.push_back(novoJogador);
+
+            std::cout << "Jogador criado com sucesso!" << std::endl;
+            break;
+        }
+        case 6:
+            salvar_jogadores(jogadores);
             exit(0);
         }
+        std::cout << std::endl;
     }
+
+    salvar_jogadores(jogadores);
     return 0;
 }

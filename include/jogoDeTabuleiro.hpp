@@ -14,14 +14,15 @@ protected:
     std::vector<std::vector<int>> _tabuleiro;
 
 public:
+    JogoDeTabuleiro();
     JogoDeTabuleiro(int linhas, int colunas);
     
-    virtual void imprimir_tabuleiro();
     void inicializar_tabuleiro();
+    virtual void imprimir_tabuleiro();
     virtual bool checar_vitoria() = 0;
     virtual void partida() = 0;
 };
 
 void limpar_terminal();
-    
+
 #endif

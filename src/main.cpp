@@ -66,27 +66,14 @@ int main()
             break;
         case 1:
         {
-            Jogador* jogador1 = nullptr;  // Inicialize os ponteiros
+            Jogador* jogador1 = nullptr;
             Jogador* jogador2 = nullptr;
+            JogoDaVelha jogo;
 
-            while (true)
-            {
-                std::cout << "Jogador 1: ";
-                jogador1 = escolhe_jogador(jogadores);
-                std::cout << "Jogador 2: ";
-                jogador2 = escolhe_jogador(jogadores);
+            selecionar_jogadores(&jogador1, &jogador2, jogadores);
 
-                if (jogador1->get_apelido() == jogador2->get_apelido())
-                {
-                    std::cout << "Os jogadores devem ser diferentes." << std::endl; //resolver
-                }
-                else
-                {
-                    break;
-                }
-            }
+            jogo = JogoDaVelha(*jogador1, *jogador2);
 
-            JogoDaVelha jogo = JogoDaVelha(*jogador1, *jogador2);
             jogo.partida();
 
             break;
@@ -97,23 +84,7 @@ int main()
             Jogador* jogador2 = nullptr;
             Lig4 jogo;
 
-            std::cout << "Quem irá jogar?" << std::endl;
-            while (true)
-            {
-                std::cout << "Jogador 1: ";
-                jogador1 = escolhe_jogador(jogadores);
-                std::cout << "Jogador 2: ";
-                jogador2 = escolhe_jogador(jogadores);
-
-                if (jogador1->get_apelido() == jogador2->get_apelido())
-                {
-                    std::cout << "Os jogadores devem ser diferentes." << std::endl; //resolver
-                }
-                else
-                {
-                    break;
-                }
-            }
+            selecionar_jogadores(&jogador1, &jogador2, jogadores);
 
             int linhas, colunas;
             std::cout << "Insira as dimensoes do tabuleiro de Ligue 4: ";
@@ -135,7 +106,7 @@ int main()
             }
 
             limpar_terminal();
-            jogo.partida(); // fazer tratamento de exceções
+            jogo.partida();
             break;
         }
         case 3:

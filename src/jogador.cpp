@@ -1,5 +1,5 @@
 #include "jogador.hpp"
-Jogador::Jogador() : Jogador("", ""){}
+Jogador::Jogador() : Jogador("", "") {}
 
 Jogador::Jogador(std::string nome, std::string apelido)
     : _nome(nome), _apelido(apelido) {}
@@ -7,14 +7,17 @@ Jogador::Jogador(std::string nome, std::string apelido)
 Jogador::Jogador(std::string nome, std::string apelido, int vitorias_jdv, int derrotas_jdv, int vitorias_lig4, int derrotas_lig4, int vitorias_cm, int derrotas_cm)
     : _nome(nome), _apelido(apelido), _vitorias_jdv(vitorias_jdv), _derrotas_jdv(derrotas_jdv), _vitorias_lig4(vitorias_lig4), _derrotas_lig4(derrotas_lig4), _vitorias_cm(vitorias_cm), _derrotas_cm(derrotas_cm) {}
 
-std::string Jogador::get_apelido() const { return _apelido; }
-std::string Jogador::get_nome() const { return _nome; }
-int Jogador::get_vitorias_jdv() const { return _vitorias_jdv; }
-int Jogador::get_derrotas_jdv() const { return _derrotas_jdv; }
-int Jogador::get_vitorias_lig4() const { return _vitorias_lig4; }
-int Jogador::get_derrotas_lig4() const { return _derrotas_lig4; }
-int Jogador::get_vitorias_cm() const { return _vitorias_cm; }
-int Jogador::get_derrotas_cm() const { return _derrotas_cm; }
+std::string Jogador::get_apelido() const { return this->_apelido; }
+std::string Jogador::get_nome() const { return this->_nome; }
+
+int Jogador::get_vitorias_jdv() const { return this->_vitorias_jdv; }
+int Jogador::get_derrotas_jdv() const { return this->_derrotas_jdv; }
+int Jogador::get_vitorias_lig4() const { return this->_vitorias_lig4; }
+int Jogador::get_derrotas_lig4() const { return this->_derrotas_lig4; }
+int Jogador::get_vitorias_cm() const { return this->_vitorias_cm; }
+int Jogador::get_derrotas_cm() const { return this->_derrotas_cm; }
+int Jogador::get_vitorias_rvs() const { return this->_vitorias_rvs; }
+int Jogador::get_derrotas_rvs() const { return this->_derrotas_rvs; }
 
 void Jogador::set_vitorias_jdv(int vitorias)
 {
@@ -36,26 +39,10 @@ void Jogador::set_derrotas_cm(int derrotas)
     this->_derrotas_cm = derrotas;
 }
 
-void Jogador::soma_derrota_lig4()
-{
-    _derrotas_lig4 = _derrotas_lig4 + 1;
-}
-
-void Jogador::soma_vitoria_lig4()
-{
-    this->_vitorias_lig4++;
-}
-
-void Jogador::soma_derrota_rvs()
-{
-    this->_derrotas_rvs++;
-
-}
-
-void Jogador::soma_vitoria_rvs()
-{
-    this->_vitorias_rvs++;
-}
+void Jogador::soma_derrota_lig4() { this->_derrotas_lig4 = _derrotas_lig4 + 1; }
+void Jogador::soma_vitoria_lig4() { this->_vitorias_lig4++; }
+void Jogador::soma_derrota_rvs() { this->_derrotas_rvs++; }
+void Jogador::soma_vitoria_rvs() { this->_vitorias_rvs++; }
 
 void Jogador::imprimir_informacoes_jdv()
 {
@@ -81,11 +68,22 @@ void Jogador::imprimir_informacoes_rvs()
     std::cout << std::endl;
 }
 
-void Jogador::imprimir_informacoes() {
+void Jogador::imprimir_informacoes_cm()
+{
     std::cout << "Jogador: " << this->_nome << std::endl;
     std::cout << "Apelido: " << this->_apelido << std::endl;
-    std::cout << "Vitorias no jogo da velha: " << this->_vitorias_jdv << "      Derrotas no jogo da velha: " << this->_derrotas_jdv << std::endl;
-    std::cout << "Vitorias no campo minado: " << this->_vitorias_cm << "      Derrotas no campo minado: " << this->_derrotas_cm << std::endl;
+    std::cout << "Vitorias no Campo Minado: " << this->_vitorias_cm << "      Derrotas no campo minado: " << this->_derrotas_cm << std::endl;
+    std::cout << std::endl;
+}
+
+void Jogador::imprimir_informacoes_geral()
+{
+    std::cout << "Jogador: " << this->_nome << std::endl;
+    std::cout << "Apelido: " << this->_apelido << std::endl;
+    std::cout << "Vitorias no Jogo da Velha: " << this->_vitorias_jdv << "      Derrotas no jogo da velha: " << this->_derrotas_jdv << std::endl;
+    std::cout << "Vitorias no Campo Minado: " << this->_vitorias_cm << "      Derrotas no campo minado: " << this->_derrotas_cm << std::endl;
+    std::cout << "Vitorias no Reversi: " << this->_vitorias_rvs << "      Derrotas no Reversi: " << this->_derrotas_rvs << std::endl;
+    std::cout << "Vitorias no Ligue 4: " << this->_vitorias_lig4 << "      Derrotas no Ligue 4: " << this->_derrotas_lig4 << std::endl;
     std::cout << std::endl;
 }
 
@@ -144,30 +142,56 @@ std::vector<Jogador> carregar_jogadores()
     return jogadores;
 }
 
-bool apelido_existe(const std::vector<Jogador>& jogadores, const std::string& apelido) {
-    for (const auto& jogador : jogadores) {
-        if (jogador.get_apelido() == apelido) {
+bool apelido_existe(const std::vector<Jogador> &jogadores, const std::string &apelido)
+{
+    for (const auto &jogador : jogadores)
+    {
+        if (jogador.get_apelido() == apelido)
+        {
             return true;
         }
     }
     return false;
 }
 
-Jogador* escolhe_jogador(std::vector<Jogador>& jogadores) {
-    std::string apelidoJogador; 
-    
-    while (true) {
-        // std::cout << "Insira o apelido do jogador: ";
+Jogador *escolhe_jogador(std::vector<Jogador> &jogadores)
+{
+    std::string apelidoJogador;
+
+    while (true)
+    {
         std::cin >> apelidoJogador;
 
-        if (!apelido_existe(jogadores, apelidoJogador)) {
+        if (!apelido_existe(jogadores, apelidoJogador))
+        {
             std::cout << "O apelido não foi encontrado. Tente novamente: ";
-        } else {
-            for (auto& jogador : jogadores) {
-                if (jogador.get_apelido() == apelidoJogador) {
+        }
+        else
+        {
+            for (auto &jogador : jogadores)
+            {
+                if (jogador.get_apelido() == apelidoJogador)
+                {
                     return &jogador; // Retorna o endereço do jogador com o apelido correspondente
                 }
             }
+        }
+    }
+}
+
+void selecionar_jogadores(Jogador** jogador1, Jogador** jogador2, std::vector<Jogador>& jogadores) {
+    std::cout << "Quem irá jogar?" << std::endl;
+
+    while (true) {
+        std::cout << "Informe o apelido do jogador 1: ";
+        *jogador1 = escolhe_jogador(jogadores);  // Atribuir o endereço retornado por escolhe_jogador
+        std::cout << "Informe o apelido do jogador 2: ";
+        *jogador2 = escolhe_jogador(jogadores);  // Atribuir o endereço retornado por escolhe_jogador
+
+        if ((*jogador1)->get_apelido() == (*jogador2)->get_apelido()) {
+            std::cout << "Os jogadores devem ser diferentes." << std::endl;
+        } else {
+            break;
         }
     }
 }

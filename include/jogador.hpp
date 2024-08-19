@@ -34,30 +34,31 @@ public:
     int get_derrotas_cm() const;
     int get_vitorias_lig4() const;
     int get_derrotas_lig4() const;
+    int get_vitorias_rvs() const;
+    int get_derrotas_rvs() const;
 
     // alterar depois
     void set_vitorias_jdv(int vitorias);
     void set_derrotas_jdv(int derrotas);
-
     void set_vitorias_cm(int vitorias);
     void set_derrotas_cm(int derrotas);
 
     void soma_derrota_lig4();
     void soma_vitoria_lig4();
-
     void soma_derrota_rvs();
     void soma_vitoria_rvs();
 
     void imprimir_informacoes_jdv();
     void imprimir_informacoes_lig4();
     void imprimir_informacoes_rvs();
-
-    void imprimir_informacoes();
+    void imprimir_informacoes_cm();
+    void imprimir_informacoes_geral();
 };
 
 std::vector<Jogador> carregar_jogadores();
 void salvar_jogadores(const std::vector<Jogador> &jogadores);
 bool apelido_existe(const std::vector<Jogador>& jogadores, const std::string& apelido);
 Jogador* escolhe_jogador(std::vector<Jogador>& jogadores);
+void selecionar_jogadores(Jogador** jogador1, Jogador** jogador2, std::vector<Jogador>& jogadores);
 
 #endif

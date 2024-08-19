@@ -24,5 +24,5 @@ public:
 };
 
 void limpar_terminal();
-    
+
 #endif

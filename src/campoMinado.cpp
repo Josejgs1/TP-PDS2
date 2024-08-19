@@ -358,7 +358,7 @@ void CampoMinado::partida()
                 std::cout << "Você perdeu!" << std::endl;
                 int vitorias = _jogador.get_derrotas_cm();
                 _jogador.set_derrotas_cm(vitorias + 1);
-                _jogador.imprimir_informacoes();
+                _jogador.imprimir_informacoes_cm();
                 return;
             }
         }
@@ -374,7 +374,7 @@ void CampoMinado::partida()
         _jogador.set_vitorias_cm(vitorias + 1);
 
         std::cout << "Parabens " << _jogador.get_apelido() << ", voce venceu!" << std::endl;
-        _jogador.imprimir_informacoes();
+        _jogador.imprimir_informacoes_cm();
         return;
     }
 }

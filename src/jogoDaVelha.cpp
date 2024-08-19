@@ -1,6 +1,10 @@
 #include "jogoDaVelha.hpp"
 #include <limits>
 
+JogoDaVelha::JogoDaVelha()
+    : JogoDeTabuleiro(), _jogador1(nullptr), _jogador2(nullptr), _jogador_atual(1){};
+
+
 JogoDaVelha::JogoDaVelha(Jogador& jogador1, Jogador& jogador2)
     : JogoDeTabuleiro(3, 3), _jogador1(&jogador1), _jogador2(&jogador2), _jogador_atual(1) {}
 

@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Trapalho Prático PDS2 2024.1 - Grupo 7: Código-Fonte de include/campoMinado.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Trapalho Prático PDS2 2024.1 - Grupo 7
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Busca','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">campoMinado.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CAMPOMINADO_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CAMPOMINADO_HPP</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;jogoDeTabuleiro.hpp&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classCampoMinado.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="classCampoMinado.html">CampoMinado</a> : <span class="keyword">public</span> <a class="code" href="classJogoDeTabuleiro.html">JogoDeTabuleiro</a></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="classJogador.html">Jogador</a>* _jogador; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">int</span> _n_bombas; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="classCampoMinado.html#abd208ffab2c455412ba83526ac4a1cf5">CampoMinado</a>();</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="classCampoMinado.html#abd208ffab2c455412ba83526ac4a1cf5">CampoMinado</a>(<span class="keywordtype">int</span> linhas, <span class="keywordtype">int</span> colunas, <a class="code" href="classJogador.html">Jogador</a> &amp;jogador, <span class="keywordtype">int</span> n_bombas);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="classCampoMinado.html#a8c9978ad6e805964baf65dcf30f63df0">~CampoMinado</a>();</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCampoMinado.html#adf7a52913e86676dba0954fa9462bcb9">imprimir_tabuleiro</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCampoMinado.html#af7c28eebdae305fade7b70b5f4639733">revelar_area</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCampoMinado.html#abd7a8158e6c877fe827bb7135f4f185c">fazer_jogada</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCampoMinado.html#a7781cb082dcd12b0f804674566400f62">marcar_bomba</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCampoMinado.html#a3684399082e2ce7f30e7a2d97005ee99">colocar_bombas</a>();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classCampoMinado.html#a1c70fe8644a61cb5d4201e57b5a142c2">bombas_em_volta</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classCampoMinado.html#a30e646c26be05ad6458c62d2ae9698c8">checar_vitoria</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCampoMinado.html#a84464dc10fc73077a2dcd7bf8d79f55f">partida</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;};</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassCampoMinado_html"><div class="ttname"><a href="classCampoMinado.html">CampoMinado</a></div><div class="ttdoc">Classe que representa o jogo Campo Minado. Herda de JogoDeTabuleiro e implementa funcionalidades espe...</div><div class="ttdef"><b>Definition:</b> campoMinado.hpp:12</div></div>
+<div class="ttc" id="aclassCampoMinado_html_a1c70fe8644a61cb5d4201e57b5a142c2"><div class="ttname"><a href="classCampoMinado.html#a1c70fe8644a61cb5d4201e57b5a142c2">CampoMinado::bombas_em_volta</a></div><div class="ttdeci">int bombas_em_volta(int x, int y)</div><div class="ttdoc">Conta o numero de bombas ao redor de uma coordenada (x, y).</div><div class="ttdef"><b>Definition:</b> campoMinado.cpp:271</div></div>
+<div class="ttc" id="aclassCampoMinado_html_a30e646c26be05ad6458c62d2ae9698c8"><div class="ttname"><a href="classCampoMinado.html#a30e646c26be05ad6458c62d2ae9698c8">CampoMinado::checar_vitoria</a></div><div class="ttdeci">bool checar_vitoria() override</div><div class="ttdoc">Checa se o jogador venceu a partida. Sobrescreve a funcao virtual pura da classe base JogoDeTabuleiro...</div><div class="ttdef"><b>Definition:</b> campoMinado.cpp:298</div></div>
+<div class="ttc" id="aclassCampoMinado_html_a3684399082e2ce7f30e7a2d97005ee99"><div class="ttname"><a href="classCampoMinado.html#a3684399082e2ce7f30e7a2d97005ee99">CampoMinado::colocar_bombas</a></div><div class="ttdeci">void colocar_bombas()</div><div class="ttdoc">Coloca as bombas no tabuleiro em posicoes aleatorias.</div><div class="ttdef"><b>Definition:</b> campoMinado.cpp:248</div></div>
+<div class="ttc" id="aclassCampoMinado_html_a7781cb082dcd12b0f804674566400f62"><div class="ttname"><a href="classCampoMinado.html#a7781cb082dcd12b0f804674566400f62">CampoMinado::marcar_bomba</a></div><div class="ttdeci">void marcar_bomba(int x, int y)</div><div class="ttdoc">Marca uma coordenada (x, y) como contendo uma bomba.</div><div class="ttdef"><b>Definition:</b> campoMinado.cpp:195</div></div>
+<div class="ttc" id="aclassCampoMinado_html_a84464dc10fc73077a2dcd7bf8d79f55f"><div class="ttname"><a href="classCampoMinado.html#a84464dc10fc73077a2dcd7bf8d79f55f">CampoMinado::partida</a></div><div class="ttdeci">void partida() override</div><div class="ttdoc">Inicia uma partida de Campo Minado. Sobrescreve a funcao virtual pura da classe base JogoDeTabuleiro.</div><div class="ttdef"><b>Definition:</b> campoMinado.cpp:338</div></div>
+<div class="ttc" id="aclassCampoMinado_html_a8c9978ad6e805964baf65dcf30f63df0"><div class="ttname"><a href="classCampoMinado.html#a8c9978ad6e805964baf65dcf30f63df0">CampoMinado::~CampoMinado</a></div><div class="ttdeci">~CampoMinado()</div><div class="ttdoc">Destruidor da classe CampoMinado.</div><div class="ttdef"><b>Definition:</b> campoMinado.cpp:52</div></div>
+<div class="ttc" id="aclassCampoMinado_html_abd208ffab2c455412ba83526ac4a1cf5"><div class="ttname"><a href="classCampoMinado.html#abd208ffab2c455412ba83526ac4a1cf5">CampoMinado::CampoMinado</a></div><div class="ttdeci">CampoMinado()</div><div class="ttdoc">Construtor padrao da classe CampoMinado. Inicializa um tabuleiro vazio com zero bombas.</div><div class="ttdef"><b>Definition:</b> campoMinado.cpp:17</div></div>
+<div class="ttc" id="aclassCampoMinado_html_abd7a8158e6c877fe827bb7135f4f185c"><div class="ttname"><a href="classCampoMinado.html#abd7a8158e6c877fe827bb7135f4f185c">CampoMinado::fazer_jogada</a></div><div class="ttdeci">void fazer_jogada(int x, int y)</div><div class="ttdoc">Faz uma jogada no tabuleiro, revelando ou marcando uma bomba.</div><div class="ttdef"><b>Definition:</b> campoMinado.cpp:161</div></div>
+<div class="ttc" id="aclassCampoMinado_html_adf7a52913e86676dba0954fa9462bcb9"><div class="ttname"><a href="classCampoMinado.html#adf7a52913e86676dba0954fa9462bcb9">CampoMinado::imprimir_tabuleiro</a></div><div class="ttdeci">void imprimir_tabuleiro() override</div><div class="ttdoc">Imprime o tabuleiro do Campo Minado. Sobrescreve a funcao virtual pura da classe base JogoDeTabuleiro...</div><div class="ttdef"><b>Definition:</b> campoMinado.cpp:58</div></div>
+<div class="ttc" id="aclassCampoMinado_html_af7c28eebdae305fade7b70b5f4639733"><div class="ttname"><a href="classCampoMinado.html#af7c28eebdae305fade7b70b5f4639733">CampoMinado::revelar_area</a></div><div class="ttdeci">void revelar_area(int x, int y)</div><div class="ttdoc">Revela a area ao redor de uma coordenada (x, y).</div><div class="ttdef"><b>Definition:</b> campoMinado.cpp:116</div></div>
+<div class="ttc" id="aclassJogador_html"><div class="ttname"><a href="classJogador.html">Jogador</a></div><div class="ttdoc">Classe que representa um jogador, com informacoes sobre vitorias e derrotas em diferentes jogos.</div><div class="ttdef"><b>Definition:</b> jogador.hpp:16</div></div>
+<div class="ttc" id="aclassJogoDeTabuleiro_html"><div class="ttname"><a href="classJogoDeTabuleiro.html">JogoDeTabuleiro</a></div><div class="ttdoc">Classe base abstrata para jogos de tabuleiro. Define a estrutura e as operacoes basicas para um jogo ...</div><div class="ttdef"><b>Definition:</b> jogoDeTabuleiro.hpp:16</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

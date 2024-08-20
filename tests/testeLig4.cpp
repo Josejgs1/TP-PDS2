@@ -76,3 +76,68 @@ TEST_CASE("Testar alternar jogador Lig4")
         CHECK(jogo_teste2.apelido_atual() == "teste1");
     }
 }
+
+TEST_CASE("Testar vitoria Lig4")
+{
+    SUBCASE("Teste checar vitoria sem vitoria")
+    {
+        Lig4 jogo_teste7(6, 7, jogador1, jogador2);
+        CHECK(jogo_teste7.checar_vitoria() == false);
+    }
+    SUBCASE("Teste checar vitoria horizontal")
+    {
+        Lig4 jogo_teste3(6, 7, jogador1, jogador2);
+        jogo_teste3.fazer_jogada(1);
+        jogo_teste3.fazer_jogada(2);
+        jogo_teste3.fazer_jogada(1);
+        jogo_teste3.fazer_jogada(2);
+        jogo_teste3.fazer_jogada(1);
+        jogo_teste3.fazer_jogada(2);
+        jogo_teste3.fazer_jogada(1);
+        CHECK(jogo_teste3.checar_vitoria() == true);
+    }
+    SUBCASE("Teste checar vitoria vertical")
+    {
+        Lig4 jogo_teste4(6, 7, jogador1, jogador2);
+        jogo_teste4.fazer_jogada(1);
+        jogo_teste4.fazer_jogada(1);
+        jogo_teste4.fazer_jogada(2);
+        jogo_teste4.fazer_jogada(2);
+        jogo_teste4.fazer_jogada(3);
+        jogo_teste4.fazer_jogada(3);
+        jogo_teste4.fazer_jogada(4);
+        CHECK(jogo_teste4.checar_vitoria() == true);
+    }
+    SUBCASE("Teste checar vitoria diagonal descendente")
+    {
+        Lig4 jogo_teste5(6, 7, jogador1, jogador2);
+        jogo_teste5.fazer_jogada(1);
+        jogo_teste5.fazer_jogada(2);
+        jogo_teste5.fazer_jogada(2);
+        jogo_teste5.fazer_jogada(3);
+        jogo_teste5.fazer_jogada(4);
+        jogo_teste5.fazer_jogada(3);
+        jogo_teste5.fazer_jogada(3);
+        jogo_teste5.fazer_jogada(4);
+        jogo_teste5.fazer_jogada(4);
+        jogo_teste5.fazer_jogada(5);
+        jogo_teste5.fazer_jogada(4);
+        CHECK(jogo_teste5.checar_vitoria() == true);
+    }
+    SUBCASE("Teste checar vitoria diagonal ascendente")
+    {
+        Lig4 jogo_teste6(6, 7, jogador1, jogador2);
+        jogo_teste6.fazer_jogada(5);
+        jogo_teste6.fazer_jogada(4);
+        jogo_teste6.fazer_jogada(2);
+        jogo_teste6.fazer_jogada(3);
+        jogo_teste6.fazer_jogada(4);
+        jogo_teste6.fazer_jogada(3);
+        jogo_teste6.fazer_jogada(3);
+        jogo_teste6.fazer_jogada(2);
+        jogo_teste6.fazer_jogada(2);
+        jogo_teste6.fazer_jogada(1);
+        jogo_teste6.fazer_jogada(2);
+        CHECK(jogo_teste6.checar_vitoria() == true);
+    }
+}

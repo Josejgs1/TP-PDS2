@@ -17,6 +17,8 @@ protected:
 public:
     JogoDeTabuleiro();
     JogoDeTabuleiro(int linhas, int colunas);
+
+    int get_coordenada(int x, int y) const;
     
     void inicializar_tabuleiro();
     virtual void imprimir_tabuleiro();

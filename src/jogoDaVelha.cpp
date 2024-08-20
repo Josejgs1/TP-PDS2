@@ -2,12 +2,19 @@
 #include <limits>
 
 JogoDaVelha::JogoDaVelha()
-    : JogoDeTabuleiro(), _jogador1(nullptr), _jogador2(nullptr), _jogador_atual(1){};
+    : JogoDeTabuleiro(), _jogador1(nullptr), _jogador2(nullptr), _jogador_atual(1) {}
 
-
+/**
+ * @brief Construtor da classe JogoDaVelha com jogadores especificos.
+ * @param jogador1 Referencia para o primeiro jogador.
+ * @param jogador2 Referencia para o segundo jogador.
+ */
 JogoDaVelha::JogoDaVelha(Jogador& jogador1, Jogador& jogador2)
     : JogoDeTabuleiro(3, 3), _jogador1(&jogador1), _jogador2(&jogador2), _jogador_atual(1) {}
 
+/**
+ * @brief Imprime o tabuleiro no console.
+ */
 void JogoDaVelha::imprimir_tabuleiro()
 {
     try
@@ -44,6 +51,11 @@ void JogoDaVelha::imprimir_tabuleiro()
     }
 }
 
+/**
+ * @brief Faz uma jogada no tabuleiro.
+ * @param x Coordenada x da jogada.
+ * @param y Coordenada y da jogada.
+ */
 void JogoDaVelha::fazer_jogada(int x, int y)
 {
     try
@@ -66,6 +78,9 @@ void JogoDaVelha::fazer_jogada(int x, int y)
     }
 }
 
+/**
+ * @brief Alterna entre os jogadores.
+ */
 void JogoDaVelha::alternar_jogador()
 {
     try
@@ -85,9 +100,12 @@ void JogoDaVelha::alternar_jogador()
     }
 }
 
+/**
+ * @brief Retorna o apelido do jogador atual.
+ * @return Apelido do jogador atual.
+ */
 std::string JogoDaVelha::apelido_atual()
 {
-    std::string apelido;
     if (_jogador_atual == 1)
     {
         return _jogador1->get_apelido();
@@ -98,6 +116,10 @@ std::string JogoDaVelha::apelido_atual()
     }
 }
 
+/**
+ * @brief Checa se algum jogador venceu.
+ * @return True se houver uma vitoria, False caso contrario.
+ */
 bool JogoDaVelha::checar_vitoria()
 {
     try
@@ -134,10 +156,14 @@ bool JogoDaVelha::checar_vitoria()
     }
     catch (const std::exception &e)
     {
-        std::cerr << "Erro ao checar vitoria" << e.what() << '\n';
+        std::cerr << "Erro ao checar vitoria: " << e.what() << '\n';
     }
 }
 
+/**
+ * @brief Checa se o jogo terminou em empate.
+ * @return True se o tabuleiro estiver cheio e nao houver vitoria, False caso contrario.
+ */
 bool JogoDaVelha::checar_final()
 {
     try
@@ -156,10 +182,13 @@ bool JogoDaVelha::checar_final()
     }
     catch (const std::exception &e)
     {
-        std::cerr << "Erro ao checar final" << e.what() << '\n';
+        std::cerr << "Erro ao checar final: " << e.what() << '\n';
     }
 }
 
+/**
+ * @brief Executa a partida de Jogo da Velha.
+ */
 void JogoDaVelha::partida()
 {
     limpar_terminal();
@@ -167,7 +196,7 @@ void JogoDaVelha::partida()
     while (!checar_vitoria() && !checar_final())
     {
         int x, y;
-        std::cout << apelido_atual() << ", faça sua jogada: ";
+        std::cout << apelido_atual() << ", faca sua jogada: ";
         std::cin >> x >> y;
         try
         {
@@ -180,7 +209,6 @@ void JogoDaVelha::partida()
             if (x < 1 || x > _linhas || y < 1 || y > _colunas)
             {
                 throw std::out_of_range("Jogada invalida! Por favor, insira dois numeros de 1 a 3.");
-                return;
             }
             else
             {
@@ -221,4 +249,7 @@ void JogoDaVelha::partida()
     }
 }
 
+/**
+ * @brief Destrutor da classe JogoDaVelha.
+ */
 JogoDaVelha::~JogoDaVelha() {}

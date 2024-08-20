@@ -175,9 +175,9 @@ void selecionar_jogadores(Jogador** jogador1, Jogador** jogador2, std::vector<Jo
 
     while (true) {
         std::cout << "Informe o apelido do jogador 1: ";
-        *jogador1 = escolhe_jogador(jogadores);
+        *jogador1 = encontrar_jogador(jogadores);
         std::cout << "Informe o apelido do jogador 2: ";
-        *jogador2 = escolhe_jogador(jogadores);
+        *jogador2 = encontrar_jogador(jogadores);
 
         if ((*jogador1)->get_apelido() == (*jogador2)->get_apelido()) {
             std::cout << "Os jogadores devem ser diferentes." << std::endl;
@@ -190,7 +190,7 @@ void selecionar_jogadores(Jogador** jogador1, Jogador** jogador2, std::vector<Jo
 void selecionar_jogador(Jogador** jogador1, std::vector<Jogador>& jogadores) {
     std::cout << "Quem irá jogar?" << std::endl;
     std::cout << "Informe o apelido do jogador: ";
-    *jogador1 = escolhe_jogador(jogadores); 
+    *jogador1 = encontrar_jogador(jogadores); 
 }
 
 void ordenar_jogadores(std::vector<Jogador>& jogadores)

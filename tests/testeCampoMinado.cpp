@@ -97,16 +97,17 @@ TEST_CASE("Teste marcar bomba")
     {
         jogo_teste.marcar_bomba(1, 1);
         CHECK_NOTHROW(jogo_teste.marcar_bomba(1, 1));
-
     }
 }
 
 TEST_CASE("Testar checar vitoria")
 {
+    SUBCASE("Teste checar vitoria sem todas as celulas reveladas")
+    {
+        CHECK(!jogo_teste.checar_vitoria());
+    }
     SUBCASE("Teste checar vitoria com todas as celulas reveladas")
     {
-        jogo_teste.colocar_bombas();
-        
         for (int i = 0; i < 4; ++i)
         {
             for (int j = 0; j < 4; ++j)
@@ -117,7 +118,6 @@ TEST_CASE("Testar checar vitoria")
                 }
             }
         }
-
         CHECK(jogo_teste.checar_vitoria());
     }
 }

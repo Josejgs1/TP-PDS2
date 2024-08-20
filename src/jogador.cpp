@@ -64,14 +64,14 @@ void Jogador::imprimir_informacoes_geral()
 {
     std::cout << "Jogador: " << this->_nome << std::endl;
     std::cout << "Apelido: " << this->_apelido << std::endl;
-    std::cout << "Vitorias no Jogo da Velha: " << this->_vitorias_jdv << "      Derrotas no jogo da velha: " << this->_derrotas_jdv << std::endl;
-    std::cout << "Vitorias no Campo Minado: " << this->_vitorias_cm << "      Derrotas no campo minado: " << this->_derrotas_cm << std::endl;
-    std::cout << "Vitorias no Reversi: " << this->_vitorias_rvs << "      Derrotas no Reversi: " << this->_derrotas_rvs << std::endl;
-    std::cout << "Vitorias no Ligue 4: " << this->_vitorias_lig4 << "      Derrotas no Ligue 4: " << this->_derrotas_lig4 << std::endl;
+    std::cout << "Vitorias no Jogo da Velha: "  <<  this->_vitorias_jdv << "      Derrotas no jogo da velha: " << this->_derrotas_jdv << std::endl;
+    std::cout << "Vitorias no Campo Minado: "   <<  this->_vitorias_cm  << "       Derrotas no campo minado: " << this->_derrotas_cm << std::endl;
+    std::cout << "Vitorias no Reversi: "        << this->_vitorias_rvs  << "            Derrotas no Reversi: " << this->_derrotas_rvs << std::endl;
+    std::cout << "Vitorias no Ligue 4: "        << this->_vitorias_lig4 << "            Derrotas no Ligue 4: " << this->_derrotas_lig4 << std::endl;
     std::cout << std::endl;
 }
 
-void salvar_jogadores(const std::vector<Jogador> &jogadores)
+void salvar_jogadores(std::vector<Jogador> &jogadores)
 {
     std::ofstream ofs("files/jogadores.csv");
     if (!ofs)
@@ -79,6 +79,8 @@ void salvar_jogadores(const std::vector<Jogador> &jogadores)
         std::cerr << "Erro ao abrir o arquivo para escrita\n";
         return;
     }
+
+    ordenar_jogadores(jogadores);
 
     for (const auto &jogador : jogadores)
     {
@@ -131,7 +133,7 @@ std::vector<Jogador> carregar_jogadores()
     return jogadores;
 }
 
-bool apelido_existe(const std::vector<Jogador> &jogadores, const std::string &apelido)
+bool apelido_existe(std::vector<Jogador> &jogadores, std::string &apelido)
 {
     for (const auto &jogador : jogadores)
     {
@@ -143,7 +145,7 @@ bool apelido_existe(const std::vector<Jogador> &jogadores, const std::string &ap
     return false;
 }
 
-Jogador *escolhe_jogador(std::vector<Jogador> &jogadores)
+Jogador *encontrar_jogador(std::vector<Jogador> &jogadores)
 {
     std::string apelidoJogador;
 
@@ -189,4 +191,38 @@ void selecionar_jogador(Jogador** jogador1, std::vector<Jogador>& jogadores) {
     std::cout << "Quem irá jogar?" << std::endl;
     std::cout << "Informe o apelido do jogador: ";
     *jogador1 = escolhe_jogador(jogadores); 
+}
+
+void ordenar_jogadores(std::vector<Jogador>& jogadores)
+{
+    std::sort(jogadores.begin(), jogadores.end(), [](const Jogador& a, const Jogador& b)
+    {
+        return a.get_nome() < b.get_nome();
+    });
+}
+
+void listar_jogadores(std::vector<Jogador>& jogadores){
+    ordenar_jogadores(jogadores);
+    std::cout << "Lista de Jogadores:\n" << std::endl;
+    for (const auto& jogador : jogadores)
+    {
+        std::cout << jogador.get_nome() << " (" << jogador.get_apelido() << ")" << std::endl;
+    }
+}
+
+void remover_jogador(std::vector<Jogador>& jogadores) {
+    std::string apelido;
+    std::cout << "Informe o apelido do jogador a ser removido: ";
+    Jogador* jogador = encontrar_jogador(jogadores);
+
+     if (jogador != nullptr) {
+        auto it = std::find_if(jogadores.begin(), jogadores.end(), [&jogador](const Jogador& j) {
+                                   return &j == jogador;
+                               });
+
+        if (it != jogadores.end()) {
+            jogadores.erase(it);
+            std::cout << "Jogador removido com sucesso!" << std::endl;
+        }
+    }
 }

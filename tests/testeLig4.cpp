@@ -62,3 +62,17 @@ TEST_CASE("Testar fazer jogada")
         std::cout.rdbuf(old_cout_streambuf);
     }
 }
+
+TEST_CASE("Testar alternar jogador Lig4")
+{
+    Lig4 jogo_teste2(6, 7, jogador1, jogador2);
+
+    SUBCASE("Teste alternar jogadores")
+    {
+        jogo_teste2.fazer_jogada(1);
+        CHECK(jogo_teste2.apelido_atual() == "teste2");
+
+        jogo_teste2.fazer_jogada(2);
+        CHECK(jogo_teste2.apelido_atual() == "teste1");
+    }
+}

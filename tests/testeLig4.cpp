@@ -141,3 +141,22 @@ TEST_CASE("Testar vitoria Lig4")
         CHECK(jogo_teste6.checar_vitoria() == true);
     }
 }
+
+TEST_CASE("Teste checar final Lig4")
+{
+    Lig4 jogo_teste8(6, 7, jogador1, jogador2);
+
+    SUBCASE("Teste checar final quando ainda ha jogadas")
+    {
+        CHECK(jogo_teste8.checar_final() == false);
+    }
+    SUBCASE("Teste checar final com o tabuleiro cheio")
+    {
+        for (int i = 1; i <= 7; ++i) {
+            for (int j = 0; j < 6; ++j) {
+                jogo_teste8.fazer_jogada(i);
+            }
+        }
+        CHECK(jogo_teste8.checar_final() == true);
+    }
+}

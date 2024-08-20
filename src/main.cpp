@@ -7,13 +7,31 @@
 #include "jogador.hpp"
 #include <memory>
 
-#define DIMENSAO_JOGO_RAPIDO 6
-#define DIMENSAO_JOGO_CLASSICO 8
-#define DIMENSAO_JOGO_EXTREMO 10
+#define DIMENSAO_JOGO_RAPIDO 6 ///< Dimensao do tabuleiro para o jogo rapido
+#define DIMENSAO_JOGO_CLASSICO 8 ///< Dimensao do tabuleiro para o jogo classico
+#define DIMENSAO_JOGO_EXTREMO 10 ///< Dimensao do tabuleiro para o jogo extremo
 
+/**
+ * @brief Imprime o menu principal do jogo.
+ */
 void imprimir_menu();
+
+/**
+ * @brief Imprime o menu de gerenciamento de jogadores.
+ */
 void imprimir_menu_jogadores();
+
+/**
+ * @brief Controla o menu de gerenciamento de jogadores.
+ * @param jogadores Vetor de jogadores para gerenciamento.
+ */
 void chamar_menu_jogadores(std::vector<Jogador>& jogadores);
+
+/**
+ * @brief Valida a entrada do usuário para o modo de jogo.
+ * @return O caractere representando o modo de jogo.
+ * @throws std::runtime_error Se a entrada for inválida.
+ */
 char validar_entrada();
 
 int main()
@@ -22,7 +40,6 @@ int main()
     std::vector<Jogador> jogadores = carregar_jogadores();
 
     limpar_terminal();
-
 
     while (true)
     {
@@ -33,9 +50,9 @@ int main()
                 break;
             }
 
-            std::cin.clear(); // Limpa o estado de erro do cin
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignora o restante da linha de entrada
-            std::cout << "Entrada inválida. Por favor, digite um número inteiro: ";
+            std::cin.clear(); ///< Limpa o estado de erro do cin
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); ///< Ignora o restante da linha de entrada
+            std::cout << "Entrada invalida. Por favor, digite um numero inteiro: ";
         }
 
         limpar_terminal();
@@ -43,12 +60,12 @@ int main()
         switch (opcao)
         {
         default:
-            std::cout << "Opcao inválida. ";
+            std::cout << "Opcao invalida. ";
             break;
         case 1:
         {
-            Jogador* jogador1 = nullptr;
-            Jogador* jogador2 = nullptr;
+            Jogador* jogador1 = nullptr; ///< Ponteiro para o jogador 1
+            Jogador* jogador2 = nullptr; ///< Ponteiro para o jogador 2
             JogoDaVelha jogo;
 
             selecionar_jogadores(&jogador1, &jogador2, jogadores);
@@ -61,8 +78,8 @@ int main()
         }
         case 2:
         {
-            Jogador* jogador1 = nullptr;  // Inicialize os ponteiros
-            Jogador* jogador2 = nullptr;
+            Jogador* jogador1 = nullptr; ///< Ponteiro para o jogador 1
+            Jogador* jogador2 = nullptr; ///< Ponteiro para o jogador 2
             Lig4 jogo;
 
             selecionar_jogadores(&jogador1, &jogador2, jogadores);
@@ -71,14 +88,14 @@ int main()
             std::cout << "Insira as dimensoes do tabuleiro de Ligue 4: ";
             std::cin >> linhas >> colunas;
 
-            while (true) //o que eu faço com isso aqui
+            while (true) 
             {
                 try
                 {
                     jogo = Lig4(linhas, colunas, *jogador1, *jogador2);
                     break;
                 }
-                catch (const std::invalid_argument &erro) // terminar tratamento de erros
+                catch (const std::invalid_argument &erro) 
                 {
                     std::cout << erro.what() << std::endl;
                     std::cout << "Tente novamente: ";
@@ -91,9 +108,9 @@ int main()
             break;
         }
         case 3:
-        {   
-            Jogador* jogador1 = nullptr;  // Inicialize os ponteiros
-            Jogador* jogador2 = nullptr;
+        {
+            Jogador* jogador1 = nullptr; ///< Ponteiro para o jogador 1
+            Jogador* jogador2 = nullptr; ///< Ponteiro para o jogador 2
             Reversi jogo;
 
             selecionar_jogadores(&jogador1, &jogador2, jogadores);
@@ -102,8 +119,8 @@ int main()
             while (true)
             {
                 std::cout << "- Escolha a dimensao do tabuleiro -" << std::endl;
-                std::cout << "Digite R para Jogo Rápido   (Tabuleiro 6x6) " << std::endl
-                          << "Digite C para Jogo Clássico (Tabuleiro 8x8) " << std::endl
+                std::cout << "Digite R para Jogo Rapido   (Tabuleiro 6x6) " << std::endl
+                          << "Digite C para Jogo Classico (Tabuleiro 8x8) " << std::endl
                           << "Digite E para Jogo Extremo  (Tabuleiro 10x10) " << std::endl;
                 std::cout << std::endl;
 
@@ -113,7 +130,7 @@ int main()
 
                     if (modo_de_jogo == 'R' || modo_de_jogo == 'r')
                     {
-                        std::cout << "Você escolheu Jogo Rápido (Tabuleiro 6x6)." << std::endl;
+                        std::cout << "Voce escolheu Jogo Rapido (Tabuleiro 6x6)." << std::endl;
                         limpar_terminal();
                         Reversi jogo(DIMENSAO_JOGO_RAPIDO, DIMENSAO_JOGO_RAPIDO, *jogador1, *jogador2);
                         jogo.partida();
@@ -121,7 +138,7 @@ int main()
                     }
                     else if (modo_de_jogo == 'C' || modo_de_jogo == 'c')
                     {
-                        std::cout << "Você escolheu Jogo Clássico (Tabuleiro 8x8)." << std::endl;
+                        std::cout << "Voce escolheu Jogo Classico (Tabuleiro 8x8)." << std::endl;
                         limpar_terminal();
                         Reversi jogo(DIMENSAO_JOGO_CLASSICO, DIMENSAO_JOGO_CLASSICO, *jogador1, *jogador2);
                         jogo.partida();
@@ -129,7 +146,7 @@ int main()
                     }
                     else if (modo_de_jogo == 'E' || modo_de_jogo == 'e')
                     {
-                        std::cout << "Você escolheu Jogo Extremo (Tabuleiro 10x10)." << std::endl;
+                        std::cout << "Voce escolheu Jogo Extremo (Tabuleiro 10x10)." << std::endl;
                         limpar_terminal();
                         Reversi jogo(DIMENSAO_JOGO_EXTREMO, DIMENSAO_JOGO_EXTREMO, *jogador1, *jogador2);
                         jogo.partida();
@@ -137,7 +154,7 @@ int main()
                     }
                     else
                     {
-                        std::cout << "Opcao inválida. Tente novamente." << std::endl;
+                        std::cout << "Opcao invalida. Tente novamente." << std::endl;
                     }
                 }
                 catch (const std::runtime_error &e)
@@ -151,7 +168,7 @@ int main()
         case 4:
         {
             int opcao;
-            Jogador* jogador = nullptr;  // Inicialize os ponteiros
+            Jogador* jogador = nullptr; ///< Ponteiro para o jogador
             selecionar_jogador(&jogador, jogadores);
 
             std::cout << "Escolha uma Opcao de tamanho do tabuleiro:" << std::endl;
@@ -247,25 +264,28 @@ int main()
 
 void imprimir_menu()
 {
-    std::cout << "O que você gostaria de fazer?\n1. Jogo da Velha\n2. Ligue 4\n3. Reversi\n4. Campo Minado\n5. Gerenciar Jogadores\n6. Sair\n-> ";
+    std::cout << "O que voce gostaria de fazer?\n1. Jogo da Velha\n2. Ligue 4\n3. Reversi\n4. Campo Minado\n5. Gerenciar Jogadores\n6. Sair\n-> ";
 }
 
 void imprimir_menu_jogadores()
 {
-    std::cout << "O que você gostaria de fazer?\n1. Adicionar Jogador\n2. Remover Jogador\n3. Listar Jogadores\n4. Ver estatísticas do Jogador\n5. Voltar\n-> ";
+    std::cout << "O que voce gostaria de fazer?\n1. Adicionar Jogador\n2. Remover Jogador\n3. Listar Jogadores\n4. Ver estatisticas do Jogador\n5. Voltar\n-> ";
 }
 
-void chamar_menu_jogadores(std::vector<Jogador>& jogadores){
+void chamar_menu_jogadores(std::vector<Jogador>& jogadores)
+{
     int opcao;
 
-    while(true){
+    while(true)
+    {
         imprimir_menu_jogadores();
         std::cin >> opcao;
         limpar_terminal();
 
-        switch(opcao){
+        switch(opcao)
+        {
             default:
-                std::cout << "Opcao inválida. ";
+                std::cout << "Opcao invalida. ";
                 break;
             case 1:
             {
@@ -285,7 +305,7 @@ void chamar_menu_jogadores(std::vector<Jogador>& jogadores){
                     }
                     else
                     {
-                        std::cout << "O apelido já existe. Tente novamente: ";
+                        std::cout << "O apelido ja existe. Tente novamente: ";
                     }
                 }
 
@@ -306,7 +326,7 @@ void chamar_menu_jogadores(std::vector<Jogador>& jogadores){
                 break;
             }
             case 4:
-            {   
+            {
                 std::cout << "Informe o apelido do jogador: ";
                 Jogador* jogador = encontrar_jogador(jogadores);
                 std::cout << std::endl;
@@ -314,11 +334,10 @@ void chamar_menu_jogadores(std::vector<Jogador>& jogadores){
                 break;
             }
             case 5:
-            {   
+            {
                 limpar_terminal();
                 return;
             }
-
         }
 
         std::cout << std::endl;
@@ -334,19 +353,19 @@ char validar_entrada()
     {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        throw std::runtime_error("\033[31mErro: Nao foi possível ler um caractere.\033[0m");
+        throw std::runtime_error("\033[31mErro: Nao foi possivel ler um caractere.\033[0m");
     }
 
     if (std::cin.peek() != '\n')
     {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        throw std::runtime_error("\033[31mErro: Entrada deve ser um único caractere.\033[0m");
+        throw std::runtime_error("\033[31mErro: Entrada deve ser um unico caractere.\033[0m");
     }
 
     if (modo_de_jogo != 'R' && modo_de_jogo != 'r' && modo_de_jogo != 'E' && modo_de_jogo != 'e' && modo_de_jogo != 'C' && modo_de_jogo != 'c')
     {
-        throw std::runtime_error("\033[31mErro: Caractere inválido. Use R, r, E, e, C ou c.\033[0m");
+        throw std::runtime_error("\033[31mErro: Caractere invalido. Use R, r, E, e, C ou c.\033[0m");
     }
 
     return modo_de_jogo;

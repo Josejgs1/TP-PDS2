@@ -6,7 +6,7 @@
 
 Jogador jogador1("jogadorTeste1", "teste1");
 Jogador jogador2("jogadorTeste1", "teste2");
-Reversi jogo_teste(6, 6, jogador1, jogador2); //é assim?
+Reversi jogo_teste(6, 6, jogador1, jogador2);
 
 TEST_CASE("Testar inicializacao do reversi")
 {
@@ -87,20 +87,47 @@ TEST_CASE("Testar inicializacao do reversi")
 //     }
 // }
 
-// TEST_CASE("Testar checar final") {
-//     JogoDaVelha jogo_teste4(jogador1, jogador2);
+TEST_CASE("Testar se o tabuleiro está cheio") {
+    Reversi jogo(8, 8, jogador1, jogador2);
 
-//     SUBCASE("Teste checar final quando ainda há jogadas") {
-//         jogo_teste4.fazer_jogada(1, 1);
-//         CHECK(jogo_teste4.checar_final() == false);
+    jogo.inicializarTabuleiro();
+
+    SUBCASE("Tabuleiro não está cheio") {
+        CHECK_FALSE(jogo.tabuleiroCheio());
+    }
+
+    // SUBCASE("Tabuleiro está cheio") {
+    //     // Fill the board and then check
+    //     CHECK(jogo.tabuleiroCheio());
+    // }
+}
+
+TEST_CASE("Testar contagem de peças") {
+    Reversi jogo(8, 8, jogador1, jogador2);
+
+    jogo.inicializarTabuleiro();
+
+    SUBCASE("Contar peças do jogador 1") {
+        int count = jogo.contarPecas(1);
+        CHECK(count >= 0);
+    }
+
+    SUBCASE("Contar peças do jogador 2") {
+        int count = jogo.contarPecas(2);
+        CHECK(count >= 0);
+    }
+}
+
+// TEST_CASE("Testar movimentos válidos") {
+//     Reversi jogo(8, 8, jogador1, jogador2);
+
+//     jogo.inicializarTabuleiro();
+
+//     SUBCASE("Movimentos válidos disponíveis") {
+//         CHECK(jogo.temMovimentosValidos(1));
 //     }
 
-//     SUBCASE("Teste checar final quando o tabuleiro está cheio") {
-//         for (int i = 1; i <= 3; ++i) {
-//             for (int j = 1; j <= 3; ++j) {
-//                 jogo_teste4.fazer_jogada(i, j);
-//             }
-//         }
-//         CHECK(jogo_teste4.checar_final() == true);
+//     SUBCASE("Movimentos inválidos disponíveis") {
+//         CHECK_FALSE(jogo.temMovimentosValidos(2));
 //     }
 // }

@@ -16,6 +16,26 @@ TEST_CASE("Testar inicializacao do reversi")
     }
 }
 
+TEST_CASE("Testar inicializacao do reversi")
+{
+    SUBCASE("Teste inicializacao valida")
+    {
+        CHECK_NOTHROW(Reversi(6, 6, jogador1, jogador2));
+    }
+}
+
+TEST_CASE("Testar realizar movimento reversi")
+{
+   SUBCASE("Teste movimento valido")
+    {
+        CHECK_NOTHROW(jogo_teste.realizarMovimento(4, 2, 1));
+    }
+    SUBCASE("Teste movimento invalido (movimento fora das regras)")
+    {
+        CHECK_THROWS_AS(jogo_teste.realizarMovimento(0, 0, 1), std::invalid_argument);
+    }
+}
+
 TEST_CASE("Testar realização de movimentos") {
     Reversi jogo(6, 6, jogador1, jogador2);
 
@@ -38,11 +58,6 @@ TEST_CASE("Testar se o tabuleiro está cheio") {
     SUBCASE("Tabuleiro não está cheio") {
         CHECK_FALSE(jogo.tabuleiroCheio());
     }
-
-    // SUBCASE("Tabuleiro está cheio") {
-    //     // Fill the board and then check
-    //     CHECK(jogo.tabuleiroCheio());
-    // }
 }
 
 TEST_CASE("Testar contagem de peças") {
@@ -69,8 +84,4 @@ TEST_CASE("Testar movimentos válidos") {
     SUBCASE("Movimentos válidos disponíveis") {
         CHECK(jogo.temMovimentosValidos(1));
     }
-
-    // SUBCASE("Movimentos inválidos disponíveis") {
-    //     CHECK_FALSE(jogo.temMovimentosValidos(2));
-    // }
 }

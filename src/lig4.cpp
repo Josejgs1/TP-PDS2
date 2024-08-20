@@ -10,7 +10,7 @@ Lig4::Lig4(int linhas, int colunas, Jogador& jogador1, Jogador& jogador2)
         throw std::invalid_argument("O tamanho mínimo do tabuleiro é 4x4.");
     }
 
-    if (linhas >20 || colunas < 20)
+    if (linhas > 20 || colunas > 20)
     {
         throw std::invalid_argument("O tamanho máximo do tabuleiro é 20x20.");
     }

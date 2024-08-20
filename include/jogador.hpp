@@ -37,12 +37,10 @@ public:
     int get_vitorias_rvs() const;
     int get_derrotas_rvs() const;
 
-    // alterar depois
-    void set_vitorias_jdv(int vitorias);
-    void set_derrotas_jdv(int derrotas);
-    void set_vitorias_cm(int vitorias);
-    void set_derrotas_cm(int derrotas);
-
+    void soma_vitoria_jdv();
+    void soma_derrota_jdv();
+    void soma_vitoria_cm();
+    void soma_derrota_cm();
     void soma_derrota_lig4();
     void soma_vitoria_lig4();
     void soma_derrota_rvs();

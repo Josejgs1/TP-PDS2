@@ -19,27 +19,11 @@ int Jogador::get_derrotas_cm() const { return this->_derrotas_cm; }
 int Jogador::get_vitorias_rvs() const { return this->_vitorias_rvs; }
 int Jogador::get_derrotas_rvs() const { return this->_derrotas_rvs; }
 
-void Jogador::set_vitorias_jdv(int vitorias)
-{
-    this->_vitorias_jdv = vitorias;
-}
-
-void Jogador::set_derrotas_jdv(int derrotas)
-{
-    this->_derrotas_jdv = derrotas;
-}
-
-void Jogador::set_vitorias_cm(int vitorias)
-{
-    this->_vitorias_cm = vitorias;
-}
-
-void Jogador::set_derrotas_cm(int derrotas)
-{
-    this->_derrotas_cm = derrotas;
-}
-
-void Jogador::soma_derrota_lig4() { this->_derrotas_lig4 = _derrotas_lig4 + 1; }
+void Jogador::soma_vitoria_jdv() { this->_vitorias_jdv++; }
+void Jogador::soma_derrota_jdv() { this->_derrotas_jdv++; }
+void Jogador::soma_vitoria_cm() { this->_vitorias_cm++; }
+void Jogador::soma_derrota_cm() { this->_derrotas_cm++; }
+void Jogador::soma_derrota_lig4() { this->_derrotas_lig4++; }
 void Jogador::soma_vitoria_lig4() { this->_vitorias_lig4++; }
 void Jogador::soma_derrota_rvs() { this->_derrotas_rvs++; }
 void Jogador::soma_vitoria_rvs() { this->_vitorias_rvs++; }
@@ -189,9 +173,9 @@ void selecionar_jogadores(Jogador** jogador1, Jogador** jogador2, std::vector<Jo
 
     while (true) {
         std::cout << "Informe o apelido do jogador 1: ";
-        *jogador1 = escolhe_jogador(jogadores);  // Atribuir o endereço retornado por escolhe_jogador
+        *jogador1 = escolhe_jogador(jogadores);
         std::cout << "Informe o apelido do jogador 2: ";
-        *jogador2 = escolhe_jogador(jogadores);  // Atribuir o endereço retornado por escolhe_jogador
+        *jogador2 = escolhe_jogador(jogadores);
 
         if ((*jogador1)->get_apelido() == (*jogador2)->get_apelido()) {
             std::cout << "Os jogadores devem ser diferentes." << std::endl;
@@ -204,5 +188,5 @@ void selecionar_jogadores(Jogador** jogador1, Jogador** jogador2, std::vector<Jo
 void selecionar_jogador(Jogador** jogador1, std::vector<Jogador>& jogadores) {
     std::cout << "Quem irá jogar?" << std::endl;
     std::cout << "Informe o apelido do jogador: ";
-    *jogador1 = escolhe_jogador(jogadores);  // Atribuir o endereço retornado por escolhe_jogador
+    *jogador1 = escolhe_jogador(jogadores); 
 }

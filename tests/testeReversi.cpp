@@ -52,12 +52,12 @@ TEST_CASE("Testar contagem de peças") {
 
     SUBCASE("Contar peças do jogador 1") {
         int count = jogo.contarPecas(1);
-        CHECK(count >= 0);
+        CHECK(count == 2);
     }
 
     SUBCASE("Contar peças do jogador 2") {
         int count = jogo.contarPecas(2);
-        CHECK(count >= 0);
+        CHECK(count == 2);
     }
 }
 

@@ -16,79 +16,22 @@ TEST_CASE("Testar inicializacao do reversi")
     }
 }
 
-// TEST_CASE("Testar fazer jogada jogo da velha")
-// {
-//     SUBCASE("Teste jogada valida")
-//     {
-//         CHECK_NOTHROW(jogo_teste.fazer_jogada(1, 1));
-//     }
-//     SUBCASE("Teste jogada invalida (posicao ocupada)")
-//     {
-//         std::ostringstream oss;
-//         std::streambuf *old_cerr_streambuf = std::cerr.rdbuf(oss.rdbuf());
+TEST_CASE("Testar realização de movimentos") {
+    Reversi jogo(6, 6, jogador1, jogador2);
 
-//         jogo_teste.fazer_jogada(1, 1);
-//         std::string erro_msg = oss.str();
-//         CHECK(erro_msg.find("Posicao ja ocupada! Tente novamente.") != std::string::npos);
+    jogo.inicializarTabuleiro();
 
-//         std::cerr.rdbuf(old_cerr_streambuf);
-//     }
-// }
+    SUBCASE("Realizar movimento válido") {
+        CHECK_NOTHROW(jogo.realizarMovimento(2, 4, 1));
+    }
 
-// TEST_CASE("Teste alternar jogador jogo da velha")
-// {
-//     SUBCASE("Teste alternar jogadores")
-//     {
-//         jogo_teste.fazer_jogada(1, 1);
-//         CHECK(jogo_teste.apelido_atual() == "teste2");
-
-//         jogo_teste.fazer_jogada(2, 2);
-//         CHECK(jogo_teste.apelido_atual() == "teste1");
-//     }
-// }
-
-// TEST_CASE("Testar checar vitoria")
-// {
-//     SUBCASE("Teste checar vitoria sem vitória")
-//     {
-//         CHECK(jogo_teste.checar_vitoria() == false);
-//     }
-//     SUBCASE("Teste checar vitoria horizontal")
-//     {
-//         JogoDaVelha jogo_teste2(jogador1, jogador2);
-//         jogo_teste2.fazer_jogada(1, 1);
-//         jogo_teste2.fazer_jogada(2, 1);
-//         jogo_teste2.fazer_jogada(1, 2);
-//         jogo_teste2.fazer_jogada(3, 1);
-//         jogo_teste2.fazer_jogada(1, 3);
-//         CHECK(jogo_teste2.checar_vitoria() == true);
-//     }
-
-//     SUBCASE("Teste checar vitoria vertical")
-//     {
-//         JogoDaVelha jogo_teste3(jogador1, jogador2);
-//         jogo_teste3.fazer_jogada(1, 1);
-//         jogo_teste3.fazer_jogada(1, 2);
-//         jogo_teste3.fazer_jogada(2, 1);
-//         jogo_teste3.fazer_jogada(1, 3);
-//         jogo_teste3.fazer_jogada(3, 1);
-//         CHECK(jogo_teste3.checar_vitoria() == true);
-//     }
-
-//     SUBCASE("Teste checar vitoria diagonal")
-//     {
-//         JogoDaVelha jogo_teste4(jogador1, jogador2);
-//         jogo_teste4.fazer_jogada(1, 1);
-//         jogo_teste4.fazer_jogada(1, 2);
-//         jogo_teste4.fazer_jogada(2, 2);
-//         jogo_teste4.fazer_jogada(1, 3);
-//         jogo_teste4.fazer_jogada(3, 3);
-//         CHECK(jogo_teste4.checar_vitoria() == true);
-//     }
-// }
+    SUBCASE("Realizar movimento inválido") {
+        CHECK_THROWS_AS(jogo.realizarMovimento(0, 0, 1), std::invalid_argument);
+    }
+}
 
 TEST_CASE("Testar se o tabuleiro está cheio") {
-    Reversi jogo(8, 8, jogador1, jogador2);
+    Reversi jogo(6, 6, jogador1, jogador2);
 
     jogo.inicializarTabuleiro();
 
@@ -103,7 +46,7 @@ TEST_CASE("Testar se o tabuleiro está cheio") {
 }
 
 TEST_CASE("Testar contagem de peças") {
-    Reversi jogo(8, 8, jogador1, jogador2);
+    Reversi jogo(6, 6, jogador1, jogador2);
 
     jogo.inicializarTabuleiro();
 
@@ -119,7 +62,7 @@ TEST_CASE("Testar contagem de peças") {
 }
 
 // TEST_CASE("Testar movimentos válidos") {
-//     Reversi jogo(8, 8, jogador1, jogador2);
+//     Reversi jogo(6, 6, jogador1, jogador2);
 
 //     jogo.inicializarTabuleiro();
 

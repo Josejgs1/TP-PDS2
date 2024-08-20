@@ -87,17 +87,22 @@ TEST_CASE("Testar checar vitoria")
     }
 }
 
-TEST_CASE("Testar checar final") {
+TEST_CASE("Testar checar final jogo da velha")
+{
     JogoDaVelha jogo_teste4(jogador1, jogador2);
 
-    SUBCASE("Teste checar final quando ainda há jogadas") {
+    SUBCASE("Teste checar final quando ainda ha jogadas")
+    {
         jogo_teste4.fazer_jogada(1, 1);
         CHECK(jogo_teste4.checar_final() == false);
     }
 
-    SUBCASE("Teste checar final quando o tabuleiro está cheio") {
-        for (int i = 1; i <= 3; ++i) {
-            for (int j = 1; j <= 3; ++j) {
+    SUBCASE("Teste checar final quando o tabuleiro esta cheio")
+    {
+        for (int i = 1; i <= 3; ++i)
+        {
+            for (int j = 1; j <= 3; ++j)
+            {
                 jogo_teste4.fazer_jogada(i, j);
             }
         }

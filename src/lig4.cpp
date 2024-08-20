@@ -1,25 +1,44 @@
 #include "lig4.hpp"
-Lig4::Lig4()
-    : JogoDeTabuleiro(), _jogador1(nullptr), _jogador2(nullptr), _jogador_atual(1){};
 
+/**
+ * @brief Construtor padrão da classe Lig4.
+ */
+Lig4::Lig4()
+    : JogoDeTabuleiro(), _jogador1(nullptr), _jogador2(nullptr), _jogador_atual(1) {}
+
+/**
+ * @brief Construtor da classe Lig4 com dimensoes e jogadores especificos.
+ * @param linhas Numero de linhas do tabuleiro.
+ * @param colunas Numero de colunas do tabuleiro.
+ * @param jogador1 Referencia para o jogador 1.
+ * @param jogador2 Referencia para o jogador 2.
+ * @throws std::invalid_argument Se as dimensoes forem menores que 4 ou maiores que 20.
+ */
 Lig4::Lig4(int linhas, int colunas, Jogador& jogador1, Jogador& jogador2)
     : JogoDeTabuleiro(linhas, colunas), _jogador1(&jogador1), _jogador2(&jogador2), _jogador_atual(1)
 {
     if (linhas < 4 || colunas < 4)
     {
-        throw std::invalid_argument("O tamanho mínimo do tabuleiro é 4x4.");
+        throw std::invalid_argument("O tamanho minimo do tabuleiro e 4x4.");
     }
 
     if (linhas > 20 || colunas > 20)
     {
-        throw std::invalid_argument("O tamanho máximo do tabuleiro é 20x20.");
+        throw std::invalid_argument("O tamanho maximo do tabuleiro e 20x20.");
     }
 
     _tabuleiro.resize(_linhas, std::vector<int>(_colunas, 0));
 }
 
+/**
+ * @brief Destrutor da classe Lig4.
+ */
 Lig4::~Lig4() {}
 
+/**
+ * @brief Faz uma jogada na coluna especificada.
+ * @param x Numero da coluna onde a jogada sera feita.
+ */
 void Lig4::fazer_jogada(int x)
 {
     if (x < 1 || x > _colunas)
@@ -49,6 +68,9 @@ void Lig4::fazer_jogada(int x)
     imprimir_tabuleiro();
 }
 
+/**
+ * @brief Alterna o jogador atual.
+ */
 void Lig4::alternar_jogador()
 {
     if (_jogador_atual == 1)
@@ -61,9 +83,12 @@ void Lig4::alternar_jogador()
     }
 }
 
+/**
+ * @brief Retorna o apelido do jogador atual.
+ * @return Apelido do jogador atual.
+ */
 std::string Lig4::apelido_atual()
 {
-    std::string apelido;
     if (_jogador_atual == 1)
     {
         return _jogador1->get_apelido();
@@ -74,9 +99,13 @@ std::string Lig4::apelido_atual()
     }
 }
 
+/**
+ * @brief Checa se ha uma vitoria no tabuleiro.
+ * @return True se houver vitoria, False caso contrario.
+ */
 bool Lig4::checar_vitoria()
 {
-    // Verificar vitória horizontal
+    // Verificar vitoria horizontal
     for (int i = 0; i < _linhas; i++)
     {
         for (int j = 0; j <= _colunas - 4; j++)
@@ -91,7 +120,7 @@ bool Lig4::checar_vitoria()
         }
     }
 
-    // Verificar vitória vertical
+    // Verificar vitoria vertical
     for (int i = 0; i <= _linhas - 4; i++)
     {
         for (int j = 0; j < _colunas; j++)
@@ -106,7 +135,7 @@ bool Lig4::checar_vitoria()
         }
     }
 
-    // Verificar vitória diagonal descendente (\)
+    // Verificar vitoria diagonal descendente (\)
     for (int i = 0; i <= _linhas - 4; i++)
     {
         for (int j = 0; j <= _colunas - 4; j++)
@@ -121,7 +150,7 @@ bool Lig4::checar_vitoria()
         }
     }
 
-    // Verificar vitória diagonal ascendente (/)
+    // Verificar vitoria diagonal ascendente (/)
     for (int i = 3; i < _linhas; i++)
     {
         for (int j = 0; j <= _colunas - 4; j++)
@@ -139,6 +168,10 @@ bool Lig4::checar_vitoria()
     return false;
 }
 
+/**
+ * @brief Checa se o jogo terminou (se o tabuleiro esta cheio).
+ * @return True se o tabuleiro esta cheio, False caso contrario.
+ */
 bool Lig4::checar_final()
 {
     for (int i = 0; i < _colunas; i++)
@@ -152,13 +185,16 @@ bool Lig4::checar_final()
     return true;
 }
 
+/**
+ * @brief Controla a partida, gerenciando jogadas e verificando vitoria e final.
+ */
 void Lig4::partida()
 {
     imprimir_tabuleiro();
     while (!checar_vitoria() && !checar_final())
     {
         int x;
-        std::cout << apelido_atual() << ", faça sua jogada: ";
+        std::cout << apelido_atual() << ", faca sua jogada: ";
         std::cin >> x;
         fazer_jogada(x);
     }
@@ -167,7 +203,7 @@ void Lig4::partida()
         alternar_jogador();
         if (_jogador_atual == 1)
         {
-            _jogador1->soma_vitoria_lig4(); //não funciona
+            _jogador1->soma_vitoria_lig4();
             _jogador2->soma_derrota_lig4();
         }
         else
@@ -188,4 +224,4 @@ void Lig4::partida()
         _jogador2->imprimir_informacoes_lig4();
         return;
     }
-};
+}

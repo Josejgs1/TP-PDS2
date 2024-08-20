@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Trapalho Prático PDS2 2024.1 - Grupo 7: Código-Fonte de include/reversi.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Trapalho Prático PDS2 2024.1 - Grupo 7
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Busca','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">reversi.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef REVERSI_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define REVERSI_HPP</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;jogoDeTabuleiro.hpp&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;jogador.hpp&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classReversi.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="classReversi.html">Reversi</a> : <span class="keyword">public</span> <a class="code" href="classJogoDeTabuleiro.html">JogoDeTabuleiro</a></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="classJogador.html">Jogador</a>* _jogador1; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="classJogador.html">Jogador</a>* _jogador2; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">int</span> _jogador_atual; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="classReversi.html#a73e3ca5c21b634f9c490b404d62f0e01">Reversi</a>();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="classReversi.html#a73e3ca5c21b634f9c490b404d62f0e01">Reversi</a>(<span class="keywordtype">int</span> linhas, <span class="keywordtype">int</span> colunas, <a class="code" href="classJogador.html">Jogador</a>&amp; jogador1, <a class="code" href="classJogador.html">Jogador</a>&amp; jogador2);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classReversi.html#afd006e4fdacdedc4a3bb34fe6f1d1940">~Reversi</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classJogoDeTabuleiro.html#af410d2e75c18cc8c6f49fb17c0c1cc7e">imprimir_tabuleiro</a>(<span class="keywordtype">int</span> jogadorAtual);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classReversi.html#a9496bb46ea5588d4b780cbff05662b69">checar_vitoria</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classReversi.html#a9bbcc8654f78ec40650234077a86a92d">partida</a>();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classReversi.html#ab570648694f5929f68862986e356bfbd">inicializarTabuleiro</a>();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classReversi.html#ab1b300b16d6d31b5d2ddf9a2c4eea50e">movimentoValido</a>(<span class="keywordtype">int</span> linha, <span class="keywordtype">int</span> coluna, <span class="keywordtype">int</span> jogador);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classReversi.html#a73bde4aad755ed79bd60211fd97f9cb0">realizarMovimento</a>(<span class="keywordtype">int</span> linha, <span class="keywordtype">int</span> coluna, <span class="keywordtype">int</span> jogador);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classReversi.html#acf5bf849fc927578eb6060293aff4308">tabuleiroCheio</a>();</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classReversi.html#a8728010b34857bb745f08b496a9eafb3">contarPecas</a>(<span class="keywordtype">int</span> jogador);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classReversi.html#a2081ca23576ac6f3ea7aecddaf1872bb">temMovimentosValidos</a>(<span class="keywordtype">int</span> jogador);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;};</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassJogador_html"><div class="ttname"><a href="classJogador.html">Jogador</a></div><div class="ttdoc">Classe que representa um jogador, com informacoes sobre vitorias e derrotas em diferentes jogos.</div><div class="ttdef"><b>Definition:</b> jogador.hpp:16</div></div>
+<div class="ttc" id="aclassJogoDeTabuleiro_html"><div class="ttname"><a href="classJogoDeTabuleiro.html">JogoDeTabuleiro</a></div><div class="ttdoc">Classe base abstrata para jogos de tabuleiro. Define a estrutura e as operacoes basicas para um jogo ...</div><div class="ttdef"><b>Definition:</b> jogoDeTabuleiro.hpp:16</div></div>
+<div class="ttc" id="aclassJogoDeTabuleiro_html_af410d2e75c18cc8c6f49fb17c0c1cc7e"><div class="ttname"><a href="classJogoDeTabuleiro.html#af410d2e75c18cc8c6f49fb17c0c1cc7e">JogoDeTabuleiro::imprimir_tabuleiro</a></div><div class="ttdeci">virtual void imprimir_tabuleiro()</div><div class="ttdoc">Imprime o tabuleiro no console. Funcao virtual que pode ser sobrescrita por classes derivadas.</div><div class="ttdef"><b>Definition:</b> jogoDeTabuleiro.cpp:53</div></div>
+<div class="ttc" id="aclassReversi_html"><div class="ttname"><a href="classReversi.html">Reversi</a></div><div class="ttdoc">Classe que representa o jogo Reversi, derivada da classe JogoDeTabuleiro. Implementa as operacoes e r...</div><div class="ttdef"><b>Definition:</b> reversi.hpp:16</div></div>
+<div class="ttc" id="aclassReversi_html_a2081ca23576ac6f3ea7aecddaf1872bb"><div class="ttname"><a href="classReversi.html#a2081ca23576ac6f3ea7aecddaf1872bb">Reversi::temMovimentosValidos</a></div><div class="ttdeci">bool temMovimentosValidos(int jogador)</div><div class="ttdoc">Checa se existem movimentos validos para um jogador.</div><div class="ttdef"><b>Definition:</b> reversi.cpp:161</div></div>
+<div class="ttc" id="aclassReversi_html_a73bde4aad755ed79bd60211fd97f9cb0"><div class="ttname"><a href="classReversi.html#a73bde4aad755ed79bd60211fd97f9cb0">Reversi::realizarMovimento</a></div><div class="ttdeci">void realizarMovimento(int linha, int coluna, int jogador)</div><div class="ttdoc">Realiza um movimento no tabuleiro.</div><div class="ttdef"><b>Definition:</b> reversi.cpp:107</div></div>
+<div class="ttc" id="aclassReversi_html_a73e3ca5c21b634f9c490b404d62f0e01"><div class="ttname"><a href="classReversi.html#a73e3ca5c21b634f9c490b404d62f0e01">Reversi::Reversi</a></div><div class="ttdeci">Reversi()</div><div class="ttdoc">Construtor padrao da classe Reversi. Inicializa o jogo com dimensoes padrao e jogadores nao definidos...</div><div class="ttdef"><b>Definition:</b> reversi.cpp:14</div></div>
+<div class="ttc" id="aclassReversi_html_a8728010b34857bb745f08b496a9eafb3"><div class="ttname"><a href="classReversi.html#a8728010b34857bb745f08b496a9eafb3">Reversi::contarPecas</a></div><div class="ttdeci">int contarPecas(int jogador)</div><div class="ttdoc">Conta o numero de pecas de um jogador no tabuleiro.</div><div class="ttdef"><b>Definition:</b> reversi.cpp:198</div></div>
+<div class="ttc" id="aclassReversi_html_a9496bb46ea5588d4b780cbff05662b69"><div class="ttname"><a href="classReversi.html#a9496bb46ea5588d4b780cbff05662b69">Reversi::checar_vitoria</a></div><div class="ttdeci">bool checar_vitoria() override</div><div class="ttdoc">Checa se houve vitoria no jogo.</div><div class="ttdef"><b>Definition:</b> reversi.cpp:403</div></div>
+<div class="ttc" id="aclassReversi_html_a9bbcc8654f78ec40650234077a86a92d"><div class="ttname"><a href="classReversi.html#a9bbcc8654f78ec40650234077a86a92d">Reversi::partida</a></div><div class="ttdeci">void partida()</div><div class="ttdoc">Inicia uma partida do jogo.</div><div class="ttdef"><b>Definition:</b> reversi.cpp:281</div></div>
+<div class="ttc" id="aclassReversi_html_ab1b300b16d6d31b5d2ddf9a2c4eea50e"><div class="ttname"><a href="classReversi.html#ab1b300b16d6d31b5d2ddf9a2c4eea50e">Reversi::movimentoValido</a></div><div class="ttdeci">bool movimentoValido(int linha, int coluna, int jogador)</div><div class="ttdoc">Checa se um movimento e valido.</div><div class="ttdef"><b>Definition:</b> reversi.cpp:59</div></div>
+<div class="ttc" id="aclassReversi_html_ab570648694f5929f68862986e356bfbd"><div class="ttname"><a href="classReversi.html#ab570648694f5929f68862986e356bfbd">Reversi::inicializarTabuleiro</a></div><div class="ttdeci">void inicializarTabuleiro()</div><div class="ttdoc">Inicializa o tabuleiro do jogo Reversi.</div><div class="ttdef"><b>Definition:</b> reversi.cpp:37</div></div>
+<div class="ttc" id="aclassReversi_html_acf5bf849fc927578eb6060293aff4308"><div class="ttname"><a href="classReversi.html#acf5bf849fc927578eb6060293aff4308">Reversi::tabuleiroCheio</a></div><div class="ttdeci">bool tabuleiroCheio()</div><div class="ttdoc">Checa se o tabuleiro esta cheio.</div><div class="ttdef"><b>Definition:</b> reversi.cpp:180</div></div>
+<div class="ttc" id="aclassReversi_html_afd006e4fdacdedc4a3bb34fe6f1d1940"><div class="ttname"><a href="classReversi.html#afd006e4fdacdedc4a3bb34fe6f1d1940">Reversi::~Reversi</a></div><div class="ttdeci">virtual ~Reversi()</div><div class="ttdoc">Destrutor da classe Reversi. Libera recursos utilizados pela instancia da classe.</div><div class="ttdef"><b>Definition:</b> reversi.cpp:32</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

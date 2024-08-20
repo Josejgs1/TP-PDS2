@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Trapalho Prático PDS2 2024.1 - Grupo 7: Código-Fonte de include/jogoDeTabuleiro.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Trapalho Prático PDS2 2024.1 - Grupo 7
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Busca','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">jogoDeTabuleiro.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef JOGODETABULEIRO_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define JOGODETABULEIRO_HPP</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;jogador.hpp&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;iomanip&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classJogoDeTabuleiro.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="classJogoDeTabuleiro.html">JogoDeTabuleiro</a></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classJogoDeTabuleiro.html#a2a2330db5362c3874bf84d2069c45b6a">   18</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classJogoDeTabuleiro.html#a2a2330db5362c3874bf84d2069c45b6a">_linhas</a>; </div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classJogoDeTabuleiro.html#a01500d731c0b44b614a849a4a8b3ad59">   19</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classJogoDeTabuleiro.html#a01500d731c0b44b614a849a4a8b3ad59">_colunas</a>; </div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classJogoDeTabuleiro.html#a841cc9e8a7861f9e7b54b37d99508391">   20</a></span>&#160;    std::vector&lt;std::vector&lt;int&gt;&gt; <a class="code" href="classJogoDeTabuleiro.html#a841cc9e8a7861f9e7b54b37d99508391">_tabuleiro</a>; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="classJogoDeTabuleiro.html#a0bdbf518ee6c225482dec2d10f13a39e">JogoDeTabuleiro</a>();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="classJogoDeTabuleiro.html#a0bdbf518ee6c225482dec2d10f13a39e">JogoDeTabuleiro</a>(<span class="keywordtype">int</span> linhas, <span class="keywordtype">int</span> colunas);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classJogoDeTabuleiro.html#a1b25df785b1715d29549d947c6217102">get_coordenada</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classJogoDeTabuleiro.html#a29d637fae5857e8807881f290981ea32">inicializar_tabuleiro</a>();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classJogoDeTabuleiro.html#af410d2e75c18cc8c6f49fb17c0c1cc7e">imprimir_tabuleiro</a>();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classJogoDeTabuleiro.html#a1dec7299d03140502d56ee33a19c5ef1">   60</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classJogoDeTabuleiro.html#a1dec7299d03140502d56ee33a19c5ef1">checar_vitoria</a>() = 0;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classJogoDeTabuleiro.html#a63580ad72c94cae8b4234d4826715e4d">   66</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classJogoDeTabuleiro.html#a63580ad72c94cae8b4234d4826715e4d">partida</a>() = 0;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;};</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keywordtype">void</span> limpar_terminal();</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassJogoDeTabuleiro_html"><div class="ttname"><a href="classJogoDeTabuleiro.html">JogoDeTabuleiro</a></div><div class="ttdoc">Classe base abstrata para jogos de tabuleiro. Define a estrutura e as operacoes basicas para um jogo ...</div><div class="ttdef"><b>Definition:</b> jogoDeTabuleiro.hpp:16</div></div>
+<div class="ttc" id="aclassJogoDeTabuleiro_html_a01500d731c0b44b614a849a4a8b3ad59"><div class="ttname"><a href="classJogoDeTabuleiro.html#a01500d731c0b44b614a849a4a8b3ad59">JogoDeTabuleiro::_colunas</a></div><div class="ttdeci">int _colunas</div><div class="ttdoc">Numero de colunas do tabuleiro.</div><div class="ttdef"><b>Definition:</b> jogoDeTabuleiro.hpp:19</div></div>
+<div class="ttc" id="aclassJogoDeTabuleiro_html_a0bdbf518ee6c225482dec2d10f13a39e"><div class="ttname"><a href="classJogoDeTabuleiro.html#a0bdbf518ee6c225482dec2d10f13a39e">JogoDeTabuleiro::JogoDeTabuleiro</a></div><div class="ttdeci">JogoDeTabuleiro()</div><div class="ttdoc">Construtor padrao da classe JogoDeTabuleiro. Inicializa o tabuleiro com 0 linhas e 0 colunas.</div><div class="ttdef"><b>Definition:</b> jogoDeTabuleiro.cpp:3</div></div>
+<div class="ttc" id="aclassJogoDeTabuleiro_html_a1b25df785b1715d29549d947c6217102"><div class="ttname"><a href="classJogoDeTabuleiro.html#a1b25df785b1715d29549d947c6217102">JogoDeTabuleiro::get_coordenada</a></div><div class="ttdeci">int get_coordenada(int x, int y) const</div><div class="ttdoc">Retorna o valor na coordenada (x, y) do tabuleiro.</div><div class="ttdef"><b>Definition:</b> jogoDeTabuleiro.cpp:28</div></div>
+<div class="ttc" id="aclassJogoDeTabuleiro_html_a1dec7299d03140502d56ee33a19c5ef1"><div class="ttname"><a href="classJogoDeTabuleiro.html#a1dec7299d03140502d56ee33a19c5ef1">JogoDeTabuleiro::checar_vitoria</a></div><div class="ttdeci">virtual bool checar_vitoria()=0</div><div class="ttdoc">Checa se houve vitoria no jogo. Funcao virtual pura que deve ser implementada por classes derivadas.</div></div>
+<div class="ttc" id="aclassJogoDeTabuleiro_html_a29d637fae5857e8807881f290981ea32"><div class="ttname"><a href="classJogoDeTabuleiro.html#a29d637fae5857e8807881f290981ea32">JogoDeTabuleiro::inicializar_tabuleiro</a></div><div class="ttdeci">void inicializar_tabuleiro()</div><div class="ttdoc">Inicializa o tabuleiro com valores padrao.</div><div class="ttdef"><b>Definition:</b> jogoDeTabuleiro.cpp:39</div></div>
+<div class="ttc" id="aclassJogoDeTabuleiro_html_a2a2330db5362c3874bf84d2069c45b6a"><div class="ttname"><a href="classJogoDeTabuleiro.html#a2a2330db5362c3874bf84d2069c45b6a">JogoDeTabuleiro::_linhas</a></div><div class="ttdeci">int _linhas</div><div class="ttdoc">Numero de linhas do tabuleiro.</div><div class="ttdef"><b>Definition:</b> jogoDeTabuleiro.hpp:18</div></div>
+<div class="ttc" id="aclassJogoDeTabuleiro_html_a63580ad72c94cae8b4234d4826715e4d"><div class="ttname"><a href="classJogoDeTabuleiro.html#a63580ad72c94cae8b4234d4826715e4d">JogoDeTabuleiro::partida</a></div><div class="ttdeci">virtual void partida()=0</div><div class="ttdoc">Inicia uma partida do jogo. Funcao virtual pura que deve ser implementada por classes derivadas.</div></div>
+<div class="ttc" id="aclassJogoDeTabuleiro_html_a841cc9e8a7861f9e7b54b37d99508391"><div class="ttname"><a href="classJogoDeTabuleiro.html#a841cc9e8a7861f9e7b54b37d99508391">JogoDeTabuleiro::_tabuleiro</a></div><div class="ttdeci">std::vector&lt; std::vector&lt; int &gt; &gt; _tabuleiro</div><div class="ttdoc">Matriz que representa o tabuleiro.</div><div class="ttdef"><b>Definition:</b> jogoDeTabuleiro.hpp:20</div></div>
+<div class="ttc" id="aclassJogoDeTabuleiro_html_af410d2e75c18cc8c6f49fb17c0c1cc7e"><div class="ttname"><a href="classJogoDeTabuleiro.html#af410d2e75c18cc8c6f49fb17c0c1cc7e">JogoDeTabuleiro::imprimir_tabuleiro</a></div><div class="ttdeci">virtual void imprimir_tabuleiro()</div><div class="ttdoc">Imprime o tabuleiro no console. Funcao virtual que pode ser sobrescrita por classes derivadas.</div><div class="ttdef"><b>Definition:</b> jogoDeTabuleiro.cpp:53</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

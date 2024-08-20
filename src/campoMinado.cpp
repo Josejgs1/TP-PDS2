@@ -10,8 +10,21 @@ const int MAX_LINHAS = 30;
 const int MIN_COLUNAS = 4;
 const int MAX_COLUNAS = 30;
 
+/**
+ * @brief Construtor padrao da classe CampoMinado.
+ * Inicializa um jogo de campo minado com um tabuleiro vazio e nenhum jogador e bomba.
+ */
 CampoMinado::CampoMinado() : JogoDeTabuleiro(0, 0), _jogador(nullptr), _n_bombas(0) {}
 
+/**
+ * @brief Construtor da classe CampoMinado com dimensoes de tabuleiro e numero de bombas especificados.
+ * @param linhas Numero de linhas do tabuleiro.
+ * @param colunas Numero de colunas do tabuleiro.
+ * @param jogador Referencia ao jogador.
+ * @param n_bombas Numero de bombas a serem colocadas no tabuleiro.
+ * Inicializa o tabuleiro e coloca as bombas, validando os parametros fornecidos.
+ * @throws std::invalid_argument Se as dimensoes do tabuleiro ou o numero de bombas estiverem fora dos limites validos.
+ */
 CampoMinado::CampoMinado(int linhas, int colunas, Jogador &jogador, int n_bombas)
     : JogoDeTabuleiro(linhas, colunas), _jogador(&jogador), _n_bombas(n_bombas)
 {
@@ -25,22 +38,23 @@ CampoMinado::CampoMinado(int linhas, int colunas, Jogador &jogador, int n_bombas
     }
     if (n_bombas < 1 || n_bombas >= (linhas * colunas))
     {
-        throw std::invalid_argument("Erro ao inicializar o tabuleiro: Numero de bombas deve ser pelo menos 1 e menor que o total de células do tabuleiro.");
+        throw std::invalid_argument("Erro ao inicializar o tabuleiro: Numero de bombas deve ser pelo menos 1 e menor que o total de celulas do tabuleiro.");
     }
 
     srand(time(0));
     colocar_bombas();
 }
 
+/**
+ * @brief Destruidor da classe CampoMinado.
+ * Limpa os recursos alocados pela classe CampoMinado.
+ */
 CampoMinado::~CampoMinado() {}
 
-/*  0- sem marcação e sem bomba
-    1- sem marcação e com bomba
-    2- marcado e sem bombas em volta
-    3- marcado e com bombas em volta
-    4- bomba marcada e tem bomba de verdade
-    5- bomba marcada e não tem bomba de verdade*/
-
+/**
+ * @brief Imprime o tabuleiro do campo minado no console.
+ * Exibe o tabuleiro com as celulas reveladas, marcadas e as bombas.
+ */
 void CampoMinado::imprimir_tabuleiro()
 {
     try
@@ -92,6 +106,13 @@ void CampoMinado::imprimir_tabuleiro()
     }
 }
 
+/**
+ * @brief Revela a area ao redor de uma celula no tabuleiro.
+ * @param x Coordenada da linha da celula a ser revelada.
+ * @param y Coordenada da coluna da celula a ser revelada.
+ * Revela a celula e, se a celula revelada nao contiver bombas ao redor, revela as celulas adjacentes.
+ * @throws std::out_of_range Se as coordenadas estiverem fora dos limites do tabuleiro.
+ */
 void CampoMinado::revelar_area(int x, int y)
 {
     try
@@ -130,6 +151,13 @@ void CampoMinado::revelar_area(int x, int y)
     }
 }
 
+/**
+ * @brief Realiza uma jogada no tabuleiro, revelando uma celula ou marcando-a como bomba.
+ * @param x Coordenada da linha da celula a ser revelada.
+ * @param y Coordenada da coluna da celula a ser revelada.
+ * Revela a celula ou marca a celula como contendo uma bomba.
+ * @throws std::logic_error Se a celula ja estiver ocupada com uma marcacao invalida.
+ */
 void CampoMinado::fazer_jogada(int x, int y)
 {
     try
@@ -156,6 +184,14 @@ void CampoMinado::fazer_jogada(int x, int y)
     }
 }
 
+/**
+ * @brief Marca ou desmarca uma celula como contendo uma bomba.
+ * @param x Coordenada da linha da celula a ser marcada.
+ * @param y Coordenada da coluna da celula a ser marcada.
+ * Marca a celula como bomba, desmarca se ja estiver marcada, ou altera a marcacao se necessario.
+ * @throws std::out_of_range Se as coordenadas estiverem fora dos limites do tabuleiro.
+ * @throws std::logic_error Se o numero maximo de bombas ja foi atingido ou se a celula ja estiver ocupada com uma marcacao invalida.
+ */
 void CampoMinado::marcar_bomba(int x, int y)
 {
     try
@@ -172,7 +208,7 @@ void CampoMinado::marcar_bomba(int x, int y)
         {
             if (bombas_marcadas >= _n_bombas)
             {
-                throw std::logic_error("Voce já marcou o número máximo de bombas (" + std::to_string(_n_bombas) + ").");
+                throw std::logic_error("Voce ja marcou o numero maximo de bombas (" + std::to_string(_n_bombas) + ").");
                 return;
             }
             else
@@ -185,32 +221,19 @@ void CampoMinado::marcar_bomba(int x, int y)
         {
             if (bombas_marcadas >= _n_bombas)
             {
-                throw std::logic_error("Voce já marcou o número máximo de bombas (" + std::to_string(_n_bombas) + ").");
+                throw std::logic_error("Voce ja marcou o numero maximo de bombas (" + std::to_string(_n_bombas) + ").");
                 return;
             }
             else
             {
                 _tabuleiro[x - 1][y - 1] = 5;
-                bombas_marcadas++;
+                bombas_marcadas--;
             }
-        }
-        else if (_tabuleiro[x - 1][y - 1] == 4)
-        {
-            _tabuleiro[x - 1][y - 1] = 0;
-            bombas_marcadas--;
-        }
-        else if (_tabuleiro[x - 1][y - 1] == 5)
-        {
-            _tabuleiro[x - 1][y - 1] = 1;
-            bombas_marcadas--;
         }
         else
         {
-            throw std::logic_error("Posicao ja ocupada! Tente novamente.");
-            return;
+            throw std::logic_error("Posicao ja ocupada com outra marca. Tente novamente.");
         }
-        limpar_terminal();
-        imprimir_tabuleiro();
     }
     catch (const std::exception &e)
     {
@@ -218,55 +241,60 @@ void CampoMinado::marcar_bomba(int x, int y)
     }
 }
 
+/**
+ * @brief Coloca bombas aleatoriamente no tabuleiro.
+ * Coloca o numero especificado de bombas em locais aleatorios no tabuleiro.
+ */
 void CampoMinado::colocar_bombas()
 {
-    try
-    {
-        int bombas_colocadas = 0;
-        while (bombas_colocadas < _n_bombas)
-        {
-            int x = rand() % _linhas;
-            int y = rand() % _colunas;
+    int bombas_colocadas = 0;
 
-            if (_tabuleiro[x][y] == 0)
-            {
-                _tabuleiro[x][y] = 1;
-                bombas_colocadas++;
-            }
-        }
-    }
-    catch (const std::exception &e)
+    while (bombas_colocadas < _n_bombas)
     {
-        std::cerr << "Erro ao colocar bombas: " << e.what() << '\n';
+        int linha = rand() % _linhas;
+        int coluna = rand() % _colunas;
+
+        if (_tabuleiro[linha][coluna] == 0)
+        {
+            _tabuleiro[linha][coluna] = 1;
+            bombas_colocadas++;
+        }
     }
 }
 
+/**
+ * @brief Conta o numero de bombas ao redor de uma celula.
+ * @param x Coordenada da linha da celula.
+ * @param y Coordenada da coluna da celula.
+ * @return Numero de bombas ao redor da celula especificada.
+ */
 int CampoMinado::bombas_em_volta(int x, int y)
 {
-    try
+    int bombas = 0;
+
+    for (int i = x - 1; i <= x + 1; i++)
     {
-        int bombas_adjacentes = 0;
-        for (int i = x - 1; i <= x + 1; i++)
+        for (int j = y - 1; j <= y + 1; j++)
         {
-            for (int j = y - 1; j <= y + 1; j++)
+            if (i >= 0 && i < _linhas && j >= 0 && j < _colunas)
             {
-                if (i >= 0 && i < _linhas && j >= 0 && j < _colunas && (i != x || j != y))
+                if (_tabuleiro[i][j] == 1)
                 {
-                    if (_tabuleiro[i][j] == 1 || _tabuleiro[i][j] == 3 || _tabuleiro[i][j] == 5)
-                    {
-                        bombas_adjacentes++;
-                    }
+                    bombas++;
                 }
             }
         }
-        return bombas_adjacentes;
     }
-    catch (const std::exception &e)
-    {
-        std::cerr << "Erro ao contar bombas em volta" << e.what() << '\n';
-    }
+
+    return bombas;
 }
 
+/**
+ * @brief Checa se o jogador venceu o jogo.
+ * @return True se o jogador venceu, caso contrario false.
+ * Verifica se todas as celulas foram reveladas ou marcadas corretamente, indicando a vitoria.
+ * @throws std::runtime_error Se ocorrer um erro durante a checagem de vitoria.
+ */
 bool CampoMinado::checar_vitoria()
 {
     try
@@ -275,36 +303,44 @@ bool CampoMinado::checar_vitoria()
         {
             for (int j = 0; j < _colunas; j++)
             {
-                if (_tabuleiro[i][j] == 0)
+                if (_tabuleiro[i][j] == 0)  // Celula nao revelada
                 {
                     return false;
                 }
-                if (_tabuleiro[i][j] == 1 || _tabuleiro[i][j] == 4 || _tabuleiro[i][j] == 5)
+                if (_tabuleiro[i][j] == 1 || _tabuleiro[i][j] == 4 || _tabuleiro[i][j] == 5)  // Celulas com bombas ou marcadas
                 {
                     if (_tabuleiro[i][j] == 1 || _tabuleiro[i][j] == 5)
                     {
-                        continue;
+                        continue;  // Continua verificando outras celulas
                     }
                     else
                     {
-                        return false;
+                        return false;  // Alguma celula ainda nao foi revelada
                     }
                 }
             }
         }
-        return true;
+        return true;  // Todas as celulas foram reveladas ou marcadas corretamente
     }
     catch (const std::exception &e)
     {
-        std::cerr << "Erro ao checar vitoria" << e.what() << '\n';
+        std::cerr << "Erro ao checar vitoria: " << e.what() << '\n';
+        throw;  // Propaga a excecao para que o chamador possa lidar com ela
     }
 }
 
+/**
+ * @brief Controla o loop principal do jogo, gerenciando a entrada do jogador e atualizando o tabuleiro.
+ * Permite ao jogador fazer jogadas e marcar bombas, verificando se houve vitoria ou derrota.
+ * @throws std::invalid_argument Se a entrada fornecida pelo jogador for invalida.
+ * @throws std::out_of_range Se as coordenadas fornecidas pelo jogador estiverem fora dos limites do tabuleiro.
+ */
 void CampoMinado::partida()
 {
     limpar_terminal();
     std::cout << "Digite duas coordenadas para fazer uma jogada ou adicione 'B' no inicio para marcar uma bomba." << std::endl;
     imprimir_tabuleiro();
+
     while (!checar_vitoria())
     {
         std::string linha;
@@ -362,7 +398,7 @@ void CampoMinado::partida()
 
             if (_tabuleiro[x - 1][y - 1] == 3)
             {
-                std::cout << "Você perdeu!" << std::endl;
+                std::cout << "Voce perdeu!" << std::endl;
                 _jogador->soma_derrota_cm();
                 _jogador->imprimir_informacoes_cm();
                 return;
@@ -374,6 +410,7 @@ void CampoMinado::partida()
             continue;
         }
     }
+
     if (checar_vitoria())
     {
         _jogador->soma_vitoria_cm();

@@ -363,8 +363,7 @@ void CampoMinado::partida()
             if (_tabuleiro[x - 1][y - 1] == 3)
             {
                 std::cout << "Você perdeu!" << std::endl;
-                int vitorias = _jogador->get_derrotas_cm();
-                _jogador->set_derrotas_cm(vitorias + 1);
+                _jogador->soma_derrota_cm();
                 _jogador->imprimir_informacoes_cm();
                 return;
             }
@@ -377,8 +376,7 @@ void CampoMinado::partida()
     }
     if (checar_vitoria())
     {
-        int vitorias = _jogador->get_vitorias_cm();
-        _jogador->set_vitorias_cm(vitorias + 1);
+        _jogador->soma_vitoria_cm();
 
         std::cout << "Parabens " << _jogador->get_apelido() << ", voce venceu!" << std::endl;
         _jogador->imprimir_informacoes_cm();

@@ -198,17 +198,13 @@ void JogoDaVelha::partida()
         alternar_jogador();
         if (_jogador_atual == 1)
         {
-            int vitorias = _jogador1->get_vitorias_jdv();
-            _jogador1->set_vitorias_jdv(vitorias + 1);
-            int derrotas = _jogador2->get_derrotas_jdv();
-            _jogador2->set_derrotas_jdv(derrotas + 1);
+            _jogador1->soma_vitoria_jdv();
+            _jogador2->soma_derrota_jdv();
         }
         else
         {
-            int vitorias = _jogador2->get_vitorias_jdv();
-            _jogador2->set_vitorias_jdv(vitorias + 1);
-            int derrotas = _jogador1->get_derrotas_jdv();
-            _jogador1->set_derrotas_jdv(derrotas + 1);
+            _jogador2->soma_vitoria_jdv();
+            _jogador1->soma_derrota_jdv();
         }
 
         std::cout << "Parabens " << apelido_atual() << ", voce venceu!" << std::endl;

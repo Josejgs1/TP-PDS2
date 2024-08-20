@@ -20,9 +20,12 @@ BINFILE=$(BINDIR)/main
 TESTOBJFILES_LIG4=$(OBJDIR)/testeLig4.o
 TESTOBJFILES_CAMPO_MINADO=$(OBJDIR)/testeCampoMinado.o
 TESTOBJFILES_JOGO_DA_VELHA=$(OBJDIR)/testeJogoDaVelha.o
+TESTOBJFILES_REVERSI=$(OBJDIR)/testeReversi.o
+
 TESTBINFILE_LIG4=$(BINDIR)/testLig4
 TESTBINFILE_CAMPO_MINADO=$(BINDIR)/testCampoMinado
 TESTBINFILE_JOGO_DA_VELHA=$(BINDIR)/testJogoDaVelha
+TESTBINFILE_REVERSI=$(BINDIR)/testeReversi
 
 # Regras principais
 all: $(BINDIR) $(FILESDIR) $(BINFILE)
@@ -45,14 +48,17 @@ $(FILESDIR):
 	mkdir -p $(FILESDIR)
 
 # Regras para compilar os testes
-$(TESTBINFILE_LIG4): $(TESTOBJFILES_LIG4) $(OBJDIR)/jogador.o $(OBJDIR)/campoMinado.o $(OBJDIR)/jogoDeTabuleiro.o $(OBJDIR)/lig4.o
-	$(CC) $(CFLAGS) $(TESTOBJFILES_LIG4) $(OBJDIR)/jogador.o $(OBJDIR)/campoMinado.o $(OBJDIR)/jogoDeTabuleiro.o $(OBJDIR)/lig4.o -o $(TESTBINFILE_LIG4) -I$(INCLUDEDIR) -I$(DOCTESTDIR)
+$(TESTBINFILE_LIG4): $(TESTOBJFILES_LIG4) $(OBJDIR)/jogador.o $(OBJDIR)/jogoDeTabuleiro.o $(OBJDIR)/lig4.o
+	$(CC) $(CFLAGS) $(TESTOBJFILES_LIG4) $(OBJDIR)/jogador.o $(OBJDIR)/jogoDeTabuleiro.o $(OBJDIR)/lig4.o -o $(TESTBINFILE_LIG4) -I$(INCLUDEDIR) -I$(DOCTESTDIR)
 
 $(TESTBINFILE_CAMPO_MINADO): $(TESTOBJFILES_CAMPO_MINADO) $(OBJDIR)/jogador.o $(OBJDIR)/campoMinado.o $(OBJDIR)/jogoDeTabuleiro.o
 	$(CC) $(CFLAGS) $(TESTOBJFILES_CAMPO_MINADO) $(OBJDIR)/jogador.o $(OBJDIR)/campoMinado.o $(OBJDIR)/jogoDeTabuleiro.o -o $(TESTBINFILE_CAMPO_MINADO) -I$(INCLUDEDIR) -I$(DOCTESTDIR)
 
-$(TESTBINFILE_JOGO_DA_VELHA): $(TESTOBJFILES_JOGO_DA_VELHA) $(OBJDIR)/jogador.o $(OBJDIR)/campoMinado.o $(OBJDIR)/jogoDeTabuleiro.o $(OBJDIR)/jogoDaVelha.o
+$(TESTBINFILE_JOGO_DA_VELHA): $(TESTOBJFILES_JOGO_DA_VELHA) $(OBJDIR)/jogador.o $(OBJDIR)/jogoDeTabuleiro.o $(OBJDIR)/jogoDaVelha.o
 	$(CC) $(CFLAGS) $(TESTOBJFILES_JOGO_DA_VELHA) $(OBJDIR)/jogador.o $(OBJDIR)/jogoDeTabuleiro.o $(OBJDIR)/jogoDaVelha.o -o $(TESTBINFILE_JOGO_DA_VELHA) -I$(INCLUDEDIR) -I$(DOCTESTDIR)
+
+$(TESTBINFILE_REVERSI): $(TESTOBJFILES_REVERSI) $(OBJDIR)/jogador.o $(OBJDIR)/jogoDeTabuleiro.o $(OBJDIR)/reversi.o
+	$(CC) $(CFLAGS) $(TESTOBJFILES_REVERSI) $(OBJDIR)/jogador.o $(OBJDIR)/jogoDeTabuleiro.o $(OBJDIR)/reversi.o -o $(TESTBINFILE_REVERSI) -I$(INCLUDEDIR) -I$(DOCTESTDIR)
 
 $(OBJDIR)/testeLig4.o: $(TESTDIR)/testeLig4.cpp | $(OBJDIR)
 	$(CC) $(CFLAGS) -I$(INCLUDEDIR) -I$(DOCTESTDIR) -c $< -o $@
@@ -61,6 +67,9 @@ $(OBJDIR)/testeCampoMinado.o: $(TESTDIR)/testeCampoMinado.cpp | $(OBJDIR)
 	$(CC) $(CFLAGS) -I$(INCLUDEDIR) -I$(DOCTESTDIR) -c $< -o $@
 
 $(OBJDIR)/testeJogoDaVelha.o: $(TESTDIR)/testeJogoDaVelha.cpp | $(OBJDIR)
+	$(CC) $(CFLAGS) -I$(INCLUDEDIR) -I$(DOCTESTDIR) -c $< -o $@
+
+$(OBJDIR)/testeReversi.o: $(TESTDIR)/testeReversi.cpp | $(OBJDIR)
 	$(CC) $(CFLAGS) -I$(INCLUDEDIR) -I$(DOCTESTDIR) -c $< -o $@
 
 # Regras para executar os testes
@@ -73,6 +82,9 @@ test_campo_minado: $(TESTBINFILE_CAMPO_MINADO)
 test_jogo_da_velha: $(TESTBINFILE_JOGO_DA_VELHA)
 	./$(TESTBINFILE_JOGO_DA_VELHA)
 
+test_reversi: $(TESTBINFILE_REVERSI)
+	./$(TESTBINFILE_REVERSI)
+
 # Limpeza
 clean:
-	rm -f $(BINFILE) $(OBJDIR)/*.o $(TESTBINFILE_LIG4) $(TESTBINFILE_CAMPO_MINADO) $(TESTBINFILE_JOGO_DA_VELHA)
+	rm -f $(BINFILE) $(OBJDIR)/*.o $(TESTBINFILE_LIG4) $(TESTBINFILE_CAMPO_MINADO) $(TESTBINFILE_JOGO_DA_VELHA) $(TESTBINFILE_REVERSI)

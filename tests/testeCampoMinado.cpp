@@ -7,33 +7,33 @@
 Jogador jog_teste("jogadorTeste", "teste");
 CampoMinado jogo_teste(4, 4, jog_teste, 2);
 
-TEST_CASE("Testar inicializacao")
+TEST_CASE("Testar inicializacao campo minado")
 {
-    SUBCASE("Teste inicializacao valida campo minado")
+    SUBCASE("Teste inicializacao valida")
     {
         CHECK_NOTHROW(CampoMinado jogo(6, 6, jog_teste, 10));
     }
 
-    SUBCASE("Teste incializacao linhas invalidas campo minado")
+    SUBCASE("Teste incializacao linhas invalidas")
     {
         CHECK_THROWS_AS(CampoMinado jogo(3, 5, jog_teste, 10), std::invalid_argument);
         CHECK_THROWS_AS(CampoMinado jogo(31, 5, jog_teste, 10), std::invalid_argument);
     }
 
-    SUBCASE("Teste incializacao colunas invalidas campo minado")
+    SUBCASE("Teste incializacao colunas invalidas")
     {
         CHECK_THROWS_AS(CampoMinado jogo(4, 3, jog_teste, 10), std::invalid_argument);
         CHECK_THROWS_AS(CampoMinado jogo(30, 31, jog_teste, 10), std::invalid_argument);
     }
 
-    SUBCASE("Teste incializacao bombas invalidas campo minado")
+    SUBCASE("Teste incializacao bombas invalidas")
     {
         CHECK_THROWS_AS(CampoMinado jogo(4, 4, jog_teste, 20), std::invalid_argument);
         CHECK_THROWS_AS(CampoMinado jogo(31, 5, jog_teste, 0), std::invalid_argument);
     }
 }
 
-TEST_CASE("Testar colocar bombas")
+TEST_CASE("Testar colocar bombas campo minado")
 {
     SUBCASE("Teste colocar bombas")
     {
@@ -53,15 +53,15 @@ TEST_CASE("Testar colocar bombas")
     }
 }
 
-TEST_CASE("Teste fazer jogada")
+TEST_CASE("Teste fazer jogada campo minado")
 {
 
-    SUBCASE("Jogada valida campo minado")
+    SUBCASE("Jogada valida")
     {
         CHECK_NOTHROW(jogo_teste.fazer_jogada(1, 1));
     }
 
-    SUBCASE("Jogada invalida (posicao ocupada) campo minado")
+    SUBCASE("Jogada invalida (posicao ocupada)")
     {
         std::ostringstream oss;
         std::streambuf *old_cerr_streambuf = std::cerr.rdbuf(oss.rdbuf());
@@ -74,14 +74,14 @@ TEST_CASE("Teste fazer jogada")
     }
 }
 
-TEST_CASE("Teste marcar bomba")
+TEST_CASE("Teste marcar bomba campo minado")
 {
     SUBCASE("Marcacao valida campo minado")
     {
         CHECK_NOTHROW(jogo_teste.marcar_bomba(1, 1));
     }
 
-    SUBCASE("Marcacao invalida (posicao ocupada) campo minado")
+    SUBCASE("Marcacao invalida (posicao ocupada)")
     {
         std::ostringstream oss;
         std::streambuf *old_cerr_streambuf = std::cerr.rdbuf(oss.rdbuf());
@@ -93,14 +93,14 @@ TEST_CASE("Teste marcar bomba")
         std::cerr.rdbuf(old_cerr_streambuf);
     }
 
-    SUBCASE("Desmarcacao de bomba valida campo minado")
+    SUBCASE("Desmarcacao de bomba valida")
     {
         jogo_teste.marcar_bomba(1, 1);
         CHECK_NOTHROW(jogo_teste.marcar_bomba(1, 1));
     }
 }
 
-TEST_CASE("Testar checar vitoria")
+TEST_CASE("Testar checar vitoria campo minado")
 {
     SUBCASE("Teste checar vitoria sem todas as celulas reveladas")
     {

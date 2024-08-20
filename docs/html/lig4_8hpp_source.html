@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Trapalho Prático PDS2 2024.1 - Grupo 7: Código-Fonte de include/lig4.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Trapalho Prático PDS2 2024.1 - Grupo 7
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Busca','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">lig4.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef LIG4_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define LIG4_HPP</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;jogoDeTabuleiro.hpp&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classLig4.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="classLig4.html">Lig4</a> : <span class="keyword">public</span> <a class="code" href="classJogoDeTabuleiro.html">JogoDeTabuleiro</a> {</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="classJogador.html">Jogador</a>* _jogador1; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="classJogador.html">Jogador</a>* _jogador2; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">int</span> _jogador_atual; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="classLig4.html#adffdeddf3d20829f752913801554126d">Lig4</a>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="classLig4.html#adffdeddf3d20829f752913801554126d">Lig4</a>(<span class="keywordtype">int</span> linhas, <span class="keywordtype">int</span> colunas, <a class="code" href="classJogador.html">Jogador</a>&amp; jogador1, <a class="code" href="classJogador.html">Jogador</a>&amp; jogador2);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="classLig4.html#add1bf78f99caaf523113e7f4cf843744">~Lig4</a>();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classLig4.html#a6051b45a1c6abb8ee524d3ab14f8e0fa">fazer_jogada</a>(<span class="keywordtype">int</span> x);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classLig4.html#a3cbd19dd4e383176272345ebe5230452">alternar_jogador</a>();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    std::string <a class="code" href="classLig4.html#a2dc8bc5d588079d6272875ee71408431">apelido_atual</a>();</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classLig4.html#a820cfe9b075b31d9438f2f16e1ee6f02">checar_vitoria</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classLig4.html#a9311bbe2658052686482dbc889c63250">checar_final</a>();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classLig4.html#af4172f1cd8c6bf06028e7ec7753b71d3">partida</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;};</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassJogador_html"><div class="ttname"><a href="classJogador.html">Jogador</a></div><div class="ttdoc">Classe que representa um jogador, com informacoes sobre vitorias e derrotas em diferentes jogos.</div><div class="ttdef"><b>Definition:</b> jogador.hpp:16</div></div>
+<div class="ttc" id="aclassJogoDeTabuleiro_html"><div class="ttname"><a href="classJogoDeTabuleiro.html">JogoDeTabuleiro</a></div><div class="ttdoc">Classe base abstrata para jogos de tabuleiro. Define a estrutura e as operacoes basicas para um jogo ...</div><div class="ttdef"><b>Definition:</b> jogoDeTabuleiro.hpp:16</div></div>
+<div class="ttc" id="aclassLig4_html"><div class="ttname"><a href="classLig4.html">Lig4</a></div><div class="ttdoc">Classe que representa o jogo Lig4, derivada da classe JogoDeTabuleiro. Implementa as operacoes e regr...</div><div class="ttdef"><b>Definition:</b> lig4.hpp:14</div></div>
+<div class="ttc" id="aclassLig4_html_a2dc8bc5d588079d6272875ee71408431"><div class="ttname"><a href="classLig4.html#a2dc8bc5d588079d6272875ee71408431">Lig4::apelido_atual</a></div><div class="ttdeci">std::string apelido_atual()</div><div class="ttdoc">Retorna o apelido do jogador atual.</div><div class="ttdef"><b>Definition:</b> lig4.cpp:90</div></div>
+<div class="ttc" id="aclassLig4_html_a3cbd19dd4e383176272345ebe5230452"><div class="ttname"><a href="classLig4.html#a3cbd19dd4e383176272345ebe5230452">Lig4::alternar_jogador</a></div><div class="ttdeci">void alternar_jogador()</div><div class="ttdoc">Alterna entre os jogadores.</div><div class="ttdef"><b>Definition:</b> lig4.cpp:74</div></div>
+<div class="ttc" id="aclassLig4_html_a6051b45a1c6abb8ee524d3ab14f8e0fa"><div class="ttname"><a href="classLig4.html#a6051b45a1c6abb8ee524d3ab14f8e0fa">Lig4::fazer_jogada</a></div><div class="ttdeci">void fazer_jogada(int x)</div><div class="ttdoc">Faz uma jogada no jogo.</div><div class="ttdef"><b>Definition:</b> lig4.cpp:42</div></div>
+<div class="ttc" id="aclassLig4_html_a820cfe9b075b31d9438f2f16e1ee6f02"><div class="ttname"><a href="classLig4.html#a820cfe9b075b31d9438f2f16e1ee6f02">Lig4::checar_vitoria</a></div><div class="ttdeci">bool checar_vitoria() override</div><div class="ttdoc">Checa se houve vitoria no jogo.</div><div class="ttdef"><b>Definition:</b> lig4.cpp:106</div></div>
+<div class="ttc" id="aclassLig4_html_a9311bbe2658052686482dbc889c63250"><div class="ttname"><a href="classLig4.html#a9311bbe2658052686482dbc889c63250">Lig4::checar_final</a></div><div class="ttdeci">bool checar_final()</div><div class="ttdoc">Checa se o jogo chegou ao fim.</div><div class="ttdef"><b>Definition:</b> lig4.cpp:175</div></div>
+<div class="ttc" id="aclassLig4_html_add1bf78f99caaf523113e7f4cf843744"><div class="ttname"><a href="classLig4.html#add1bf78f99caaf523113e7f4cf843744">Lig4::~Lig4</a></div><div class="ttdeci">~Lig4()</div><div class="ttdoc">Destrutor da classe Lig4. Libera recursos utilizados pela instancia da classe.</div><div class="ttdef"><b>Definition:</b> lig4.cpp:36</div></div>
+<div class="ttc" id="aclassLig4_html_adffdeddf3d20829f752913801554126d"><div class="ttname"><a href="classLig4.html#adffdeddf3d20829f752913801554126d">Lig4::Lig4</a></div><div class="ttdeci">Lig4()</div><div class="ttdoc">Construtor padrao da classe Lig4. Inicializa o jogo com dimensoes padrao e jogadores nao definidos.</div><div class="ttdef"><b>Definition:</b> lig4.cpp:6</div></div>
+<div class="ttc" id="aclassLig4_html_af4172f1cd8c6bf06028e7ec7753b71d3"><div class="ttname"><a href="classLig4.html#af4172f1cd8c6bf06028e7ec7753b71d3">Lig4::partida</a></div><div class="ttdeci">void partida() override</div><div class="ttdoc">Inicia uma partida do jogo.</div><div class="ttdef"><b>Definition:</b> lig4.cpp:191</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

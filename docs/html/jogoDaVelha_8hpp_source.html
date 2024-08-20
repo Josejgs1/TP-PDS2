@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Trapalho Prático PDS2 2024.1 - Grupo 7: Código-Fonte de include/jogoDaVelha.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Trapalho Prático PDS2 2024.1 - Grupo 7
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Busca','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">jogoDaVelha.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef JOGODAVELHA_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define JOGODAVELHA_HPP</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;jogoDeTabuleiro.hpp&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classJogoDaVelha.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="classJogoDaVelha.html">JogoDaVelha</a> : <span class="keyword">public</span> <a class="code" href="classJogoDeTabuleiro.html">JogoDeTabuleiro</a></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="classJogador.html">Jogador</a>* _jogador1; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="classJogador.html">Jogador</a>* _jogador2; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">int</span> _jogador_atual; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classJogoDaVelha.html#a4cd8634f2b9f754fae92e2e6bc897c19">JogoDaVelha</a>();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="classJogoDaVelha.html#a4cd8634f2b9f754fae92e2e6bc897c19">JogoDaVelha</a>(<a class="code" href="classJogador.html">Jogador</a>&amp; jogador1, <a class="code" href="classJogador.html">Jogador</a>&amp; jogador2);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classJogoDaVelha.html#af290749c1d368fc48f12ae3cf029aeb1">~JogoDaVelha</a>();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classJogoDaVelha.html#aef044270aeff5aa49f8209fc35b5bca8">imprimir_tabuleiro</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classJogoDaVelha.html#a766b823c2c3be9310148d3bd28843051">fazer_jogada</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classJogoDaVelha.html#a779a5b27932814cd1b30f515dd87761b">alternar_jogador</a>();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    std::string <a class="code" href="classJogoDaVelha.html#abe5e552f07acab43fb38a42b09198d8b">apelido_atual</a>();</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classJogoDaVelha.html#ac3cd7ceb848e6c11d0b860ac5fbc97af">checar_vitoria</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classJogoDaVelha.html#a7a943a551238e3eecf12288be77e3252">checar_final</a>();</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classJogoDaVelha.html#ae6699b860c6c6c2a95610511db58943f">partida</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;};</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassJogador_html"><div class="ttname"><a href="classJogador.html">Jogador</a></div><div class="ttdoc">Classe que representa um jogador, com informacoes sobre vitorias e derrotas em diferentes jogos.</div><div class="ttdef"><b>Definition:</b> jogador.hpp:16</div></div>
+<div class="ttc" id="aclassJogoDaVelha_html"><div class="ttname"><a href="classJogoDaVelha.html">JogoDaVelha</a></div><div class="ttdoc">Classe que representa o jogo da velha. Herda de JogoDeTabuleiro e implementa funcionalidades especifi...</div><div class="ttdef"><b>Definition:</b> jogoDaVelha.hpp:15</div></div>
+<div class="ttc" id="aclassJogoDaVelha_html_a4cd8634f2b9f754fae92e2e6bc897c19"><div class="ttname"><a href="classJogoDaVelha.html#a4cd8634f2b9f754fae92e2e6bc897c19">JogoDaVelha::JogoDaVelha</a></div><div class="ttdeci">JogoDaVelha()</div><div class="ttdoc">Construtor padrao da classe JogoDaVelha. Inicializa o jogo com dois jogadores nulos e o jogador atual...</div><div class="ttdef"><b>Definition:</b> jogoDaVelha.cpp:4</div></div>
+<div class="ttc" id="aclassJogoDaVelha_html_a766b823c2c3be9310148d3bd28843051"><div class="ttname"><a href="classJogoDaVelha.html#a766b823c2c3be9310148d3bd28843051">JogoDaVelha::fazer_jogada</a></div><div class="ttdeci">void fazer_jogada(int x, int y)</div><div class="ttdoc">Faz uma jogada no tabuleiro na coordenada (x, y).</div><div class="ttdef"><b>Definition:</b> jogoDaVelha.cpp:59</div></div>
+<div class="ttc" id="aclassJogoDaVelha_html_a779a5b27932814cd1b30f515dd87761b"><div class="ttname"><a href="classJogoDaVelha.html#a779a5b27932814cd1b30f515dd87761b">JogoDaVelha::alternar_jogador</a></div><div class="ttdeci">void alternar_jogador()</div><div class="ttdoc">Alterna o jogador atual.</div><div class="ttdef"><b>Definition:</b> jogoDaVelha.cpp:84</div></div>
+<div class="ttc" id="aclassJogoDaVelha_html_a7a943a551238e3eecf12288be77e3252"><div class="ttname"><a href="classJogoDaVelha.html#a7a943a551238e3eecf12288be77e3252">JogoDaVelha::checar_final</a></div><div class="ttdeci">bool checar_final()</div><div class="ttdoc">Checa se o jogo chegou ao fim.</div><div class="ttdef"><b>Definition:</b> jogoDaVelha.cpp:167</div></div>
+<div class="ttc" id="aclassJogoDaVelha_html_abe5e552f07acab43fb38a42b09198d8b"><div class="ttname"><a href="classJogoDaVelha.html#abe5e552f07acab43fb38a42b09198d8b">JogoDaVelha::apelido_atual</a></div><div class="ttdeci">std::string apelido_atual()</div><div class="ttdoc">Retorna o apelido do jogador atual.</div><div class="ttdef"><b>Definition:</b> jogoDaVelha.cpp:107</div></div>
+<div class="ttc" id="aclassJogoDaVelha_html_ac3cd7ceb848e6c11d0b860ac5fbc97af"><div class="ttname"><a href="classJogoDaVelha.html#ac3cd7ceb848e6c11d0b860ac5fbc97af">JogoDaVelha::checar_vitoria</a></div><div class="ttdeci">bool checar_vitoria() override</div><div class="ttdoc">Checa se o jogador venceu a partida. Sobrescreve a funcao virtual pura da classe base JogoDeTabuleiro...</div><div class="ttdef"><b>Definition:</b> jogoDaVelha.cpp:123</div></div>
+<div class="ttc" id="aclassJogoDaVelha_html_ae6699b860c6c6c2a95610511db58943f"><div class="ttname"><a href="classJogoDaVelha.html#ae6699b860c6c6c2a95610511db58943f">JogoDaVelha::partida</a></div><div class="ttdeci">void partida() override</div><div class="ttdoc">Inicia uma partida de Jogo da Velha. Sobrescreve a funcao virtual pura da classe base JogoDeTabuleiro...</div><div class="ttdef"><b>Definition:</b> jogoDaVelha.cpp:192</div></div>
+<div class="ttc" id="aclassJogoDaVelha_html_aef044270aeff5aa49f8209fc35b5bca8"><div class="ttname"><a href="classJogoDaVelha.html#aef044270aeff5aa49f8209fc35b5bca8">JogoDaVelha::imprimir_tabuleiro</a></div><div class="ttdeci">void imprimir_tabuleiro() override</div><div class="ttdoc">Imprime o tabuleiro do jogo da velha. Sobrescreve a funcao virtual pura da classe base JogoDeTabuleir...</div><div class="ttdef"><b>Definition:</b> jogoDaVelha.cpp:18</div></div>
+<div class="ttc" id="aclassJogoDaVelha_html_af290749c1d368fc48f12ae3cf029aeb1"><div class="ttname"><a href="classJogoDaVelha.html#af290749c1d368fc48f12ae3cf029aeb1">JogoDaVelha::~JogoDaVelha</a></div><div class="ttdeci">virtual ~JogoDaVelha()</div><div class="ttdoc">Destruidor da classe JogoDaVelha.</div><div class="ttdef"><b>Definition:</b> jogoDaVelha.cpp:255</div></div>
+<div class="ttc" id="aclassJogoDeTabuleiro_html"><div class="ttname"><a href="classJogoDeTabuleiro.html">JogoDeTabuleiro</a></div><div class="ttdoc">Classe base abstrata para jogos de tabuleiro. Define a estrutura e as operacoes basicas para um jogo ...</div><div class="ttdef"><b>Definition:</b> jogoDeTabuleiro.hpp:16</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

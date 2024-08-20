@@ -61,16 +61,16 @@ TEST_CASE("Testar contagem de peças") {
     }
 }
 
-// TEST_CASE("Testar movimentos válidos") {
-//     Reversi jogo(6, 6, jogador1, jogador2);
+TEST_CASE("Testar movimentos válidos") {
+    Reversi jogo(6, 6, jogador1, jogador2);
 
-//     jogo.inicializarTabuleiro();
+    jogo.inicializarTabuleiro();
 
-//     SUBCASE("Movimentos válidos disponíveis") {
-//         CHECK(jogo.temMovimentosValidos(1));
-//     }
+    SUBCASE("Movimentos válidos disponíveis") {
+        CHECK(jogo.temMovimentosValidos(1));
+    }
 
-//     SUBCASE("Movimentos inválidos disponíveis") {
-//         CHECK_FALSE(jogo.temMovimentosValidos(2));
-//     }
-// }
+    // SUBCASE("Movimentos inválidos disponíveis") {
+    //     CHECK_FALSE(jogo.temMovimentosValidos(2));
+    // }
+}

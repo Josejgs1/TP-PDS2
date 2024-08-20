@@ -10,7 +10,7 @@ INCLUDEDIR=include
 TESTDIR=tests
 
 # Diretório do doctest
-DOCTESTDIR=$(FILESDIR)
+DOCTESTDIR=.
 
 # Diretórios e arquivos
 OBJFILES=$(OBJDIR)/jogador.o $(OBJDIR)/jogoDaVelha.o $(OBJDIR)/jogoDeTabuleiro.o $(OBJDIR)/lig4.o $(OBJDIR)/reversi.o $(OBJDIR)/campoMinado.o $(OBJDIR)/main.o

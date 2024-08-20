@@ -9,3 +9,7 @@ main
 
 # Ignorar o banco de jogadores
 jogadores.csv
+
+#ignorar os executáveis dos testes
+testJogoDaVelha
+testLig4

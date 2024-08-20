@@ -69,7 +69,7 @@ $(OBJDIR)/testeCampoMinado.o: $(TESTDIR)/testeCampoMinado.cpp | $(OBJDIR)
 $(OBJDIR)/testeJogoDaVelha.o: $(TESTDIR)/testeJogoDaVelha.cpp | $(OBJDIR)
 	$(CC) $(CFLAGS) -I$(INCLUDEDIR) -I$(DOCTESTDIR) -c $< -o $@
 
-$(OBJDIR)/reversi.o: $(TESTDIR)/reversi.cpp | $(OBJDIR)
+$(OBJDIR)/testeReversi.o: $(TESTDIR)/testeReversi.cpp | $(OBJDIR)
 	$(CC) $(CFLAGS) -I$(INCLUDEDIR) -I$(DOCTESTDIR) -c $< -o $@
 
 # Regras para executar os testes

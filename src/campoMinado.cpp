@@ -337,12 +337,11 @@ bool CampoMinado::checar_vitoria()
  */
 void CampoMinado::partida()
 {
-    limpar_terminal();
-    std::cout << "Digite duas coordenadas para fazer uma jogada ou adicione 'B' no inicio para marcar uma bomba." << std::endl;
-    imprimir_tabuleiro();
-
     while (!checar_vitoria())
     {
+        limpar_terminal();
+        std::cout << "Digite duas coordenadas para fazer uma jogada ou adicione 'B' no inicio para marcar uma bomba." << std::endl;
+        imprimir_tabuleiro();
         std::string linha;
         int x, y;
         std::cout << _jogador->get_apelido() << ", faca sua jogada: ";
